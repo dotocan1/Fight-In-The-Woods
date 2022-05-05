@@ -124,6 +124,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			fireGun();
 		}
 
 		private void LateUpdate()
@@ -234,6 +235,13 @@ namespace StarterAssets
 			}
 		}
 
+		public void fireGun()
+        {
+            if (_input.fire)
+            {
+				Debug.Log("hey");
+            }
+        }
 		private void JumpAndGravity()
 		{
 			if (Grounded)
@@ -265,6 +273,7 @@ namespace StarterAssets
 					{
 						_animator.SetBool(_animIDJump, true);
 					}
+
 				}
 
 				// jump timeout
