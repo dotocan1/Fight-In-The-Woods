@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4402701321439209113}
   - component: {fileID: 7302018871387296054}
   m_Layer: 0
-  m_Name: WaterAbility
+  m_Name: WaterThrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

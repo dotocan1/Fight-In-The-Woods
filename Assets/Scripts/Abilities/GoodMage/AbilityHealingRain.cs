@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityHealingCircle : MonoBehaviour
+public class AbilityHealingRain : MonoBehaviour
 {
     public GameObject projectilePrefab;
     float delay = 2.0f; //This implies a delay of 2 seconds.
@@ -11,7 +11,7 @@ public class AbilityHealingCircle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

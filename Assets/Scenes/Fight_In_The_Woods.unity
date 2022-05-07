@@ -30700,5 +30700,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoodMageCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4594125684846078472, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - {fileID: 4594125684846078710, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+--- !u!1 &8612705201004320586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4594125684846078707, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+  m_PrefabInstance: {fileID: 5208383590265142713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8612705201004320587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612705201004320586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750ca0ae96ea4d242979fa0f2281b28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4402701321439209112, guid: 6425945785a2b754fb0e9c83f6f59e31, type: 3}
