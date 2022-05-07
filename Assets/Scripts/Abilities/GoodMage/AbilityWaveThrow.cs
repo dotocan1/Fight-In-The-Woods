@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveThrow : MonoBehaviour
+public class AbilityWaveThrow : MonoBehaviour
 {
     public GameObject projectilePrefab;
     private GameObject instantiatedObj;

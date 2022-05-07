@@ -30645,93 +30645,78 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.335497, y: 1.9730948, z: 0.3636024}
   m_Center: {x: -1.4318229, y: 0.98736805, z: 0.0068491995}
---- !u!1001 &5208383590265142713
+--- !u!1 &6043918228954805394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3317657244858789449, guid: 4c24113fda280584686bb50ebc450086, type: 3}
+  m_PrefabInstance: {fileID: 9073310916691679963}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6043918228954805395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043918228954805394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0010ac4abbb749840a6fc845e6bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2596234385541707993, guid: 808341ba6886cdc479fc8f4a0185350e, type: 3}
+--- !u!1001 &9073310916691679963
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.3
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalPosition.z
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684845590227, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858364521, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4594125684846078707, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
+    - target: {fileID: 3317657244858789449, guid: 4c24113fda280584686bb50ebc450086, type: 3}
       propertyPath: m_Name
-      value: GoodMageCharacter
+      value: ArcherCharacter
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4594125684846078472, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
-    - {fileID: 4594125684846078710, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
---- !u!1 &8612705201004320586 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4594125684846078707, guid: c1347b5fd86b8f84c84a14d97a0d6186, type: 3}
-  m_PrefabInstance: {fileID: 5208383590265142713}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8612705201004320587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8612705201004320586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 750ca0ae96ea4d242979fa0f2281b28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4402701321439209112, guid: 6425945785a2b754fb0e9c83f6f59e31, type: 3}
---- !u!114 &8612705201004320593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8612705201004320586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8313d7f2db0768048bf8dd0f9d17a893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4402701321439209112, guid: 1c2e5519182e71b4d86e4e84aea135dc, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c24113fda280584686bb50ebc450086, type: 3}
