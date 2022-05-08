@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public int health = 50;
+    private int health = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,11 @@ public class Combat : MonoBehaviour
         }
     }
 
+    // ovo je pozvano u skripti koja detektira koliziju
+    // izmedu vode i enemya
     public void takeDamage()
     {
+        Debug.Log(health);
         health--;
     }
 }

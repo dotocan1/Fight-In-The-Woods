@@ -9,7 +9,10 @@ public class DamageWaterThrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        combatScript = GameObject.Find("Enemy").GetComponent<Combat>();
+        if (GameObject.Find("Enemy") != null)
+        {
+            combatScript = GameObject.Find("Enemy").GetComponent<Combat>();
+        }
     }
 
     // Update is called once per frame
@@ -20,8 +23,11 @@ public class DamageWaterThrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hey");
-        combatScript.takeDamage();
-        //Destroy(gameObject);
+        //Debug.Log("Hey");
+        if (GameObject.Find("Enemy") != null)
+        {
+            combatScript.takeDamage();
+        }
+            
     }
 }

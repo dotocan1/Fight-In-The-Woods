@@ -16,7 +16,7 @@ public class AbilityWaterThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 2), projectilePrefab.transform.rotation);
         }
