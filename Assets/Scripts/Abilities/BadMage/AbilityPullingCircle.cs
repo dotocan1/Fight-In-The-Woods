@@ -5,7 +5,6 @@ using UnityEngine;
 public class AbilityPullingCircle : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    float delay = 2.0f; //This implies a delay of 2 seconds.
     private GameObject instantiatedObj;
 
     // Start is called before the first frame update

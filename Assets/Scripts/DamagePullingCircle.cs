@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageWaterThrow : MonoBehaviour
+public class DamagePullingCircle : MonoBehaviour
 {
     private Combat combatScript;
 
@@ -23,12 +23,14 @@ public class DamageWaterThrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
         if (GameObject.Find("Enemy") != null)
         {
-            Debug.Log("Water Throw works!");
-            combatScript.takeDamage();
-        }
+            Debug.Log("Pulling circle works!");
             
+            // TODO: ovdje sada ide logika koja povlaci
+            // playere u sredinu
+
+
+        }
     }
 }
