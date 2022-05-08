@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    private int health = 1000;
+    private float health = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,6 @@ public class Combat : MonoBehaviour
     public void takeDamage()
     {
         Debug.Log(health);
-        health--;
+        health = health - 0.1f;
     }
 }
