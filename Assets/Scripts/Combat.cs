@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveArrowForward : MonoBehaviour
+public class Combat : MonoBehaviour
 {
-    private float speed = 0.5f;
+    public int health = 50;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime * speed);
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void takeDamage()
+    {
+        health--;
     }
 }

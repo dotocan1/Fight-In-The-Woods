@@ -10,15 +10,15 @@ public class AbilityWaterThrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 2), projectilePrefab.transform.rotation);
         }
     }
 }

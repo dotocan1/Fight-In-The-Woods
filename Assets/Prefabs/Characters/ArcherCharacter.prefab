@@ -2035,6 +2035,7 @@ GameObject:
   - component: {fileID: 3317657244868172889}
   - component: {fileID: 3317657244858789448}
   - component: {fileID: 3317657244858789454}
+  - component: {fileID: 6043918228954805395}
   m_Layer: 0
   m_Name: ArcherCharacter
   m_TagString: Untagged
@@ -2111,6 +2112,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6043918228954805395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317657244858789449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0010ac4abbb749840a6fc845e6bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2596234385541707993, guid: 808341ba6886cdc479fc8f4a0185350e, type: 3}
 --- !u!1 &3317657244858789451
 GameObject:
   m_ObjectHideFlags: 0
