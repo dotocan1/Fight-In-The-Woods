@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float sensitivity = 2.0f;
 
-    // This script is attached to the FollowTarget game object
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector2 turn;
+    public float sensitivity = .5f;
 
     // Update is called once per frame
     void Update()
-    {   
-        // control the camera view
-
-        float mouseY = Input.GetAxis("Mouse Y");
-        transform.Rotate(new Vector3(-mouseY * sensitivity, 0, 0));
-
-        float mouseX = Input.GetAxis("Mouse X");
-        transform.Rotate(new Vector3(0, mouseX * sensitivity, 0));
+    {
+        turn.y += Input.GetAxis("Mouse Y") * sensitivity;
+        turn.x += Input.GetAxis("Mouse X") * sensitivity;
+        transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
     }
 }
