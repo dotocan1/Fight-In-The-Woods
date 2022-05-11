@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private float smooth = 0f;
+    private float smooth = 1.0f;
 
     // Update is called once per frame
     void Update()

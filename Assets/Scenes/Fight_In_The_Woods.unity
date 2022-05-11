@@ -42297,6 +42297,7 @@ MonoBehaviour:
   speed: 6
   rotationSpeed: 50
   xRange: 10
+  followTarget: {fileID: 0}
 --- !u!1 &207039843790517132
 GameObject:
   m_ObjectHideFlags: 0
@@ -49984,6 +49985,7 @@ GameObject:
   - component: {fileID: 3220856236223499713}
   - component: {fileID: 3220856236223499715}
   - component: {fileID: 3220856236223499581}
+  - component: {fileID: 3220856236223499721}
   m_Layer: 0
   m_Name: BadMageCharacter
   m_TagString: Untagged
@@ -50008,6 +50010,7 @@ MonoBehaviour:
   speed: 6
   rotationSpeed: 50
   xRange: 10
+  followTarget: {fileID: 1187419649}
 --- !u!1 &3220856236223499720
 GameObject:
   m_ObjectHideFlags: 0
@@ -50024,6 +50027,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3220856236223499721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3220856236223499718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a981a38d660ff4e9ad46753d0a105a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: {x: 0, y: 0}
+  sensitivity: 0.5
 --- !u!1 &3220856236223499722
 GameObject:
   m_ObjectHideFlags: 0
