@@ -6,6 +6,7 @@ public class AbilityWaterThrow : MonoBehaviour
 {
     public GameObject projectilePrefab;
     private GameObject instantiatedObj;
+    public GameObject followTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class AbilityWaterThrow : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q))
         {
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 1) + (transform.up * 1.5f), projectilePrefab.transform.rotation);
+            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 1) + (transform.up * 1.5f), followTarget.transform.rotation);
             Destroy(instantiatedObj, 0.3f);
         }
     }
