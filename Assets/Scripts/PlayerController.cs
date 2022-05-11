@@ -7,9 +7,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public float speed = 10.0f;
-    public float rotationSpeed = 20.0f;
-
-    public float xRange = 10;
+    private float rotationSpeed = 125.0f;
 
     public GameObject followTarget;
 
@@ -19,8 +17,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
-    private float smooth = 1.0f;
+    private float smooth = 0.5f;
 
     // Update is called once per frame
     void Update()
@@ -40,6 +37,6 @@ public class PlayerController : MonoBehaviour
 
         // Dampen towards the target rotation
 
-         transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
     }
 }
