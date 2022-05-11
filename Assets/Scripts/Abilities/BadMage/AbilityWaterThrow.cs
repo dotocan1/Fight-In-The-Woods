@@ -7,9 +7,6 @@ public class AbilityWaterThrow : MonoBehaviour
     public GameObject projectilePrefab;
     private GameObject instantiatedObj;
 
-    public float temp = 1.5f;
-    public float temp2 = 1.0f;
-
     // Start is called before the first frame update
     void Start()
     {
