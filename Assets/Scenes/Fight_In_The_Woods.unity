@@ -44231,10 +44231,6 @@ PrefabInstance:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 1187419649}
-    - target: {fileID: 447345996470216933, guid: 4f152bd85aef8334a9feb89e5ab8784c, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f152bd85aef8334a9feb89e5ab8784c, type: 3}
 --- !u!114 &9166353085472745808
