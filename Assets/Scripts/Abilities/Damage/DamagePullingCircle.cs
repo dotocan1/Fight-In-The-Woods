@@ -30,12 +30,7 @@ public class DamagePullingCircle : MonoBehaviour
     {
         // provjerava postoji li drugi objekt te je li drugi object character
         if (GameObject.Find("Enemy") != null && other.gameObject.GetInstanceID() == GameObject.Find("Enemy").GetInstanceID())
-        {
-            //other.gameObject.transform.position = transform.position
-
-            //other.gameObject.transform.position = Vector3.Lerp(startPosition, transform.position, 5.0f * Time.deltaTime);
-            // treba implementirati da se polako primice krugu
-            
+        {   
             isAbility = true;
         }
     }

@@ -25,7 +25,14 @@ public class Combat : MonoBehaviour
     // izmedu vode i enemya
     public void takeDamage()
     {
-        Debug.Log(health);
+        Debug.Log("Taking damage! Enemy health is now:" + health);
         health = health - 0.1f;
+    }
+
+    public void healPlayer()
+    {
+        health += 100.0f;
+        Debug.Log("Healing! Enemy health is now:" + health);
+
     }
 }
