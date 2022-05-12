@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4402701321439209115}
   - component: {fileID: 4402701321439209114}
   - component: {fileID: 4402701321439209113}
-  - component: {fileID: 7302018871387296054}
+  - component: {fileID: 1479703598740472540}
   m_Layer: 0
   m_Name: HealingCircle
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4402701321439209112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50.15, y: 3.9, z: 67.39}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 0, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402701321439209112}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -91,12 +91,12 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402701321439209112}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7302018871387296054
+--- !u!114 &1479703598740472540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,7 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4402701321439209112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10fb64aa035c75045842e2ab834123ea, type: 3}
+  m_Script: {fileID: 11500000, guid: e8ec7d6ad06012a4c88b309551e13a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
