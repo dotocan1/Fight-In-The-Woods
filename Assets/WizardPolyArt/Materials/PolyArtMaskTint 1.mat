@@ -38,12 +38,11 @@ Material:
     m_Floats:
     - _Float1: 0
     - _Metal: 0
-    - _Metallic: 0.373
+    - _Metallic: 0.3
     - _Sm: 0
-    - _Smoothness: 0.064
+    - _Smoothness: 0
     - __dirty: 0
     m_Colors:
-    - _Hair: {r: 0.1462264, g: 0.50353247, b: 1, a: 0}
-    - _InnerCloth: {r: 0.1792453, g: 0.078631185, b: 0.16314705, a: 0}
-    - _OuterChlothes: {r: 0.45860973, g: 0.25485048, b: 0.6509434, a: 0}
-  m_BuildTextureStacks: []
+    - _Hair: {r: 0.0990566, g: 0.4757334, b: 1, a: 0}
+    - _InnerCloth: {r: 0.6415094, g: 0.15432537, b: 0.5665582, a: 0}
+    - _OuterChlothes: {r: 0.6035535, g: 0.18396229, b: 1, a: 0}
