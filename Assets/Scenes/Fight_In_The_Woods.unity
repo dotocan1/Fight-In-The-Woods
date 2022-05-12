@@ -42582,6 +42582,7 @@ MonoBehaviour:
   horizontalInput: 0
   verticalInput: 0
   speed: 6
+  rotationSpeed: 125
   followTarget: {fileID: 0}
 --- !u!1 &207039843790517132
 GameObject:
@@ -50293,7 +50294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInput: 0
   verticalInput: 0
-  speed: 6
+  speed: 10
+  rotationSpeed: 125
   followTarget: {fileID: 1187419649}
 --- !u!1 &3220856236223499720
 GameObject:

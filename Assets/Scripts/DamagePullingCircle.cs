@@ -36,6 +36,8 @@ public class DamagePullingCircle : MonoBehaviour
 
             // other.gameObject.transform.position = Vector3.Lerp(startPosition, transform.position, 1000f * Time.deltaTime);
             // treba implementirati da se polako primice krugu
+
+
         }
     }
 }
