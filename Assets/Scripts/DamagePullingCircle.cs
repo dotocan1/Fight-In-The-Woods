@@ -5,6 +5,11 @@ using UnityEngine;
 public class DamagePullingCircle : MonoBehaviour
 {
     private Combat combatScript;
+    float t;
+    Vector3 startPosition;
+    Vector3 target;
+    float timeToReachTarget;
+
 
     // Start is called before the first frame update
     void Start()
@@ -12,6 +17,7 @@ public class DamagePullingCircle : MonoBehaviour
         if (GameObject.Find("Enemy") != null)
         {
             combatScript = GameObject.Find("Enemy").GetComponent<Combat>();
+            startPosition = GameObject.Find("Enemy").transform.position;
         }
     }
 
@@ -23,14 +29,13 @@ public class DamagePullingCircle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy") != null)
+        // provjerava postoji li drugi objekt te je li drugi object character
+        if (GameObject.Find("Enemy") != null && other.gameObject.GetInstanceID() == GameObject.Find("Enemy").GetInstanceID())
         {
-            Debug.Log("Pulling circle works!");
-            
-            // TODO: ovdje sada ide logika koja povlaci
-            // playere u sredinu
+            //other.gameObject.transform.position = transform.position
 
-
+            // other.gameObject.transform.position = Vector3.Lerp(startPosition, transform.position, 1000f * Time.deltaTime);
+            // treba implementirati da se polako primice krugu
         }
     }
 }

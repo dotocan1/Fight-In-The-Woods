@@ -26,7 +26,6 @@ public class DamageWaterThrow : MonoBehaviour
         
         if (GameObject.Find("Enemy") != null)
         {
-            Debug.Log("Water Throw works!");
             combatScript.takeDamage();
         }
             
