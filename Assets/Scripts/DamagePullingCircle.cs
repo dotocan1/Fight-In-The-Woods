@@ -5,11 +5,8 @@ using UnityEngine;
 public class DamagePullingCircle : MonoBehaviour
 {
     private Combat combatScript;
-    float t;
-    Vector3 startPosition;
-    Vector3 target;
-    float timeToReachTarget;
-
+    bool isAbility = false;
+    private float speed = 8.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,14 +14,16 @@ public class DamagePullingCircle : MonoBehaviour
         if (GameObject.Find("Enemy") != null)
         {
             combatScript = GameObject.Find("Enemy").GetComponent<Combat>();
-            startPosition = GameObject.Find("Enemy").transform.position;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(isAbility == true)
+        {
+            GameObject.Find("Enemy").transform.position = Vector3.MoveTowards(GameObject.Find("Enemy").transform.position, transform.position, Time.deltaTime * speed);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,10 +33,10 @@ public class DamagePullingCircle : MonoBehaviour
         {
             //other.gameObject.transform.position = transform.position
 
-            // other.gameObject.transform.position = Vector3.Lerp(startPosition, transform.position, 1000f * Time.deltaTime);
+            //other.gameObject.transform.position = Vector3.Lerp(startPosition, transform.position, 5.0f * Time.deltaTime);
             // treba implementirati da se polako primice krugu
-
-
+            
+            isAbility = true;
         }
     }
 }
