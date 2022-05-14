@@ -5,11 +5,16 @@ using UnityEngine;
 public class Combat : MonoBehaviour
 {
     private float health = 1000;
+    Rigidbody rbEnemy;
+    public float m_Thrust = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        if (GameObject.Find("Enemy") != null)
+        {
+            rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
+        }
     }
 
     // Update is called once per frame
@@ -34,5 +39,10 @@ public class Combat : MonoBehaviour
         health += 100.0f;
         Debug.Log("Healing! Enemy health is now:" + health);
 
+    }
+
+    public void waveThrow()
+    {
+        rbEnemy.AddForce(transform.forward * m_Thrust);
     }
 }

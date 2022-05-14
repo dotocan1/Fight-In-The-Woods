@@ -42605,6 +42605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb707a3297cfbe41991c52110d90f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Thrust: 20
 --- !u!1 &207039843790517136
 GameObject:
   m_ObjectHideFlags: 0
@@ -44180,7 +44181,7 @@ GameObject:
   - component: {fileID: 2187332231164101898}
   - component: {fileID: 2187332231164101899}
   m_Layer: 0
-  m_Name: 
+  m_Name: FollowTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48575,6 +48576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4402701321439209112, guid: 1c2e5519182e71b4d86e4e84aea135dc, type: 3}
+  followTarget: {fileID: 2187332231164101897}
 --- !u!1 &3668235488918939458
 GameObject:
   m_ObjectHideFlags: 0
