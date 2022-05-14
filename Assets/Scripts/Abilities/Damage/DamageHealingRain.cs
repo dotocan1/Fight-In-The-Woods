@@ -18,11 +18,16 @@ public class DamageHealingRain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        combatScript.healPlayer();
+        if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+        {
+            combatScript.healPlayer();
+
+            // implement healing over time
+        }
     }
 }

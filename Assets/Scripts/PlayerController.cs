@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+
 public class PlayerController : MonoBehaviour
 {
     static readonly int forwardFloat = Animator.StringToHash("Forward");
@@ -72,15 +73,5 @@ public class PlayerController : MonoBehaviour
             speed = 12.0f;
         }
         else { speed = 10.0f; }
-
-
-
-        // rotates the player towards where camera is aiming
-
-        Quaternion target = Quaternion.Euler(0, followTarget.transform.localRotation.eulerAngles.y, 0);
-
-        // Dampen towards the target rotation
-
-        // transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
     }
 }
