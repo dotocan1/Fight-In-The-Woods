@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9174048750121454476}
   - component: {fileID: 9028094173125612691}
   m_Layer: 0
-  m_Name: WaveThrow
+  m_Name: WavePush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4402701321439209112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50.15, y: 3.9, z: 67.39}
-  m_LocalScale: {x: 9.4341, y: 4.9002, z: 3.1657}
+  m_LocalScale: {x: 5, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageWaveThrow : MonoBehaviour
+public class DamageWavePush : MonoBehaviour
 {
     private Combat combatScript;
 
@@ -18,14 +18,14 @@ public class DamageWaveThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy") != null)
+        if (GameObject.Find("Enemy") != null && GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
         {
-            combatScript.waveThrow();
+            combatScript.wavePush();
         }
     }
 }

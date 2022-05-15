@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityWaveThrow : MonoBehaviour
+public class AbilityWavePush : MonoBehaviour
 {
     public GameObject projectilePrefab;
     private GameObject instantiatedObj;
@@ -17,9 +17,10 @@ public class AbilityWaveThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 1) + (transform.up * 1.5f), followTarget.transform.rotation);
+            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward * 2) + (transform.up * 1.5f), followTarget.transform.rotation);
+            Destroy(instantiatedObj, 0.3f);
         }
     }
 }

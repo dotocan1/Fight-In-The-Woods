@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    private float health = 1000;
+    private float health = 1000f;
     Rigidbody rbEnemy;
     public float m_Thrust = 20f;
     public float timer = 0.0001f;
     public bool timerRunning = false;
-    int i;
+    private float pushForce = 5.0f;
 
 
     // Start is called before the first frame update
@@ -24,6 +24,8 @@ public class Combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (health < 0)
         {
             Destroy(gameObject);
@@ -31,15 +33,16 @@ public class Combat : MonoBehaviour
 
         // wave throw
 
-        if (timerRunning)
+        if (timerRunning == true)
         {
-            timer-= Time.smoothDeltaTime;
+            timer -= Time.smoothDeltaTime;
             if (timer >= 0)
             {
-                Debug.Log(i++);
+                Debug.Log("Timer running!");
             }
             else
             {
+                // Debug.Log("Timer over");
                 rbEnemy.velocity = Vector3.zero;
                 rbEnemy.angularVelocity = Vector3.zero;
                 timerRunning = false;
@@ -63,10 +66,12 @@ public class Combat : MonoBehaviour
 
     }
 
-    public void waveThrow()
+    public void wavePush()
     {
-        Vector3 moveBackwards = Vector3.forward * 2.0f;
+
+        Vector3 moveBackwards = Vector3.forward * pushForce;
         rbEnemy.AddForce(moveBackwards * m_Thrust);
         timerRunning = true;
+
     }
 }
