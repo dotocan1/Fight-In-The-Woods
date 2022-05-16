@@ -23,9 +23,12 @@ public class DamageWavePush : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy") != null && GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+        if (GameObject.Find("Enemy") != null)
         {
-            combatScript.wavePush();
+            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+            {
+                combatScript.wavePush();
+            }
         }
     }
 }

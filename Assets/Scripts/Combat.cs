@@ -31,16 +31,21 @@ public class Combat : MonoBehaviour
 
     // ove funkcije su pozvane u skripti koja detektira kolizije
 
-    public void takeDamage()
+    public void takeWaterThrowDamage()
     {
         Debug.Log("Taking damage! Enemy health is now:" + health);
-        health = health - 0.1f;
+        health -= 1f;
     }
 
     public void takeArrowCircleDamage()
     {
         Debug.Log("Taking damage! Enemy health is now:" + health);
         health -= 100f;
+    }
+
+    public void takeSingleArrowDamage()
+    {
+        health -= 1000f;
     }
 
     public void healPlayer()

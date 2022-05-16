@@ -23,11 +23,14 @@ public class DamageWaterThrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
         if (GameObject.Find("Enemy") != null)
         {
-            combatScript.takeDamage();
+            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+            {
+                combatScript.takeWaterThrowDamage();
+            }
         }
-            
+
     }
 }

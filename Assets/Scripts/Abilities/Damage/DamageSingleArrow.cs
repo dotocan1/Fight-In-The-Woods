@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageHealingRain : MonoBehaviour
+public class DamageSingleArrow : MonoBehaviour
 {
     private Combat combatScript;
 
@@ -23,14 +23,9 @@ public class DamageHealingRain : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy") != null)
+        if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID() && GameObject.Find("Enemy") != null)
         {
-            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
-            {
-                combatScript.healPlayer();
-
-                // implement healing over time
-            }
+            combatScript.takeSingleArrowDamage();
         }
     }
 }

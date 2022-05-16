@@ -29,9 +29,12 @@ public class DamagePullingCircle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // provjerava postoji li drugi objekt te je li drugi object character
-        if (GameObject.Find("Enemy") != null && other.gameObject.GetInstanceID() == GameObject.Find("Enemy").GetInstanceID())
-        {   
-            isAbility = true;
+        if (GameObject.Find("Enemy") != null)
+        {
+            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+            {
+                isAbility = true;
+            }
         }
     }
 }
