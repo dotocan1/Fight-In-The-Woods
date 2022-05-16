@@ -7,8 +7,6 @@ public class Combat : MonoBehaviour
     private float health = 1000f;
     Rigidbody rbEnemy;
     public float m_Thrust = 20f;
-    public float timer = 0.0001f;
-    public bool timerRunning = false;
     private float pushForce = 5.0f;
 
 
@@ -25,30 +23,10 @@ public class Combat : MonoBehaviour
     void Update()
     {
 
-
         if (health < 0)
         {
             Destroy(gameObject);
         }
-
-        // wave throw
-
-        if (timerRunning == true)
-        {
-            timer -= Time.smoothDeltaTime;
-            if (timer >= 0)
-            {
-                Debug.Log("Timer running!");
-            }
-            else
-            {
-                // Debug.Log("Timer over");
-                rbEnemy.velocity = Vector3.zero;
-                rbEnemy.angularVelocity = Vector3.zero;
-                timerRunning = false;
-            }
-        }
-
     }
 
     // ovo je pozvano u skripti koja detektira koliziju
@@ -71,7 +49,11 @@ public class Combat : MonoBehaviour
 
         Vector3 moveBackwards = Vector3.forward * pushForce;
         rbEnemy.AddForce(moveBackwards * m_Thrust);
-        timerRunning = true;
+
+        // stops force
+
+        // rbEnemy.velocity = Vector3.zero;
+        //  rbEnemy.angularVelocity = Vector3.zero;
 
     }
 }
