@@ -23,9 +23,12 @@ public class DamageSingleArrow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID() && GameObject.Find("Enemy") != null)
+        if (GameObject.Find("Enemy") != null)
         {
-            combatScript.takeSingleArrowDamage();
+            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
+            {
+                combatScript.takeSingleArrowDamage();
+            }
         }
     }
 }
