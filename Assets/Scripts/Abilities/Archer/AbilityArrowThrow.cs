@@ -19,8 +19,7 @@ public class AbilityArrowThrow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-            Debug.Log("This is arrow transform position: " + instantiatedObj.transform.position);
-            Debug.Log("This is player model transform position: " + transform.position);
+            Destroy(instantiatedObj, 1f);
         }
     }
 }
