@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object;
 
 [RequireComponent(typeof(Animator))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     static readonly int forwardFloat = Animator.StringToHash("Forward");
     static readonly int jumpTrigger = Animator.StringToHash("Jump");
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (!base.IsOwner)
+            return;
 
         // moves the character
 
