@@ -37329,10 +37329,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2107688114, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: field of view
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107688114, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: far clip plane
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107688114, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: near clip plane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107688115, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3690004
+      objectReference: {fileID: 0}
+    - target: {fileID: 563212849943989550, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126105848882589462, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 6878533062389734872}
+    - target: {fileID: 3126105848882589462, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: followTarget
+      value: 
+      objectReference: {fileID: 6878533062389734871}
+    - target: {fileID: 3126105848882589462, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: projectileSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3126105848882589465, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
       propertyPath: m_Name
       value: ArcherCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 3126105848882589466, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: fpsCam
+      value: 
+      objectReference: {fileID: 6878533062389734872}
+    - target: {fileID: 3126105848882589466, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 2583071833000182564, guid: 808341ba6886cdc479fc8f4a0185350e, type: 3}
     - target: {fileID: 3126105848882754361, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -37379,3 +37419,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+--- !u!1 &6878533062389734871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2107688111, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+  m_PrefabInstance: {fileID: 6878533062389734870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &6878533062389734872 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2107688114, guid: 6290c2a9b281cbb46a5d647005d6be47, type: 3}
+  m_PrefabInstance: {fileID: 6878533062389734870}
+  m_PrefabAsset: {fileID: 0}
