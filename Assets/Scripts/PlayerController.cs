@@ -20,8 +20,6 @@ public class PlayerController : NetworkBehaviour
     public float speed = 10.0f;
     public float rotationSpeed = 125.0f;
 
-    public GameObject followTarget;
-
     // Start is called before the first frame update
     void Start()
     {
