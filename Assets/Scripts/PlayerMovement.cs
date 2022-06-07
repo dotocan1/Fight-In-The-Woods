@@ -24,12 +24,21 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     PhotonView view;
+    [SerializeField] Camera cam;
 
     // 7.6. dodani private na start
     private void Start() 
     {
         anim = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
+        //cam = Camera.main;
+
+        if(!view.IsMine)
+        {
+            //Destroy(cam);
+            cam.enabled = false;
+            Debug.Log("AAAAAAAAAAAAA");
+        }
     }
 
     private float smooth = 0.5f;
@@ -38,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // 7.6. If View
-        if (view.IsMine)
+        if (view.IsMine) // check if this is my player character
         {
 
             float x = Input.GetAxis("Horizontal");

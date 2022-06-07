@@ -6,6 +6,9 @@ using Photon.Pun;
 public class SpawnPlayers : MonoBehaviour
 { 
     public GameObject PlayerPrefab;
+    public float SpawnTime = 1;
+    float timer;
+    bool HasPlayerSpawned = false;
 
     public float minX;
     public float maxX;
@@ -16,9 +19,25 @@ public class SpawnPlayers : MonoBehaviour
 
     private void Start()
     {
-       Vector3 randomPosition = new Vector3(Random.Range(minX, maxX),Random.Range(minY, maxY) ,Random.Range(minZ, maxZ));
-        PhotonNetwork.Instantiate(PlayerPrefab.name, randomPosition, Quaternion.identity); //Quaternion indentiy - nema rotacije! 
+       
     }
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer >= SpawnTime)
+        {
+            if (!HasPlayerSpawned)
+            {
+                Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+                PhotonNetwork.Instantiate(PlayerPrefab.name, randomPosition, Quaternion.identity); //Quaternion indentiy - nema rotacije! 
+                HasPlayerSpawned = true;
+            }
+
+            timer = 0;
+        }
+    }
+
 
 }
 
