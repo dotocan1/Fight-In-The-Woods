@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Animator))]
 
@@ -12,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator anim;
 
+    // 7.6. Photon view
+     
+
   
     private bool sprinting;
     private bool jump;
@@ -19,10 +23,13 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
 
-    // Start is called before the first frame update
-    void Start()
+    PhotonView view;
+
+    // 7.6. dodani private na start
+    private void Start() 
     {
         anim = GetComponent<Animator>();
+        view = GetComponent<PhotonView>();
     }
 
     private float smooth = 0.5f;
@@ -30,37 +37,41 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 7.6. If View
+        if (view.IsMine)
+        {
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+            Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.deltaTime);
 
-        // moves the character
+            // moves the character
 
-        sprinting = Input.GetButton("Sprint");
-        jump = Input.GetButtonDown("Jump");
+            sprinting = Input.GetButton("Sprint");
+            jump = Input.GetButtonDown("Jump");
 
-        if (jump && 
-            anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState && 
-            anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState) 
+            if (jump &&
+                anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
+                anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
                 anim.SetTrigger(jumpTrigger);
 
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    if (sprinting) move *= 2;
-   
-        //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
-        //}
+            //if (Input.GetKey(KeyCode.W))
+            //{
+            //    if (sprinting) move *= 2;
 
-        // sprinting
+            //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
+            //}
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 12.0f;
+            // sprinting
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 12.0f;
+            }
+            else { speed = 10.0f; }
         }
-        else { speed = 10.0f; }
     }
 }
