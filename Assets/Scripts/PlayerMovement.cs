@@ -6,15 +6,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    static readonly int forwardFloat = Animator.StringToHash("Forward");
-    static readonly int jumpTrigger = Animator.StringToHash("Jump");
-    static readonly int jumpState = Animator.StringToHash("Jump");
+    
 
     private Animator animator;
 
 
-    private bool sprinting;
-    private bool jump;
+
     public float speed = 12f;
 
     public CharacterController controller;
@@ -31,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
+        bool isRunning = animator.GetBool("isRunning");
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -40,22 +39,14 @@ public class PlayerMovement : MonoBehaviour
 
         // moves the character
 
-        //sprinting = Input.GetButton("Sprint");
-        //jump = Input.GetButtonDown("Jump");
-
-        if (jump &&
-            animator.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
-            animator.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
-            animator.SetTrigger(jumpTrigger);
-
         if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isRunning", true);
+            isRunning = true;
         }
 
         if (!Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isRunning", false);
+            isRunning = false;
         }
 
         // sprinting
