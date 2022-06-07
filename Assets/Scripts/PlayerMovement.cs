@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+
 
     private Animator animator;
     PhotonView view;
@@ -45,12 +45,12 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
-                isRunning = true;
+                animator.SetBool("isRunning", true);
             }
 
             if (!Input.GetKey(KeyCode.W))
             {
-                isRunning = false;
+                animator.SetBool("isRunning", false);
             }
 
             // sprinting
