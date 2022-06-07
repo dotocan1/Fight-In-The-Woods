@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [RequireComponent(typeof(Animator))]
 
@@ -9,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     
 
     private Animator animator;
-
+    PhotonView view;
 
 
     public float speed = 12f;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        view = GetComponent<PhotonView>();
     }
 
     private float smooth = 0.5f;
@@ -33,28 +35,31 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        // moves the character
-
-        if (Input.GetKey(KeyCode.W))
+        if (view.IsMine)
         {
-            isRunning = true;
-        }
+            Vector3 move = transform.right * x + transform.forward * z;
 
-        if (!Input.GetKey(KeyCode.W))
-        {
-            isRunning = false;
-        }
+            controller.Move(move * speed * Time.deltaTime);
 
-        // sprinting
+            // moves the character
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 12.0f;
+            if (Input.GetKey(KeyCode.W))
+            {
+                isRunning = true;
+            }
+
+            if (!Input.GetKey(KeyCode.W))
+            {
+                isRunning = false;
+            }
+
+            // sprinting
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 12.0f;
+            }
+            else { speed = 10.0f; }
         }
-        else { speed = 10.0f; }
     }
 }
