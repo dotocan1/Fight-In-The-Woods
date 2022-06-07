@@ -13,7 +13,7 @@ public class AbilityArrowThrow : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward) + (transform.up), transform.rotation);
+            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position + (transform.forward) + (transform.up), fpsCam.transform.rotation);
             Destroy(instantiatedObj, 10f);
         }
     }
