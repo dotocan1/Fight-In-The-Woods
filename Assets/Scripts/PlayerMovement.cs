@@ -40,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
         // moves the character
 
-        sprinting = Input.GetButton("Sprint");
-        jump = Input.GetButtonDown("Jump");
+        //sprinting = Input.GetButton("Sprint");
+        //jump = Input.GetButtonDown("Jump");
 
         if (jump && 
             anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState && 
