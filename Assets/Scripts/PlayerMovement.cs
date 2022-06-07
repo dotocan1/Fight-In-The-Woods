@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        bool isRunning = animator.GetBool("isRunning");
+        //bool isRunning = animator.GetBool("isRunning");
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
