@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
 
     public CharacterController controller;
+    public Animator animator;
 
     PhotonView view;
     [SerializeField] Camera cam;
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // 7.6. dodani private na start
     private void Start() 
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
         //cam = Camera.main;
 
@@ -60,31 +61,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        // moves the character
-
-        sprinting = Input.GetButton("Sprint");
-        jump = Input.GetButtonDown("Jump");
-
-        if (jump &&
-            anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
-            anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
-            anim.SetTrigger(jumpTrigger);
-
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    if (sprinting) move *= 2;
-
-        //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
-        //}
-
-        // sprinting
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            Vector3 move = transform.right * x + transform.forward * z;
-
-            controller.Move(move * speed * Time.deltaTime);
-
             // moves the character
 
             if (Input.GetKey(KeyCode.W))
@@ -104,6 +80,5 @@ public class PlayerMovement : MonoBehaviour
                 speed = 12.0f;
             }
             else { speed = 10.0f; }
-        }
     }
 }
