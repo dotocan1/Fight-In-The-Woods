@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class AbilitySingleArrow : MonoBehaviour
 {
-    public GameObject projectilePrefab;
     private GameObject instantiatedObj;
     public Camera fpsCam;
 
@@ -40,7 +39,7 @@ public class AbilitySingleArrow : MonoBehaviour
             // made it here then ability is available to use...
             // UseAbilityCode goes here
 
-            instantiatedObj = PhotonNetwork.Instantiate("SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
+            instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
             Destroy(instantiatedObj, 10f);
 
             // start the cooldown timer

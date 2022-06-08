@@ -30,7 +30,7 @@ public class SpawnPlayers : MonoBehaviour
             if (!HasPlayerSpawned)
             {
                 Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
-                PhotonNetwork.Instantiate(PlayerPrefab.name, randomPosition, Quaternion.identity); //Quaternion indentiy - nema rotacije! 
+                PhotonNetwork.Instantiate("Characters/" + PlayerPrefab.name, randomPosition, Quaternion.identity); //Quaternion indentiy - nema rotacije! 
                 HasPlayerSpawned = true;
             }
 

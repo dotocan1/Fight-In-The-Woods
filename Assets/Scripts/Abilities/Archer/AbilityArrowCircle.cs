@@ -10,6 +10,19 @@ public class AbilityArrowCircle : MonoBehaviour
     public bool IsAvailable = true;
     public float CooldownDuration = 10.0f;
 
+    PhotonView view;
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+        AbilityArrowCircle abilityArrowCircle = GetComponent<AbilityArrowCircle>();
+
+        if (!view.IsMine)
+        {
+
+            abilityArrowCircle.enabled = false;
+            Debug.Log("Uspjesno unistena skripta");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +38,7 @@ public class AbilityArrowCircle : MonoBehaviour
             // made it here then ability is available to use...
             // UseAbilityCode goes here
 
-            instantiatedObj = PhotonNetwork.Instantiate("ArrowCircle", transform.position, transform.rotation);
+            instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, transform.rotation);
             Destroy(instantiatedObj, 10f);
 
             // start the cooldown timer
