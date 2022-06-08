@@ -114,5 +114,13 @@ public class PlayerMovement : MonoBehaviour
         {
             speed = 12f;
         }
+        if (Input.GetKey(KeyCode.R))
+        {
+            animator.SetBool("isSwordAttack", true);
+        }
+        if (!Input.GetKey(KeyCode.R))
+        {
+            animator.SetBool("isSwordAttack", true);
+        }
     }
 }
