@@ -16,7 +16,7 @@ public class AbilityWavePush : MonoBehaviour
     private void Start()
     {
         view = GetComponent<PhotonView>();
-        AbilityWavePush abilityWavePush= GetComponent<AbilityWavePush>();
+        AbilityWavePush abilityWavePush = GetComponent<AbilityWavePush>();
 
         if (!view.IsMine)
         {
@@ -28,7 +28,7 @@ public class AbilityWavePush : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             // if not available to use (still cooling down) just exit
             if (IsAvailable == false)
@@ -39,11 +39,16 @@ public class AbilityWavePush : MonoBehaviour
             // made it here then ability is available to use...
             // UseAbilityCode goes here
 
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 10f);
+            for (int i = 0; i < 5; i++)
+            {
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
+                Destroy(instantiatedObj, 10f);
 
-            // start the cooldown timer
-            StartCoroutine(StartCooldown());
+                // start the cooldown timer
+                StartCoroutine(StartCooldown());
+            }
+
+
         }
     }
 
