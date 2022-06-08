@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
             bool runningPressed = Input.GetKey(KeyCode.W);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
-
+            bool swordAttackingPressed = Input.GetKey(KeyCode.R);
             // animating the movement
 
             if (Input.GetKey(KeyCode.W))
@@ -60,7 +60,17 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isRunning", false);
             }
 
-            if(runningPressed && sprintingPressed)
+            if (swordAttackingPressed)
+            {
+                animator.SetBool("isSwordAttacking", true);
+            }
+
+            if (!swordAttackingPressed)
+            {
+                animator.SetBool("isSwordAttacking", false);
+            }
+
+            if (runningPressed && sprintingPressed)
             {
                 animator.SetBool("isSprinting", true);
                 speed = 16f;
@@ -114,14 +124,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 speed = 12f;
-            }
-            if (Input.GetKey(KeyCode.R))
-            {
-                animator.SetBool("isSwordAttack", true);
-            }
-            if (!Input.GetKey(KeyCode.R))
-            {
-                animator.SetBool("isSwordAttack", true);
             }
         }
     }
