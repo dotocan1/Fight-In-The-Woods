@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AbilityArrowThrow : MonoBehaviour
+using Photon.Pun;
+public class AbilityArrowCircle : MonoBehaviour
 {
-    public GameObject projectilePrefab;
     private GameObject instantiatedObj;
     public Camera fpsCam;
 
@@ -26,7 +25,7 @@ public class AbilityArrowThrow : MonoBehaviour
             // made it here then ability is available to use...
             // UseAbilityCode goes here
 
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position, transform.rotation);
+            instantiatedObj = PhotonNetwork.Instantiate("ArrowCircle", transform.position, transform.rotation);
             Destroy(instantiatedObj, 10f);
 
             // start the cooldown timer
