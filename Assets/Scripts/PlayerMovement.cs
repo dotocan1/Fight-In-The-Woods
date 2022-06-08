@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     PhotonView view;
     [SerializeField] Camera cam;
+    [SerializeField] AudioListener audioListener;
 
     // 7.6. dodani private na start
     private void Start() 
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Destroy(cam);
             cam.enabled = false;
+            audioListener.enabled = false;
             Debug.Log("AAAAAAAAAAAAA");
         }
     }
@@ -49,38 +51,42 @@ public class PlayerMovement : MonoBehaviour
         // 7.6. If View
         if (view.IsMine) // check if this is my player character
         {
-
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
-            Vector3 move = transform.right * x + transform.forward * z;
-
-            controller.Move(move * speed * Time.deltaTime);
-
-            // moves the character
-
-            sprinting = Input.GetButton("Sprint");
-            jump = Input.GetButtonDown("Jump");
-
-            if (jump &&
-                anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
-                anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
-                anim.SetTrigger(jumpTrigger);
-
-            //if (Input.GetKey(KeyCode.W))
-            //{
-            //    if (sprinting) move *= 2;
-
-            //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
-            //}
-
-            // sprinting
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = 12.0f;
-            }
-            else { speed = 10.0f; }
+            Move();   
         }
+    }
+
+    private void Move()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * speed * Time.deltaTime);
+
+        // moves the character
+
+        sprinting = Input.GetButton("Sprint");
+        jump = Input.GetButtonDown("Jump");
+
+        if (jump &&
+            anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
+            anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
+            anim.SetTrigger(jumpTrigger);
+
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    if (sprinting) move *= 2;
+
+        //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
+        //}
+
+        // sprinting
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 12.0f;
+        }
+        else { speed = 10.0f; }
     }
 }

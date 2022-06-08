@@ -4400,6 +4400,7 @@ MonoBehaviour:
   speed: 10
   controller: {fileID: 3551389857284985537}
   cam: {fileID: 8356760506296694784}
+  audioListener: {fileID: 0}
 --- !u!65 &6384703300987114406
 BoxCollider:
   m_ObjectHideFlags: 0
