@@ -7,11 +7,7 @@ using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
-    static readonly int forwardFloat = Animator.StringToHash("Forward");
-    static readonly int jumpTrigger = Animator.StringToHash("Jump");
-    static readonly int jumpState = Animator.StringToHash("Jump");
 
-    private Animator anim;
 
     // 7.6. Photon view
      
@@ -22,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
 
     public CharacterController controller;
+    public Animator animator;
 
     PhotonView view;
     [SerializeField] Camera cam;
@@ -30,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // 7.6. dodani private na start
     private void Start() 
     {
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
         //cam = Camera.main;
 
@@ -64,29 +61,24 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        // moves the character
+            // moves the character
 
-        sprinting = Input.GetButton("Sprint");
-        jump = Input.GetButtonDown("Jump");
+            if (Input.GetKey(KeyCode.W))
+            {
+                animator.SetBool("isRunning", true);
+            }
 
-        if (jump &&
-            anim.GetCurrentAnimatorStateInfo(0).shortNameHash != jumpState &&
-            anim.GetNextAnimatorStateInfo(0).shortNameHash != jumpState)
-            anim.SetTrigger(jumpTrigger);
+            if (!Input.GetKey(KeyCode.W))
+            {
+                animator.SetBool("isRunning", false);
+            }
 
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    if (sprinting) move *= 2;
+            // sprinting
 
-        //    //anim.SetFloat(forwardFloat, verticalInput, 0.1f, Time.deltaTime);
-        //}
-
-        // sprinting
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 12.0f;
-        }
-        else { speed = 10.0f; }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                speed = 12.0f;
+            }
+            else { speed = 10.0f; }
     }
 }
