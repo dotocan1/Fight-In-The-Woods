@@ -10,15 +10,25 @@ public class PlayerMovement : MonoBehaviour
 
 
     // 7.6. Photon view
-     
 
-  
+
+
     private bool sprinting;
     private bool jump;
+    private bool ismoving;
+
+ 
+
     public float speed = 12f;
 
     public CharacterController controller;
     public Animator animator;
+
+    //footsteps sound 
+    private AudioSource SoundPlayer;
+    
+
+
 
     PhotonView view;
     [SerializeField] Camera cam;
@@ -29,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
+        SoundPlayer = GetComponent<AudioSource>();
+        
         //cam = Camera.main;
 
         if(!view.IsMine)
@@ -36,8 +48,10 @@ public class PlayerMovement : MonoBehaviour
             //Destroy(cam);
             cam.enabled = false;
             audioListener.enabled = false;
-            Debug.Log("AAAAAAAAAAAAA");
+            Debug.Log("why u have to be mad, its only a game.");
         }
+        
+
     }
 
     private float smooth = 0.5f;
@@ -65,12 +79,17 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
+                ismoving = true;
                 animator.SetBool("isRunning", true);
-            }
+                if (ismoving && !SoundPlayer.isPlaying) SoundPlayer.Play();
+
+            } else ismoving = false;
 
             if (!Input.GetKey(KeyCode.W))
             {
                 animator.SetBool("isRunning", false);
+               SoundPlayer.Stop();
+         
             }
 
             // sprinting
@@ -80,5 +99,20 @@ public class PlayerMovement : MonoBehaviour
                 speed = 12.0f;
             }
             else { speed = 10.0f; }
+
+            
+            
+    }
+
+    private void PlayerFootstep()
+    {
+        SoundPlayer.timeSamples = Random.Range(0, SoundPlayer.timeSamples);
+        SoundPlayer.pitch = Random.Range(0, SoundPlayer.pitch);
+        SoundPlayer.volume = 0.2f;
+        SoundPlayer.volume = AudioListener.volume;
+         
+        SoundPlayer.Play();
+        
+        
     }
 }
