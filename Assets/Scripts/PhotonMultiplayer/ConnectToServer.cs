@@ -14,6 +14,8 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject progressLabel;
 
+    bool isConnecting;
+
     private void Start()
     {
         progressLabel.SetActive(false);
