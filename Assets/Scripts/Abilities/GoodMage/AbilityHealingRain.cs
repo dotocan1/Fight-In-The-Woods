@@ -1,28 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class AbilityHealingRain : MonoBehaviour
 {
-    public GameObject projectilePrefab;
-    float delay = 2.0f; //This implies a delay of 2 seconds.
     private GameObject instantiatedObj;
+    public Camera fpsCam;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool IsAvailable = true;
+    public float CooldownDuration = 10.0f;
+
+    PhotonView view;
+
+    private void Start()
     {
+        view = GetComponent<PhotonView>();
+        AbilityHealingRain abilityHealingRain = GetComponent<AbilityHealingRain>();
 
+        if (!view.IsMine)
+        {
+
+            abilityHealingRain.enabled = false;
+            Debug.Log("Uspjesno unistena skripta");
+        }
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            // Launch a projectile
+            // if not available to use (still cooling down) just exit
+            if (IsAvailable == false)
+            {
+                return;
+            }
 
-            instantiatedObj = (GameObject)Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-            Destroy(instantiatedObj, 2);
+            // made it here then ability is available to use...
+            // UseAbilityCode goes here
+
+            instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
+            Destroy(instantiatedObj, 10f);
+
+            // start the cooldown timer
+            StartCoroutine(StartCooldown());
         }
+    }
+
+    public IEnumerator StartCooldown()
+    {
+        IsAvailable = false;
+        yield return new WaitForSeconds(CooldownDuration);
+        IsAvailable = true;
     }
 }
