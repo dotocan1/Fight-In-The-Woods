@@ -8,17 +8,10 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviour
 {
 
-
-    // 7.6. Photon view
-     
-
-  
-    private bool sprinting;
-    private bool jump;
     public float speed = 12f;
 
     public CharacterController controller;
-    public Animator animator;
+    private Animator animator;
 
     PhotonView view;
     [SerializeField] Camera cam;

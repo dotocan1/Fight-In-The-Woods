@@ -11,7 +11,21 @@ public class AbilitySingleArrow : MonoBehaviour
 
     public bool IsAvailable = true;
     public float CooldownDuration = 10.0f;
+    
+    PhotonView view;
 
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+        AbilitySingleArrow abilitySingleArrow = GetComponent<AbilitySingleArrow>();
+
+        if (!view.IsMine)
+        {
+
+            abilitySingleArrow.enabled = false;
+            Debug.Log("Uspjesno unistena skripta");
+        }
+    }
     // Update is called once per frame
     void Update()
     {
