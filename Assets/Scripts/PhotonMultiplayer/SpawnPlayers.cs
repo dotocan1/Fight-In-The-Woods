@@ -8,6 +8,7 @@ public class SpawnPlayers : MonoBehaviour
     public GameObject PlayerPrefab;
     Player[] allPlayers;
     int myNumberInRoom;
+    int degrees;
 
     public Transform[] spawnPoints;
     public float SpawnTime = 1;
@@ -30,12 +31,15 @@ public class SpawnPlayers : MonoBehaviour
 
     void Update()
     {
+        if (spawnPoints[myNumberInRoom].name == "Point_A_1_1" || spawnPoints[myNumberInRoom].name == "Point_A_1_2") degrees = 90;
+        else degrees = -90;
+
         timer += Time.deltaTime;
         if (timer >= SpawnTime)
         {
             if (!HasPlayerSpawned)
             {
-                PhotonNetwork.Instantiate("Characters/" + PlayerPrefab.name, spawnPoints[myNumberInRoom].position, Quaternion.identity); 
+                PhotonNetwork.Instantiate("Characters/" + PlayerPrefab.name, spawnPoints[myNumberInRoom].position, Quaternion.Euler(0,degrees,0)); 
                 HasPlayerSpawned = true;
             }
 
