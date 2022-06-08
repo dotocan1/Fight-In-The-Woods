@@ -24,14 +24,12 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
-        //cam = Camera.main;
+        audioListener = cam.GetComponent<AudioListener>(); 
 
         if (!view.IsMine)
         {
-            //Destroy(cam);
             cam.enabled = false;
             audioListener.enabled = false;
-            Debug.Log("AAAAAAAAAAAAA");
         }
     }
 
