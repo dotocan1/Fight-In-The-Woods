@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] AudioListener audioListener;
 
+    
+
     // 7.6. dodani private na start
     private void Start()
     {
@@ -42,6 +44,85 @@ public class PlayerMovement : MonoBehaviour
         if (view.IsMine) // check if this is my player character
         {
             Move();
+
+            bool runningPressed = Input.GetKey(KeyCode.W);
+            bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
+
+            // animating the movement
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                animator.SetBool("isRunning", true);
+            }
+
+            if (!Input.GetKey(KeyCode.W))
+            {
+                animator.SetBool("isRunning", false);
+            }
+
+            if(runningPressed && sprintingPressed)
+            {
+                animator.SetBool("isSprinting", true);
+                speed = 16f;
+            }
+
+            if (!runningPressed || !sprintingPressed)
+            {
+                animator.SetBool("isSprinting", false);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("isRunningLeft", true);
+            }
+
+            if (!Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("isRunningLeft", false);
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                animator.SetBool("isWalkingBackwards", true);
+            }
+
+            if (!Input.GetKey(KeyCode.S))
+            {
+                animator.SetBool("isWalkingBackwards", false);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("isWalkingLeft", true);
+            }
+
+            if (!Input.GetKey(KeyCode.A))
+            {
+                animator.SetBool("isWalkingLeft", false);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                animator.SetBool("isWalkingRight", true);
+            }
+
+            if (!Input.GetKey(KeyCode.D))
+            {
+                animator.SetBool("isWalkingRight", false);
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                speed = 12f;
+            }
+            if (Input.GetKey(KeyCode.R))
+            {
+                animator.SetBool("isSwordAttack", true);
+            }
+            if (!Input.GetKey(KeyCode.R))
+            {
+                animator.SetBool("isSwordAttack", true);
+            }
         }
     }
 
@@ -52,75 +133,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        // moves the character
         controller.Move(move * speed * Time.deltaTime);
 
-        // moves the character
-        if (Input.GetKey(KeyCode.W))
-        {
-            animator.SetBool("isRunning", true);
-        }
-
-        if (!Input.GetKey(KeyCode.W))
-        {
-            animator.SetBool("isRunning", false);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isRunningLeft", true);
-        }
-
-        if (!Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isRunningLeft", false);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            animator.SetBool("isWalkingBackwards", true);
-        }
-
-        if (!Input.GetKey(KeyCode.S))
-        {
-            animator.SetBool("isWalkingBackwards", false);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isWalkingLeft", true);
-        }
-
-        if (!Input.GetKey(KeyCode.A))
-        {
-            animator.SetBool("isWalkingLeft", false);
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            animator.SetBool("isWalkingRight", true);
-        }
-
-        if (!Input.GetKey(KeyCode.D))
-        {
-            animator.SetBool("isWalkingRight", false);
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 16f;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            speed = 12f;
-        }
-        if (Input.GetKey(KeyCode.R))
-        {
-            animator.SetBool("isSwordAttack", true);
-        }
-        if (!Input.GetKey(KeyCode.R))
-        {
-            animator.SetBool("isSwordAttack", true);
-        }
     }
 }
