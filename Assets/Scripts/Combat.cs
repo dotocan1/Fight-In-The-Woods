@@ -68,9 +68,9 @@ public class Combat : MonoBehaviour
 
     }
 
-    public void swordAttack()
+    public void takeSwordDamage()
     {
-        health -= 50f;
+        health -= 500f;
         Debug.Log("Taking damage! Enemy health is now:" + health);
     }
 }

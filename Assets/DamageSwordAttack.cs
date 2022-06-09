@@ -25,10 +25,7 @@ public class DamageSwordAttack : MonoBehaviour
     {
         if (GameObject.Find("Enemy") != null)
         {
-            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
-            {
-                combatScript.swordAttack();
-            }
+            combatScript.takeSwordDamage();
         }
     }
 }
