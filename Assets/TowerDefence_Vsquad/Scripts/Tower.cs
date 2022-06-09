@@ -25,7 +25,8 @@ public class Tower : MonoBehaviour {
     {
         anim_2 = GetComponent<Animator>();
         homeY = LookAtObj.transform.localRotation.eulerAngles.y;
-        TowerHp = Towerbug.GetComponent<TowerHP>();
+       // TowerHp = Towerbug.GetComponent<TowerHP>();
+       Towerbug = Instantiate(Towerbug);
     }
            
 
@@ -89,14 +90,14 @@ public class Tower : MonoBehaviour {
         }
 
         // Destroy
-
+        /*
         if (TowerHp.CastleHp <= 0)        {
             
             Destroy(gameObject);
             DestroyParticle = Instantiate(DestroyParticle, Towerbug.transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal_2)) as GameObject;            
             Destroy(DestroyParticle, 3);
         }
-
+        */
 
 
     }
