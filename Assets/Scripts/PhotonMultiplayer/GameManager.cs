@@ -1,14 +1,26 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviour
 {
+    public static GameManager GM;
+
     public GameObject pauseMenu;
     public static bool paused = false;
     private bool disconnecting = false;
+
+    public int nextPlayersTeam;
+    //public Transform[] spawnPointsTeamOne;
+    //public Transform[] spawnPointsTeamTwo;
+
+    private void OnEnable()
+    {
+        if(GameManager.GM == null)
+        {
+            GameManager.GM = this;
+        }
+    }
 
     public void TogglePause() 
     {
@@ -27,6 +39,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         disconnecting = true;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void UpdateTeam()
+    {
+        if (nextPlayersTeam == 1) nextPlayersTeam = 2;
+        else nextPlayersTeam = 1;
     }
 
     /*#region Photon Callbacks
