@@ -63,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isRunning", false);
             }
 
+            // animacija maca
+ 
             if (swordAttackingPressed)
             {
                 animator.SetBool("isSwordAttacking", true);
@@ -74,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isSwordAttacking", false);
             }
 
+            // sprintanje
+
             if (runningPressed && sprintingPressed)
             {
                 animator.SetBool("isSprinting", true);
@@ -84,6 +88,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isSprinting", false);
             }
+
+            // mijenanje brzine kod prestanka sprinta
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                speed = 12f;
+            }
+
+            // trcanje ulijevo
 
             if (runningLeftPressed)
             {
@@ -115,11 +128,31 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isRunningRight", false);
             }
 
+            // trcanje napred ulijevo
 
-            if (Input.GetKeyUp(KeyCode.LeftShift))
+            if (runningPressed && runningLeftPressed)
             {
-                speed = 12f;
+                animator.SetBool("isRunningForwardLeft", true);
             }
+
+            if (!runningPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningForwardLeft", false);
+            }
+
+            // trcanje napred udesno
+
+            if (runningPressed && runningRightPressed)
+            {
+                animator.SetBool("isRunningForwardRight", true);
+            }
+
+            if (!runningPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningForwardRight", false);
+            }
+
+
         }
     }
 
