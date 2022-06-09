@@ -15,11 +15,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool sprinting;
     private bool jump;
-    private bool ismoving;
+    private bool isMoving;
 
- 
-
-    public float speed = 12f;
+    public float speed;
 
     public CharacterController controller;
     private Animator animator;
@@ -34,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] AudioListener audioListener;
 
-    
 
     // 7.6. dodani private na start
     private void Start()
@@ -44,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
         SoundPlayer = GetComponent<AudioSource>();
         
         //cam = Camera.main;
+        audioListener = cam.GetComponent<AudioListener>(); 
 
         if (!view.IsMine)
         {
-            //Destroy(cam);
             cam.enabled = false;
             audioListener.enabled = false;
             Debug.Log("why u have to be mad, its only a game.");
@@ -61,6 +58,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
+        speed = 12f;
+
+        if (pause)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().TogglePause();
+        }
+
+        if (GameManager.paused)
+        {
+            speed = 0f;
+        }
+
         // 7.6. If View
         if (view.IsMine) // check if this is my player character
         {
@@ -69,15 +79,16 @@ public class PlayerMovement : MonoBehaviour
             bool runningPressed = Input.GetKey(KeyCode.W);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
             bool swordAttackingPressed = Input.GetKey(KeyCode.R);
+
             // animating the movement
 
             if (Input.GetKey(KeyCode.W))
             {
-                ismoving = true;
+                isMoving = true;
                 animator.SetBool("isRunning", true);
-                if (ismoving && !SoundPlayer.isPlaying) SoundPlayer.Play();
+                if (isMoving && !SoundPlayer.isPlaying) PlayerFootstep();
 
-            } else ismoving = false;
+            } else isMoving = false;
 
             if (!Input.GetKey(KeyCode.W))
             {
@@ -168,13 +179,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerFootstep()
     {
+    
         SoundPlayer.timeSamples = Random.Range(0, SoundPlayer.timeSamples);
         SoundPlayer.pitch = Random.Range(0, SoundPlayer.pitch);
         SoundPlayer.volume = 0.2f;
         SoundPlayer.volume = AudioListener.volume;
          
         SoundPlayer.Play();
-        
-        
     }
 }

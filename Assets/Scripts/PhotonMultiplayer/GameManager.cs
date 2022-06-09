@@ -6,7 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    #region Photon Callbacks
+    public GameObject pauseMenu;
+    public static bool paused = false;
+    private bool disconnecting = false;
+
+    public void TogglePause() 
+    {
+        if (disconnecting) return; 
+
+        paused = !paused;
+        Debug.Log(paused);
+
+        pauseMenu.SetActive(paused);
+        Cursor.lockState = (paused) ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.visible = paused;
+    }
+
+    public void Quit()
+    {
+        disconnecting = true;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    /*#region Photon Callbacks
 
     /// <summary>
     /// Called when the local player left the room. We need to load the launcher scene.
@@ -27,5 +50,5 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
-    #endregion Public Methods
+    #endregion Public Methods*/
 }
