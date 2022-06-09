@@ -164,10 +164,6 @@ public class PlayerMovement : MonoBehaviour
         // moves the character
         controller.Move(move * speed * Time.deltaTime);
 
-            else { speed = 10.0f; }
-
-            
-            
     }
 
     private void PlayerFootstep()
