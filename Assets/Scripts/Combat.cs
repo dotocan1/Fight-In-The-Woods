@@ -27,7 +27,7 @@ public class Combat : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             animator.SetBool("isDead", true);
         }
     }
