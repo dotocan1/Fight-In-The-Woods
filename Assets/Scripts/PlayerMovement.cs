@@ -7,26 +7,13 @@ using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
-
-
-    // 7.6. Photon view
-
-
-
     private bool sprinting;
     private bool jump;
-    private bool isMoving;
-
+    
     public float speed;
 
     public CharacterController controller;
     private Animator animator;
-
-    //footsteps sound 
-    private AudioSource SoundPlayer;
-    
-
-
 
     PhotonView view;
     [SerializeField] Camera cam;
@@ -39,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
-        SoundPlayer = GetComponent<AudioSource>();
+        
         
         //cam = Camera.main;
         audioListener = cam.GetComponent<AudioListener>(); 
@@ -88,16 +75,14 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
-                isMoving = true;
                 animator.SetBool("isRunning", true);
-                if (isMoving && !SoundPlayer.isPlaying) PlayerFootstep();
 
-            } else isMoving = false;
+            }
 
             if (!Input.GetKey(KeyCode.W))
             {
-               animator.SetBool("isRunning", false);
-               SoundPlayer.Stop();
+                animator.SetBool("isRunning", false);
+
             }
 
             // animacija maca
@@ -230,14 +215,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void PlayerFootstep()
-    {
-    
-        SoundPlayer.timeSamples = Random.Range(0, SoundPlayer.timeSamples);
-        SoundPlayer.pitch = Random.Range(0, SoundPlayer.pitch);
-        SoundPlayer.volume = 0.2f;
-        SoundPlayer.volume = AudioListener.volume;
-         
-        SoundPlayer.Play();
-    }
+   
+
 }
