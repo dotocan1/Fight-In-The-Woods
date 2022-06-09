@@ -81,9 +81,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (!Input.GetKey(KeyCode.W))
             {
-                animator.SetBool("isRunning", false);
+               animator.SetBool("isRunning", false);
                SoundPlayer.Stop();
-         
             }
 
             if (swordAttackingPressed)
@@ -100,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isSprinting", true);
                 speed = 16f;
+                Debug.Log("Trcim bre");
             }
 
             if (!runningPressed || !sprintingPressed)
