@@ -8,7 +8,7 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float speed = 12f;
+    public float speed;
 
     public CharacterController controller;
     private Animator animator;
@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] AudioListener audioListener;
 
-    
 
     // 7.6. dodani private na start
     private void Start()
@@ -38,6 +37,19 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool pause = Input.GetKeyDown(KeyCode.Escape);
+        speed = 12f;
+
+        if (pause)
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().TogglePause();
+        }
+
+        if (GameManager.paused)
+        {
+            speed = 0f;
+        }
+
         // 7.6. If View
         if (view.IsMine) // check if this is my player character
         {
