@@ -9,12 +9,14 @@ public class Combat : MonoBehaviour
     public float m_Thrust = 20f;
     private float pushForce = 5.0f;
 
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         if (GameObject.Find("Enemy") != null)
         {
+            animator = GetComponent<Animator>();
             rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
         }
     }
@@ -23,9 +25,10 @@ public class Combat : MonoBehaviour
     void Update()
     {
 
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
+            animator.SetBool("isDead", true);
         }
     }
 

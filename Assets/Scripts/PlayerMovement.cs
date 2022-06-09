@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] AudioListener audioListener;
 
-    
+
 
     // 7.6. dodani private na start
     private void Start()
@@ -46,6 +46,9 @@ public class PlayerMovement : MonoBehaviour
             Move();
 
             bool runningPressed = Input.GetKey(KeyCode.W);
+            bool runningLeftPressed = Input.GetKey(KeyCode.A);
+            bool runningRightPressed = Input.GetKey(KeyCode.D);
+            bool runningBackwardsPressed = Input.GetKey(KeyCode.S);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
             bool swordAttackingPressed = Input.GetKey(KeyCode.R);
             // animating the movement
@@ -63,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
             if (swordAttackingPressed)
             {
                 animator.SetBool("isSwordAttacking", true);
-                
+
             }
 
             if (!swordAttackingPressed)
@@ -82,45 +85,36 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isSprinting", false);
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (runningLeftPressed)
             {
                 animator.SetBool("isRunningLeft", true);
             }
 
-            if (!Input.GetKey(KeyCode.A))
+            if (!runningLeftPressed)
             {
                 animator.SetBool("isRunningLeft", false);
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (runningBackwardsPressed)
             {
-                animator.SetBool("isWalkingBackwards", true);
+                animator.SetBool("isRunningBackwards", true);
             }
 
-            if (!Input.GetKey(KeyCode.S))
+            if (!runningBackwardsPressed)
             {
-                animator.SetBool("isWalkingBackwards", false);
+                animator.SetBool("isRunningBackwards", false);
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (runningRightPressed)
             {
-                animator.SetBool("isWalkingLeft", true);
+                animator.SetBool("isRunningRight", true);
             }
 
-            if (!Input.GetKey(KeyCode.A))
+            if (!runningRightPressed)
             {
-                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isRunningRight", false);
             }
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                animator.SetBool("isWalkingRight", true);
-            }
-
-            if (!Input.GetKey(KeyCode.D))
-            {
-                animator.SetBool("isWalkingRight", false);
-            }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
