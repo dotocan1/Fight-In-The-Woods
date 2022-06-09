@@ -71,9 +71,15 @@ public class Combat : MonoBehaviour
 
     }
 
-    public void takeSwordDamage()
+    public void takeSwordDamage(GameObject character)
     {
-        health -= 500f;
-        Debug.Log("Taking damage! Enemy health is now:" + health);
+        Animator a_animator = character.GetComponent<Animator>();
+
+
+        if (a_animator.GetBool("isSwordAttacking"))
+        {
+            health -= 500f;
+            Debug.Log("Taking damage! Enemy health is now:" + health);
+        }
     }
 }

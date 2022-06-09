@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageSwordAttack : MonoBehaviour
 {
     private Combat combatScript;
+    public GameObject character;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,8 @@ public class DamageSwordAttack : MonoBehaviour
     {
         if (GameObject.Find("Enemy") != null)
         {
-            combatScript.takeSwordDamage();
+            Debug.Log(gameObject.name);
+            combatScript.takeSwordDamage(character);
         }
     }
 }
