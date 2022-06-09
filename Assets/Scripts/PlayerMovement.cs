@@ -152,6 +152,30 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isRunningForwardRight", false);
             }
 
+            // trcanje nazad ulijevo
+
+            if (runningBackwardsPressed && runningLeftPressed)
+            {
+                animator.SetBool("isRunningBackwardsLeft", true);
+            }
+
+            if (!runningBackwardsPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningBackwardsLeft", false);
+            }
+
+            // trcanje nazad udesno
+
+            if (runningBackwardsPressed && runningRightPressed)
+            {
+                animator.SetBool("isRunningBackwardsRight", true);
+            }
+
+            if (!runningBackwardsPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningBackwardsRight", false);
+            }
+
 
         }
     }
