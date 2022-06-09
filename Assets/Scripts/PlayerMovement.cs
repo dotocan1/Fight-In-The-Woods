@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     //footsteps sound 
     private AudioSource SoundPlayer;
+    public AudioClip[] clips;
     
 
 
@@ -84,16 +85,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
-                isMoving = true;
                 animator.SetBool("isRunning", true);
-                if (isMoving && !SoundPlayer.isPlaying) PlayerFootstep();
+                if (!SoundPlayer.isPlaying) PlayerFootstepForward();
 
-            } else isMoving = false;
+            }
 
             if (!Input.GetKey(KeyCode.W))
             {
-               animator.SetBool("isRunning", false);
-               SoundPlayer.Stop();
+                animator.SetBool("isRunning", false);
+                if(SoundPlayer.isPlaying) SoundPlayer.Stop();
+
             }
 
             if (swordAttackingPressed)
@@ -122,10 +123,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isRunningLeft", true);
             }
+ 
 
             if (!Input.GetKey(KeyCode.A))
             {
                 animator.SetBool("isRunningLeft", false);
+
             }
 
             if (Input.GetKey(KeyCode.S))
@@ -177,14 +180,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void PlayerFootstep()
+    private void PlayerFootstepForward()
     {
-    
-        SoundPlayer.timeSamples = Random.Range(0, SoundPlayer.timeSamples);
-        SoundPlayer.pitch = Random.Range(0, SoundPlayer.pitch);
-        SoundPlayer.volume = 0.2f;
-        SoundPlayer.volume = AudioListener.volume;
-         
-        SoundPlayer.Play();
+        
+        SoundPlayer.pitch = Random.Range(0.90f, 1.05f);
+        SoundPlayer.volume = 0.02f;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            SoundPlayer.PlayDelayed(0.18f);
+        }
+        else SoundPlayer.Play();
     }
+
 }
