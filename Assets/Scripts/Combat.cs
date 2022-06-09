@@ -67,4 +67,10 @@ public class Combat : MonoBehaviour
         //  rbEnemy.angularVelocity = Vector3.zero;
 
     }
+
+    public void swordAttack()
+    {
+        health -= 50f;
+        Debug.Log("Taking damage! Enemy health is now:" + health);
+    }
 }

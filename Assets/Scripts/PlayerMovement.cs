@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             if (swordAttackingPressed)
             {
                 animator.SetBool("isSwordAttacking", true);
+                
             }
 
             if (!swordAttackingPressed)
