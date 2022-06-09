@@ -9,12 +9,14 @@ public class Combat : MonoBehaviour
     public float m_Thrust = 20f;
     private float pushForce = 5.0f;
 
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         if (GameObject.Find("Enemy") != null)
         {
+            animator = GetComponent<Animator>();
             rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
         }
     }
@@ -23,9 +25,10 @@ public class Combat : MonoBehaviour
     void Update()
     {
 
-        if (health < 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
+            animator.SetBool("isDead", true);
         }
     }
 
@@ -66,5 +69,11 @@ public class Combat : MonoBehaviour
         // rbEnemy.velocity = Vector3.zero;
         //  rbEnemy.angularVelocity = Vector3.zero;
 
+    }
+
+    public void takeSwordDamage()
+    {
+        health -= 500f;
+        Debug.Log("Taking damage! Enemy health is now:" + health);
     }
 }

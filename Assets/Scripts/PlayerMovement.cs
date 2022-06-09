@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioListener audioListener;
 
 
+
     // 7.6. dodani private na start
     private void Start()
     {
@@ -77,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
             Move();
 
             bool runningPressed = Input.GetKey(KeyCode.W);
+            bool runningLeftPressed = Input.GetKey(KeyCode.A);
+            bool runningRightPressed = Input.GetKey(KeyCode.D);
+            bool runningBackwardsPressed = Input.GetKey(KeyCode.S);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
             bool swordAttackingPressed = Input.GetKey(KeyCode.R);
 
@@ -96,15 +100,20 @@ public class PlayerMovement : MonoBehaviour
                SoundPlayer.Stop();
             }
 
+            // animacija maca
+ 
             if (swordAttackingPressed)
             {
                 animator.SetBool("isSwordAttacking", true);
+
             }
 
             if (!swordAttackingPressed)
             {
                 animator.SetBool("isSwordAttacking", false);
             }
+
+            // sprintanje
 
             if (runningPressed && sprintingPressed)
             {
@@ -118,50 +127,94 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isSprinting", false);
             }
 
-            if (Input.GetKey(KeyCode.A))
-            {
-                animator.SetBool("isRunningLeft", true);
-            }
-
-            if (!Input.GetKey(KeyCode.A))
-            {
-                animator.SetBool("isRunningLeft", false);
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                animator.SetBool("isWalkingBackwards", true);
-            }
-
-            if (!Input.GetKey(KeyCode.S))
-            {
-                animator.SetBool("isWalkingBackwards", false);
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                animator.SetBool("isWalkingLeft", true);
-            }
-
-            if (!Input.GetKey(KeyCode.A))
-            {
-                animator.SetBool("isWalkingLeft", false);
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                animator.SetBool("isWalkingRight", true);
-            }
-
-            if (!Input.GetKey(KeyCode.D))
-            {
-                animator.SetBool("isWalkingRight", false);
-            }
+            // mijenanje brzine kod prestanka sprinta
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 speed = 12f;
             }
+
+            // trcanje ulijevo
+
+            if (runningLeftPressed)
+            {
+                animator.SetBool("isRunningLeft", true);
+            }
+
+            if (!runningLeftPressed)
+            {
+                animator.SetBool("isRunningLeft", false);
+            }
+
+            if (runningBackwardsPressed)
+            {
+                animator.SetBool("isRunningBackwards", true);
+            }
+
+            if (!runningBackwardsPressed)
+            {
+                animator.SetBool("isRunningBackwards", false);
+            }
+
+            if (runningRightPressed)
+            {
+                animator.SetBool("isRunningRight", true);
+            }
+
+            if (!runningRightPressed)
+            {
+                animator.SetBool("isRunningRight", false);
+            }
+
+            // trcanje napred ulijevo
+
+            if (runningPressed && runningLeftPressed)
+            {
+                animator.SetBool("isRunningForwardLeft", true);
+            }
+
+            if (!runningPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningForwardLeft", false);
+            }
+
+            // trcanje napred udesno
+
+            if (runningPressed && runningRightPressed)
+            {
+                animator.SetBool("isRunningForwardRight", true);
+            }
+
+            if (!runningPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningForwardRight", false);
+            }
+
+            // trcanje nazad ulijevo
+
+            if (runningBackwardsPressed && runningLeftPressed)
+            {
+                animator.SetBool("isRunningBackwardsLeft", true);
+            }
+
+            if (!runningBackwardsPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningBackwardsLeft", false);
+            }
+
+            // trcanje nazad udesno
+
+            if (runningBackwardsPressed && runningRightPressed)
+            {
+                animator.SetBool("isRunningBackwardsRight", true);
+            }
+
+            if (!runningBackwardsPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningBackwardsRight", false);
+            }
+
+
         }
     }
 
