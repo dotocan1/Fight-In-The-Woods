@@ -6,7 +6,7 @@ using System.IO;
 public class SpawnPlayers : MonoBehaviour
 {
     PhotonView view;
-    public GameObject PlayerPrefab;
+    private GameObject PlayerPrefab;
     //Player[] allPlayers;
     //int myNumberInRoom;
     int degrees;

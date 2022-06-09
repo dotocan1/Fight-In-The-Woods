@@ -7,8 +7,9 @@ using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public InputField createInput;
-    public InputField joinInput;
+    public TMP_InputField createInput;
+    public TMP_InputField joinInput;
+    
 
     public void CreateRoom()
     {
@@ -23,6 +24,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        Debug.Log("ucitavanje levela");
         PhotonNetwork.LoadLevel("Fight_In_The_Woods");
     }
     
