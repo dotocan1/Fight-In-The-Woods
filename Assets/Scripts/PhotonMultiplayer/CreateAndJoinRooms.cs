@@ -20,6 +20,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         Debug.Log("JOINAM");
         PhotonNetwork.JoinRoom(joinInput.text);
+        Debug.Log("OPET JOINAM");
     }
 
     public override void OnJoinedRoom()
@@ -27,5 +28,11 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         Debug.Log("ucitavanje levela");
         PhotonNetwork.LoadLevel("Fight_In_The_Woods");
     }
-    
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        base.OnJoinRoomFailed(returnCode, message);
+        Debug.Log(message);
+    }
+
 }
