@@ -47,7 +47,7 @@ public class SpawnPlayers : MonoBehaviour
 
                 if (view.IsMine)
                 {
-                    PlayerPrefab =  PhotonNetwork.Instantiate(Path.Combine("Characters", "GoodMageCharacter") , spawnPointsTeamOne[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab =  PhotonNetwork.Instantiate(Path.Combine("Characters", "ArcherCharacter") , spawnPointsTeamOne[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
                 } // + PlayerPrefab.name
             }
             else

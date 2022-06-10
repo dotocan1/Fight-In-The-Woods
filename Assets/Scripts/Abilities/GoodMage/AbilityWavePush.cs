@@ -39,14 +39,14 @@ public class AbilityWavePush : MonoBehaviour
             // made it here then ability is available to use...
             // UseAbilityCode goes here
 
-            for (int i = 0; i < 5; i++)
-            {
+         
+            
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-                Destroy(instantiatedObj, 10f);
+
 
                 // start the cooldown timer
                 StartCoroutine(StartCooldown());
-            }
+            
 
 
         }

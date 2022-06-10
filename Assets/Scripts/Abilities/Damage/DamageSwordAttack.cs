@@ -26,7 +26,7 @@ public class DamageSwordAttack : MonoBehaviour
     {
         if (GameObject.Find("Enemy") != null)
         {
-            Debug.Log(gameObject.name);
+            //Debug.Log(gameObject.name);
             combatScript.takeSwordDamage(character);
         }
     }

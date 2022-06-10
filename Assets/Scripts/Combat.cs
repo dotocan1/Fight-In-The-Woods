@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    private float health = 1000f;
+    public float health = 3000f;
     Rigidbody rbEnemy;
     public float m_Thrust = 20f;
     private float pushForce = 5.0f;
@@ -27,7 +27,7 @@ public class Combat : MonoBehaviour
 
         if (health <= 0)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject,5f);
             animator.SetBool("isDead", true);
         }
     }
@@ -37,23 +37,23 @@ public class Combat : MonoBehaviour
     public void takeWaterThrowDamage()
     {
         Debug.Log("Taking damage! Enemy health is now:" + health);
-        health -= 1f;
+        health -= 300f;
     }
 
     public void takeArrowCircleDamage()
     {
         Debug.Log("Taking damage! Enemy health is now:" + health);
-        health -= 100f;
+        health -= 150f;
     }
 
     public void takeSingleArrowDamage()
     {
-        health -= 1000f;
+        health -= 400f;
     }
 
     public void healPlayer()
     {
-        health += 100.0f;
+        health += 300.0f;
         Debug.Log("Healing! Enemy health is now:" + health);
 
     }
@@ -73,13 +73,12 @@ public class Combat : MonoBehaviour
 
     public void takeSwordDamage(GameObject character)
     {
+        // ovo ce se koristit za provjeru ako je u animaciji
         Animator a_animator = character.GetComponent<Animator>();
-
-
         if (a_animator.GetBool("isSwordAttacking"))
         {
-            health -= 500f;
+            health -= 50f;
             Debug.Log("Taking damage! Enemy health is now:" + health);
-        }
+        } 
     }
 }
