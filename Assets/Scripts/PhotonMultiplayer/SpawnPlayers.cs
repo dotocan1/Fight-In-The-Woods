@@ -72,7 +72,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         {
             if (!HasPlayerSpawned)
             {
-                PhotonNetwork.Instantiate("Characters/GoodMageCharacter", spawnPoints[myNumberInRoom].position, Quaternion.Euler(0,degrees,0)); 
+                PhotonNetwork.Instantiate("Characters/WarriorCharacter", spawnPoints[myNumberInRoom].position, Quaternion.Euler(0,degrees,0)); 
                 HasPlayerSpawned = true;
             }
 

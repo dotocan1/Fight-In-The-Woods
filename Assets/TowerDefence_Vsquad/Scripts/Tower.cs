@@ -32,7 +32,7 @@ public class Tower : MonoBehaviour {
 
     
     // for Catcher tower attack animation
-
+    /*
     void GetDamage()
 
     {
@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour {
             target.GetComponent<EnemyHp>().Dmg(dmg);
         }
     }
-
+    */
 
 
 
