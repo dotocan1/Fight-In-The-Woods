@@ -6,6 +6,7 @@ using System.Linq;
 public class AudioSettings : MonoBehaviour
 {
     private bool isMoving;
+    
 
     private AudioSource SoundPlayer;
     //public AudioClip[] clips;
