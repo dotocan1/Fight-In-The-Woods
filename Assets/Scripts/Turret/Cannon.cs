@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
+    //rate of fire od cannona
     [SerializeField] float rateOfFire = 1f;
    
 
@@ -16,17 +17,5 @@ public class Cannon : MonoBehaviour
     public void fire()
     {
         Instantiate(projectile, transform.position, transform.rotation); 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

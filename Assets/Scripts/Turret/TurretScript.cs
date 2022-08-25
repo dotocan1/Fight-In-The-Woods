@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class TurretScript : MonoBehaviour
 {
-    [SerializeField] float turretRange = 10f;
-    [SerializeField] float turretRotationSpeed = 5f;
+    [SerializeField] float turretRange = 17f;
+    [SerializeField] float turretRotationSpeed = 10f;
 
     private Transform playerTransform;
     private Cannon currentCannon;
@@ -15,6 +15,8 @@ public class TurretScript : MonoBehaviour
     private float fireRateDelta;
     //PlayerEnter skripta import status
     PlayerEnter playerStatus;
+    
+
 
     
     void Start()
@@ -22,13 +24,13 @@ public class TurretScript : MonoBehaviour
         playerTransform = FindObjectOfType<PlayerMovement>().transform;
         currentCannon = GetComponentInChildren<Cannon>();
         fireRate = currentCannon.GetRateOfFire();
-        playerStatus = GetComponent<PlayerEnter>();
-        
+        playerStatus = GetComponentInParent<PlayerEnter>();
     }
 
 
     void Update()
     {
+        
        Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y-1, playerTransform.position.z);
 
         //provjeri ako je player u range-u
@@ -38,7 +40,6 @@ public class TurretScript : MonoBehaviour
         }
         if (playerStatus.PlayerStatus)
         {
-            Debug.Log("Player usao");
             //Cannon gleda u smjer playera
             Vector3 playerDirection = playerGroundPos - transform.position;
             float turretRotationStep = turretRotationSpeed * Time.deltaTime;

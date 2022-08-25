@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         if (disconnecting) return; 
 
         paused = !paused;
-        Debug.Log(paused);
+        //Debug.Log(paused);
 
         pauseMenu.SetActive(paused);
         Cursor.lockState = (paused) ? CursorLockMode.None : CursorLockMode.Confined;

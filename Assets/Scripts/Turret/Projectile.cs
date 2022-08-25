@@ -8,12 +8,12 @@ public class Projectile : MonoBehaviour
     private Transform playerTransform;
     
 
-    //private Rigidbody rb;
+    private Rigidbody rb;
 
     private void Start()
     {
-       // rb = GetComponent<Rigidbody>();
-        //Impulse();
+        rb = GetComponent<Rigidbody>();
+        Impulse();
         playerTransform = FindObjectOfType<PlayerMovement>().transform;
     }
     
@@ -23,14 +23,13 @@ public class Projectile : MonoBehaviour
         Vector3 vector3 = playerTransform.position - playerGroundPos;
         transform.LookAt(playerTransform.position);
         transform.Translate(new Vector3(0f, 0f, projectileSpeed * Time.deltaTime));
-
+        
     }
 
-
-   /* private void Impulse()
+   private void Impulse()
     {
         rb.AddForce(transform.forward * projectileSpeed, ForceMode.Impulse);
-    }*/
+    }
   
 
 }
