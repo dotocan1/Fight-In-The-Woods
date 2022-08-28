@@ -21,17 +21,19 @@ public class TurretScript : MonoBehaviour
     
     void Start()
     {
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
         currentCannon = GetComponentInChildren<Cannon>();
         fireRate = currentCannon.GetRateOfFire();
         playerStatus = GetComponentInParent<PlayerEnter>();
+
     }
 
 
     void Update()
     {
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+
+        Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y-1, playerTransform.position.z);
         
-       Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y-1, playerTransform.position.z);
 
         //provjeri ako je player u range-u
         if (Vector3.Distance(transform.position, playerGroundPos) > turretRange)

@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isSprinting", true);
                 speed = 10f;
-                Debug.Log("Trcim bre");
+                //Debug.Log("Trcim bre");
             }
 
             if (!runningPressed || !sprintingPressed)
