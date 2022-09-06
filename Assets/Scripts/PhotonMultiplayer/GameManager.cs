@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTeam()
     {
+        Debug.Log(nextPlayersTeam);
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
     }

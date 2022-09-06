@@ -41,13 +41,13 @@ public class AudioSettings : MonoBehaviour
             {
 
                 SoundPlayer.pitch = Random.Range(0.95f, 1.05f);
-                SoundPlayer.volume = 0.02f;
+                SoundPlayer.volume = 0.05f;
                 SoundPlayer.PlayDelayed(0.18f);
             }
             else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.S) && (!Input.GetKey(KeyCode.W) || !Input.GetKeyDown(KeyCode.W)))
             {
                 SoundPlayer.pitch = Random.Range(0.75f, 0.80f);
-                SoundPlayer.volume = 0.02f;
+                SoundPlayer.volume = 0.05f;
                 SoundPlayer.PlayDelayed(0.18f);
             }
             else
