@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
-    public float health = 3000f;
+    public float health = 100f;
     Rigidbody rbEnemy;
     public float m_Thrust = 20f;
     private float pushForce = 5.0f;
