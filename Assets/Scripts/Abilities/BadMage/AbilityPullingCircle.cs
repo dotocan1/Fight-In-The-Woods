@@ -41,7 +41,7 @@ public class AbilityPullingCircle : MonoBehaviour
 
             for(int i=0; i<10; i++)
             {
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position, transform.rotation);
                 Destroy(instantiatedObj, 10f);
             }
 

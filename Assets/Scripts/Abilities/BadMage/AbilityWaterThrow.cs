@@ -28,7 +28,7 @@ public class AbilityWaterThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             // if not available to use (still cooling down) just exit
             if (IsAvailable == false)
