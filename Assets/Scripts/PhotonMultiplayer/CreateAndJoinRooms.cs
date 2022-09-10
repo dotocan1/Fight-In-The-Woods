@@ -9,11 +9,14 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public TMP_InputField createInput;
     public TMP_InputField joinInput;
-    
+
+    //SpawnPlayers spawnPlayers;
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(createInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 4});  
+        PhotonNetwork.CreateRoom(createInput.text, new Photon.Realtime.RoomOptions { MaxPlayers = 4});
+        //spawnPlayers = GetComponent<SpawnPlayers>();
+        //spawnPlayers.enabled = true;
     }
 
     public void JoinRoom()
@@ -21,6 +24,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         Debug.Log("JOINAM");
         PhotonNetwork.JoinRoom(joinInput.text);
         Debug.Log("OPET JOINAM");
+
+        //spawnPlayers = GetComponent<SpawnPlayers>();
+        //spawnPlayers.enabled = true;
     }
 
     public override void OnJoinedRoom()
@@ -33,6 +39,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         base.OnJoinRoomFailed(returnCode, message);
         Debug.Log(message);
-    }
+        ;    }
 
 }

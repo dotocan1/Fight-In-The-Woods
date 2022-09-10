@@ -1,4 +1,4 @@
-using Photon.Pun;
+ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     private bool disconnecting = false;
 
     public int nextPlayersTeam;
-    //public Transform[] spawnPointsTeamOne;
-    //public Transform[] spawnPointsTeamTwo;
+    public Transform[] spawnPointsTeamOne;
+    public Transform[] spawnPointsTeamTwo;
 
     private void OnEnable()
     {
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTeam()
     {
-        Debug.Log(nextPlayersTeam);
+        Debug.Log("UPDATE TEAM " + nextPlayersTeam);
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
     }
