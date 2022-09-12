@@ -14,13 +14,54 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPointsTeamOne;
     public Transform[] spawnPointsTeamTwo;
 
+    public int currentScene;
+
     private void OnEnable()
     {
-        if(GameManager.GM == null)
+
+        if (GameManager.GM == null)
+        {
+            GameManager.GM = this;
+         
+        }
+        
+    }
+    /*public override void OnEnable()
+    {
+        Debug.Log("ON ENABLE");
+        base.OnEnable();
+        
+        if (GameManager.GM == null)
         {
             GameManager.GM = this;
         }
+        PhotonNetwork.AddCallbackTarget(this);
+        SceneManager.sceneLoaded += OnSceneFinishedLoading;
     }
+
+    void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        // called when multiplayer scene is loaded
+        currentScene = scene.buildIndex;
+        Debug.Log("CURRENT SCENE: " + currentScene);
+        if (currentScene == 2)
+        {
+            Debug.Log("CREATE PLAYEEEEER");
+            CreatePlayer();
+        }
+    }*/
+
+    /* private void Start()
+     {
+         CreatePlayer();
+     }
+
+     private void CreatePlayer()
+     {
+         // creates player network controller but not player character
+         PhotonNetwork.Instantiate("Photon/PhotonNetworkPlayer", transform.position, Quaternion.identity, 0);
+     }*/
+
 
     public void TogglePause() 
     {
@@ -46,6 +87,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("UPDATE TEAM " + nextPlayersTeam);
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
+        /*Debug.Log("PLAYER COUNT: " + PhotonNetwork.CurrentRoom.PlayerCount);
+        if (PhotonNetwork.CurrentRoom.PlayerCount % 2 == 0) nextPlayersTeam = 2;
+        else nextPlayersTeam = 1;*/
     }
 
     /*#region Photon Callbacks

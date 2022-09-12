@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
+using System.Collections;
 
 public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
@@ -22,9 +23,9 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        Debug.Log("AAAAAAAAA");
-        Debug.Log("MY TEAM: " + myTeam);
-        Debug.Log(PlayerPrefab == null);
+        // Debug.Log("AAAAAAAAA");
+        // Debug.Log("MY TEAM: " + myTeam);
+        //Debug.Log(PlayerPrefab == null);
         if (PlayerPrefab == null && myTeam != 0)
         {
             Debug.Log("EVOOOO");
@@ -41,6 +42,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
             else
             {
                 degrees = -90;
+                Debug.Log("ERROR 2 " + GameManager.GM.nextPlayersTeam);
                 int spawnPicker = Random.Range(0, GameManager.GM.spawnPointsTeamTwo.Length);
                 if (view.IsMine)
                 {
@@ -55,6 +57,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_GetTeam() // sent to the master client and executed there
     {
+        Debug.Log("ERROR " + GameManager.GM.currentScene);
         myTeam = GameManager.GM.nextPlayersTeam;
         GameManager.GM.UpdateTeam();
         Debug.Log("GET TEAM " + myTeam);
