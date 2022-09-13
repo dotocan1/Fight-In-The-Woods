@@ -1,4 +1,5 @@
-using Photon.Pun;
+ using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,23 +12,40 @@ public class GameManager : MonoBehaviour
     private bool disconnecting = false;
 
     public int nextPlayersTeam;
-    //public Transform[] spawnPointsTeamOne;
-    //public Transform[] spawnPointsTeamTwo;
+    public Transform[] spawnPointsTeamOne;
+    public Transform[] spawnPointsTeamTwo;
+
+    public int currentScene;
 
     private void OnEnable()
     {
-        if(GameManager.GM == null)
+        if (GameManager.GM == null)
         {
             GameManager.GM = this;
         }
+        
     }
+
+     private void Start()
+     {
+        StartCoroutine(CreatePlayer());
+         //CreatePlayer();
+     }
+
+     private IEnumerator CreatePlayer()
+     {
+        yield return new WaitForSeconds(2); // wait for the game object to be instantiated
+         // creates player network controller but not player character
+        PhotonNetwork.Instantiate("PhotonPrefabs/PhotonNetworkPlayer", transform.position, Quaternion.identity, 0);
+
+     }
 
     public void TogglePause() 
     {
         if (disconnecting) return; 
 
         paused = !paused;
-        Debug.Log(paused);
+        //Debug.Log(paused);
 
         pauseMenu.SetActive(paused);
         Cursor.lockState = (paused) ? CursorLockMode.None : CursorLockMode.Confined;
@@ -43,31 +61,10 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTeam()
     {
-        Debug.Log(nextPlayersTeam);
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
+        /*Debug.Log("PLAYER COUNT: " + PhotonNetwork.CurrentRoom.PlayerCount);
+        if (PhotonNetwork.CurrentRoom.PlayerCount % 2 == 0) nextPlayersTeam = 2;
+        else nextPlayersTeam = 1;*/
     }
-
-    /*#region Photon Callbacks
-
-    /// <summary>
-    /// Called when the local player left the room. We need to load the launcher scene.
-    /// </summary>
-    public override void OnLeftRoom()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    #endregion Photon Callbacks
-
-
-    #region Public Methods
-
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
-
-
-    #endregion Public Methods*/
 }
