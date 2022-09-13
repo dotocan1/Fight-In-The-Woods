@@ -1,4 +1,5 @@
  using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,50 +19,26 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-
-        if (GameManager.GM == null)
-        {
-            GameManager.GM = this;
-         
-        }
-        
-    }
-    /*public override void OnEnable()
-    {
-        Debug.Log("ON ENABLE");
-        base.OnEnable();
-        
         if (GameManager.GM == null)
         {
             GameManager.GM = this;
         }
-        PhotonNetwork.AddCallbackTarget(this);
-        SceneManager.sceneLoaded += OnSceneFinishedLoading;
+        
     }
 
-    void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
-    {
-        // called when multiplayer scene is loaded
-        currentScene = scene.buildIndex;
-        Debug.Log("CURRENT SCENE: " + currentScene);
-        if (currentScene == 2)
-        {
-            Debug.Log("CREATE PLAYEEEEER");
-            CreatePlayer();
-        }
-    }*/
-
-    /* private void Start()
+     private void Start()
      {
-         CreatePlayer();
+        StartCoroutine(CreatePlayer());
+         //CreatePlayer();
      }
 
-     private void CreatePlayer()
+     private IEnumerator CreatePlayer()
      {
+        yield return new WaitForSeconds(2); // wait for the game object to be instantiated
          // creates player network controller but not player character
-         PhotonNetwork.Instantiate("Photon/PhotonNetworkPlayer", transform.position, Quaternion.identity, 0);
-     }*/
+        PhotonNetwork.Instantiate("PhotonPrefabs/PhotonNetworkPlayer", transform.position, Quaternion.identity, 0);
 
+     }
 
     public void TogglePause() 
     {
@@ -84,34 +61,10 @@ public class GameManager : MonoBehaviour
 
     public void UpdateTeam()
     {
-        Debug.Log("UPDATE TEAM " + nextPlayersTeam);
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
         /*Debug.Log("PLAYER COUNT: " + PhotonNetwork.CurrentRoom.PlayerCount);
         if (PhotonNetwork.CurrentRoom.PlayerCount % 2 == 0) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;*/
     }
-
-    /*#region Photon Callbacks
-
-    /// <summary>
-    /// Called when the local player left the room. We need to load the launcher scene.
-    /// </summary>
-    public override void OnLeftRoom()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    #endregion Photon Callbacks
-
-
-    #region Public Methods
-
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
-
-
-    #endregion Public Methods*/
 }
