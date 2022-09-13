@@ -29,9 +29,9 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         //if (view.IsMine) view.RPC("RPC_GetTeam", RpcTarget.MasterClient); // if obj belongs to the local player send the RPC fun to the obj on the master client
 
         allPlayers = PhotonNetwork.PlayerList;
-        foreach(Player player in allPlayers) // figure out my player number in the room
+        foreach (Player player in allPlayers) // figure out my player number in the room
         {
-            if(player != PhotonNetwork.LocalPlayer)
+            if (player != PhotonNetwork.LocalPlayer)
             {
                 myNumberInRoom++;
             }
@@ -64,16 +64,16 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
             }
         }*/
 
-        if(spawnPoints[myNumberInRoom].name == "Point_A_1" || spawnPoints[myNumberInRoom].name == "Point_A_2") degrees = 90;
-        else degrees = -90;
+        //if(spawnPoints[myNumberInRoom].name == "Point_A_1" || spawnPoints[myNumberInRoom].name == "Point_A_2") degrees = 90;
+        //else degrees = -90;
 
         timer += Time.deltaTime;
         if (timer >= SpawnTime)
         {
             if (!HasPlayerSpawned)
             {
-                PhotonNetwork.Instantiate("Characters/BadMageCharacter", spawnPoints[myNumberInRoom].position, Quaternion.Euler(0,degrees,0)); 
-                HasPlayerSpawned = true;
+                    PhotonNetwork.Instantiate("Characters/BadMageCharacter", spawnPoints[myNumberInRoom].position, Quaternion.Euler(0, degrees, 0));
+                    HasPlayerSpawned = true;
             }
 
             timer = 0;

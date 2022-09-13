@@ -10,6 +10,12 @@ public class AbilityWaterThrow : MonoBehaviour
     public Camera fpsCam;
     PhotonView view;
 
+    [SerializeField]public float fireRate = 100f;
+
+    private float nextFire;
+
+
+
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -25,10 +31,21 @@ public class AbilityWaterThrow : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            if(!(nextFire + fireRate < Time.time))
+            {
+                Debug.Log("this is not firing");
+                return;
+            }
+            
+            nextFire = Time.time + fireRate;
+
             instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
             Destroy(instantiatedObj, 0.5f);
+
+           
+
         }
     }
 }

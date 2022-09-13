@@ -17,9 +17,9 @@ public class MouseLook : MonoBehaviourPunCallbacks
         view = GetComponentInParent<PhotonView>();
 
         //Set Cursor to not be visible
-        Cursor.visible = false;
+        Cursor.visible = true;
 
-        Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
