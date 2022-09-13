@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private bool sprinting;
     private bool jump;
     
-    public float speed;
+    private float speed;
 
     public CharacterController controller;
     private Animator animator;
@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
         
-        
+
+
         //cam = Camera.main;
         audioListener = cam.GetComponent<AudioListener>(); 
 
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         bool pause = Input.GetKeyDown(KeyCode.Escape);
-        speed = 12f;
+        speed = 8f;
 
         if (pause)
         {
@@ -103,8 +104,8 @@ public class PlayerMovement : MonoBehaviour
             if (runningPressed && sprintingPressed)
             {
                 animator.SetBool("isSprinting", true);
-                speed = 16f;
-                Debug.Log("Trcim bre");
+                speed = 10f;
+                //Debug.Log("Trcim bre");
             }
 
             if (!runningPressed || !sprintingPressed)
@@ -116,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                speed = 12f;
+                speed = default;
             }
 
             // trcanje ulijevo

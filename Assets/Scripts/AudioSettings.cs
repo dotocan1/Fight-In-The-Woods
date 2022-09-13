@@ -6,6 +6,7 @@ using System.Linq;
 public class AudioSettings : MonoBehaviour
 {
     private bool isMoving;
+    
 
     private AudioSource SoundPlayer;
     //public AudioClip[] clips;
@@ -36,22 +37,16 @@ public class AudioSettings : MonoBehaviour
     {
         if (isMoving = true && !SoundPlayer.isPlaying)
         {
-
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
-
                 SoundPlayer.pitch = Random.Range(0.95f, 1.05f);
-                SoundPlayer.volume = 0.05f;
+                SoundPlayer.volume = 0.03f;
                 SoundPlayer.PlayDelayed(0.18f);
             }
-            else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.S) && (!Input.GetKey(KeyCode.W) || !Input.GetKeyDown(KeyCode.W)))
+            else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                SoundPlayer.pitch = Random.Range(0.75f, 0.80f);
-                SoundPlayer.volume = 0.05f;
-                SoundPlayer.PlayDelayed(0.18f);
-            }
-            else
-            {
+                SoundPlayer.pitch = Random.Range(0.95f, 1.05f);
+                SoundPlayer.volume = 0.03f;
                 SoundPlayer.Play();
             }
         }
