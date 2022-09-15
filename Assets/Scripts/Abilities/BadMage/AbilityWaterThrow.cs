@@ -12,7 +12,8 @@ public class AbilityWaterThrow : MonoBehaviour
 
     // timer
 
-    float gametimer = 0f;
+    float gametimer;
+    
 
 
     private void Start()
@@ -30,10 +31,12 @@ public class AbilityWaterThrow : MonoBehaviour
     void Update()
     {
 
+        gametimer += Time.deltaTime;
+        int seconds = (int)(gametimer % 60);
+        int minutes = (int)(gametimer / 60);
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-
             instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
             Destroy(instantiatedObj, 0.5f);
         }
