@@ -8,7 +8,7 @@ public class ProjectileDeath : MonoBehaviour
     //fixati collider (Sphere collider Destroya cannon kuglu instantly
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Team_1" || other.tag == "Team_2")
         {
             Destroy(gameObject);
         }
