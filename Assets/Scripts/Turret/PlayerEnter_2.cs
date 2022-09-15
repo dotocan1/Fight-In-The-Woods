@@ -5,18 +5,24 @@ using UnityEngine.Animations;
 
 //Skripta detektira ulazak playera u Turret range
 
-public class PlayerEnter : MonoBehaviour
+public class PlayerEnter_2 : MonoBehaviour
 {
     
-    public bool PlayerStatus;
+    public bool PlayerStatus_2;
     public void OnTriggerEnter(Collider other)
-    {     
-        PlayerStatus = true;       
+    {
+        if (other.tag == "Team_2")
+        {
+            PlayerStatus_2 = true;
+        }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        PlayerStatus = false; 
+        if (other.tag == "Team_2")
+        {
+            PlayerStatus_2 = false;
+        }
     }
 
 

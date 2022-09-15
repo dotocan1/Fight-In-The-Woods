@@ -2,6 +2,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class TurretScript : MonoBehaviour
@@ -14,33 +15,30 @@ public class TurretScript : MonoBehaviour
     private float fireRate;
     private float fireRateDelta;
     //PlayerEnter skripta import status
-    PlayerEnter playerStatus;
-    
-
+    PlayerEnter_2 playerStatus_2;
+    PlayerEnter_1 playerStatus_1;
 
     
     void Start()
     {
         currentCannon = GetComponentInChildren<Cannon>();
         fireRate = currentCannon.GetRateOfFire();
-        playerStatus = GetComponentInParent<PlayerEnter>();
+        playerStatus_2 = GetComponentInParent<PlayerEnter_2>();
+        playerStatus_1 = GetComponentInParent<PlayerEnter_1>();
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+
 
     }
 
 
     void Update()
     {
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
 
-        Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y-1, playerTransform.position.z);
+        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+        Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
         
 
-        //provjeri ako je player u range-u
-        if (Vector3.Distance(transform.position, playerGroundPos) > turretRange)
-        {
-            return; 
-        }
-        if (playerStatus.PlayerStatus)
+        if (playerStatus_1.PlayerStatus_1 == true || playerStatus_2.PlayerStatus_2 == true)
         {
             //Cannon gleda u smjer playera
             Vector3 playerDirection = playerGroundPos - transform.position;
@@ -55,7 +53,7 @@ public class TurretScript : MonoBehaviour
                 currentCannon.fire();
                 fireRateDelta = fireRate;
             }
-        }
+       }
 
     }
 }

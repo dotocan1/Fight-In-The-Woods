@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 
 public class PhoenixFire : MonoBehaviour
 {
-    [SerializeField] VisualEffect effect; 
+    [SerializeField] VisualEffect effect;
 
     public void PlayEffect()
     {
