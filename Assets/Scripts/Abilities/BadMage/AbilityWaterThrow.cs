@@ -10,6 +10,11 @@ public class AbilityWaterThrow : MonoBehaviour
     public Camera fpsCam;
     PhotonView view;
 
+    // timer
+
+    float gametimer = 0f;
+
+
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -24,6 +29,8 @@ public class AbilityWaterThrow : MonoBehaviour
 
     void Update()
     {
+
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
 

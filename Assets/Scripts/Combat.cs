@@ -10,15 +10,16 @@ public class Combat : MonoBehaviour
     private float pushForce = 5.0f;
 
     private Animator animator;
+    private Damage damageScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.Find("Enemy") != null)
-        {
+      
             animator = GetComponent<Animator>();
-            rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
-        }
+
+            // upotrijebis getEnemy
+            //rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
