@@ -6,40 +6,28 @@ public class Damage : MonoBehaviour
 {
 
     /*
-    
-        ArrowCircle
+
         SingleArrow
         PullingCircle
-        WaterThrow
         HealingRain
         WavePush
     
     */
     private Combat combatScript;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (GameObject.Find("Enemy") != null)
-        {
-            combatScript = GameObject.Find("Enemy").GetComponent<Combat>();
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (GameObject.Find("Enemy") != null)
-        {
-            if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
-            {
-                combatScript.takeArrowCircleDamage();
-            }
+        if (string.Equals(gameObject.name, "ArrowCircle"))
+        {   
+            // ovo je poziv iz Combat skripte
+            combatScript.takeArrowCircleDamage();
         }
+
+        else if (string.Equals(gameObject.name, "WaterThrow"))
+        {
+            combatScript.takeWaterThrowDamage();
+        }
+
+
     }
 }
