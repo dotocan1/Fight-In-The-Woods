@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
@@ -26,6 +27,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
                 if (view.IsMine)
                 {
                     PlayerPrefab = PhotonNetwork.Instantiate("Characters/WarriorCharacter", GameManager.GM.spawnPointsTeamOne[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab.tag = "Team_1";
                 }
             }
             else
@@ -35,6 +37,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
                 if (view.IsMine)
                 {
                     PlayerPrefab = PhotonNetwork.Instantiate("Characters/BadMageCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab.tag = "Team_2";
                 }
             }
         }
@@ -50,7 +53,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void RPC_SentTeam(int whichTeam)  
+    void RPC_SentTeam(int whichTeam)
     {
         myTeam = whichTeam;
     }
