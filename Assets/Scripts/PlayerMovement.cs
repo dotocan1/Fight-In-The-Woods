@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
         {
             cam.enabled = false;
             audioListener.enabled = false;
-            Debug.Log("why u have to be mad, its only a game.");
         }
         
 
