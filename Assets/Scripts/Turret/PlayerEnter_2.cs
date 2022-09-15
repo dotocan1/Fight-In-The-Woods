@@ -7,24 +7,51 @@ using UnityEngine.Animations;
 
 public class PlayerEnter_2 : MonoBehaviour
 {
-    
     public bool PlayerStatus_2;
-    public void OnTriggerEnter(Collider other)
+    public GameObject PlayerAvatar_2;
+    Transform child;
+
+    private void Start()
+    {
+        PlayerStatus_2 = false;
+        child = transform.GetChild(2);
+    }
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Team_2")
         {
             PlayerStatus_2 = true;
+            PlayerAvatar_2 = other.gameObject;
+            child.GetComponent<TurretScript>().enabled = true;
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Team_2")
         {
             PlayerStatus_2 = false;
+            PlayerAvatar_2 = null;
+            child.GetComponent<TurretScript>().enabled = false;
         }
     }
 
 
 
 }
+
+
+/*using Unity.VisualScripting;
+using UnityEngine;
+
+    public class CodeTriggerCustomEvent : MonoBehaviour
+{
+    void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            //Trigger the previously created Custom Scripting Event MyCustomEvent with the integer value 2.
+            EventBus.Trigger(EventNames.MyCustomEvent, 2);
+        }
+    }
+}*/

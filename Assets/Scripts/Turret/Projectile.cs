@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] float projectileSpeed = 12f;
     private Transform playerTransform;
+    private TurretScript turret;
     
 
     private Rigidbody rb;
@@ -14,7 +15,7 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Impulse();
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+        playerTransform = gameObject.transform.parent;
     }
     
     private void Update()
