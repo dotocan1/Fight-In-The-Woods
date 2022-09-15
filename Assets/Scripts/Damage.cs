@@ -17,17 +17,37 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (string.Equals(gameObject.name, "ArrowCircle"))
-        {   
-            // ovo je poziv iz Combat skripte
-            combatScript.takeArrowCircleDamage();
-        }
+        string gameObjectName = gameObject.name;
 
-        else if (string.Equals(gameObject.name, "WaterThrow"))
+        if (gameObjectName.Equals("WaterThrow(Clone)"))
         {
-            combatScript.takeWaterThrowDamage();
+            // ovo je poziv iz Combat skripte
+
+            // ovo funkcionira ali je pod komentarom iz razloga sto kad pogodis zid il nes
+            // baca error jer zid nema health tako da makni iz komentara tek kad si rjesila provjeru
+            // za taggove
+
+            //combatScript.takeWaterThrowDamage();
         }
+        else if (gameObjectName.Equals("ArrowCircle(Clone)"))
+        {
 
+        }
+        else if (gameObjectName.Equals("SingleArrow(Clone)"))
+        {
 
+        }
+        else if (gameObjectName.Equals("PullingCircle(Clone)"))
+        {
+
+        }
+        else if (gameObjectName.Equals("HealingRain(Clone)"))
+        {
+
+        }
+        else if (gameObjectName.Equals("WavePush(Clone)"))
+        {
+
+        }
     }
 }
