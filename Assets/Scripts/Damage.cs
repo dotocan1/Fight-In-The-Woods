@@ -2,8 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageHealingRain : MonoBehaviour
+public class Damage : MonoBehaviour
 {
+
+    /*
+    
+        ArrowCircle
+        SingleArrow
+        PullingCircle
+        WaterThrow
+        HealingRain
+        WavePush
+    
+    */
     private Combat combatScript;
 
     // Start is called before the first frame update
@@ -27,9 +38,7 @@ public class DamageHealingRain : MonoBehaviour
         {
             if (GameObject.Find("Enemy").GetInstanceID() == other.gameObject.GetInstanceID())
             {
-                combatScript.healPlayer();
-
-                // implement healing over time
+                combatScript.takeArrowCircleDamage();
             }
         }
     }
