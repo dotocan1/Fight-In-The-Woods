@@ -16,6 +16,7 @@ public class Cannon : MonoBehaviour
 
     public void fire()
     {
-        Instantiate(projectile, transform.position, transform.rotation); 
+        GameObject bullet = Instantiate(projectile, transform.position, transform.rotation);
+        bullet.transform.parent = GetComponentInParent<TurretScript>().playerTransform; // u parent transform sam spremila transform od playera
     }
 }
