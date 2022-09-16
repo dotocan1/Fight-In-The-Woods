@@ -8,52 +8,56 @@ public class Phoenix : MonoBehaviour
     [SerializeField] float PhoenixRange = 17f;
     [SerializeField] float PhoenixRotationSpeed = 10f;
 
-    PlayerEnter_2 playerStatus_2;
-    PlayerEnter_1 playerStatus_1;
-
-    private float RateOfFire = 2f;
-    private float RateOfFireDelta; 
-
+    public Transform playerTransform;
+    private float RateOfFire = 1.5f;
+    private float RateOfFireDelta;
     //Ubacujemo skriptu is PhoenixFire
     private PhoenixFire Fire;
+    //ubacujemo player status
+    PhoenixEnter_1 phoenixEnter_1;
+    PhoenixEnter_2 phoenixEnter_2;
+    
 
-    private Transform playerTransform;
 
     void Start()
     {
-        //playerTransform = FindObjectOfType<PlayerMovement>().transform;
         Fire = GetComponentInChildren<PhoenixFire>();
-        playerStatus_2 = GetComponentInParent<PlayerEnter_2>();
-        playerStatus_1 = GetComponentInParent<PlayerEnter_1>();
+
+        phoenixEnter_1 = GetComponentInParent<PhoenixEnter_1>();
+        phoenixEnter_2 = GetComponentInParent<PhoenixEnter_2>();
 
     }
     void Update()
     {
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
-
-        Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
-
-
-        //provjeri ako je player u range-u
-        if (Vector3.Distance(transform.position, playerGroundPos) > PhoenixRange)
+        if (phoenixEnter_1 != null)
         {
-            return;
+            playerTransform = phoenixEnter_1.PlayerAvatar_1.transform;
+            FireBall(playerTransform);
         }
-
-        if (playerStatus_1.PlayerStatus_1 == true || playerStatus_2.PlayerStatus_2 == true)
+        else if (phoenixEnter_2 != null)
         {
-
-            Vector3 playerDirection = playerGroundPos - transform.position;
-            float PhoenixRotationStep = PhoenixRotationSpeed * Time.deltaTime;
-            Vector3 newLookDirection = Vector3.RotateTowards(transform.forward, playerDirection, PhoenixRotationStep, 0f);
-            transform.rotation = Quaternion.LookRotation(newLookDirection);
-
-            RateOfFireDelta -= Time.deltaTime;
-            if (RateOfFireDelta <= 0)
-            {
-                Fire.PlayEffect();
-                RateOfFireDelta = RateOfFire;
-            }
+            playerTransform = phoenixEnter_2.PlayerAvatar_2.transform;
+            FireBall(playerTransform);
         }
     }
+
+
+        private void FireBall(Transform playerAvatar)
+    {
+        Vector3 playerGroundPos = new Vector3(playerAvatar.position.x, playerAvatar.position.y, playerAvatar.position.z);
+
+        //Cannon gleda u smjer playera
+        Vector3 playerDirection = playerGroundPos - transform.position;
+        float turretRotationStep = PhoenixRotationSpeed * Time.deltaTime;
+        Vector3 newLookDirection = Vector3.RotateTowards(transform.forward, playerDirection, turretRotationStep, 0f);
+        transform.rotation = Quaternion.LookRotation(newLookDirection);
+
+        RateOfFireDelta -= Time.deltaTime;
+        if (RateOfFireDelta <= 0)
+        {
+            Fire.PlayEffect();
+            RateOfFireDelta = RateOfFire;
+        }
+    }
+
 }
