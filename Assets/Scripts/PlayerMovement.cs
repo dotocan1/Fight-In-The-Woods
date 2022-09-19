@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     private bool jump;
     float horizontalAxis, verticalAxis;
 
+    Rigidbody rb;
+
     private float speed = 8.0f;
 
     public CharacterController controller;
@@ -27,8 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
-
-
+        rb = GetComponent<Rigidbody>();
 
         //cam = Camera.main;
         audioListener = cam.GetComponent<AudioListener>();
@@ -69,144 +70,142 @@ public class PlayerMovement : MonoBehaviour
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
             bool swordAttackingPressed = Input.GetKey(KeyCode.R);
 
-            // ne mice karaktera
-            if (swordAttackingPressed)
+            Move();
+
+            // animating the movement
+
+            if (Input.GetKey(KeyCode.W))
             {
-                return;
+                speed = 8.0f;
+                animator.SetBool("isRunning", true);
+
             }
-            else
+
+            if (!Input.GetKey(KeyCode.W))
             {
-                Move();
+                animator.SetBool("isRunning", false);
 
-                // animating the movement
+            }
 
-                if (Input.GetKey(KeyCode.W))
-                {
-                    animator.SetBool("isRunning", true);
+            // sprintanje
 
-                }
+            if (runningPressed && sprintingPressed)
+            {
+                animator.SetBool("isSprinting", true);
+                speed = 9.0f;
+                //Debug.Log("Trcim bre");
+            }
 
-                if (!Input.GetKey(KeyCode.W))
-                {
-                    animator.SetBool("isRunning", false);
+            if (!runningPressed || !sprintingPressed)
+            {
+                animator.SetBool("isSprinting", false);
+            }
 
-                }
+            // mijenanje brzine kod prestanka sprinta
 
-                // animacija maca
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                speed = 8.0f;
+            }
 
-                if (swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
-                {
-                    animator.SetBool("isSwordAttacking", true);
-                }
+            // trcanje ulijevo
 
-                if (!swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
-                {
-                    animator.SetBool("isSwordAttacking", false);
-                }
+            if (runningLeftPressed)
+            {
+                animator.SetBool("isRunningLeft", true);
+            }
 
-                // sprintanje
+            if (!runningLeftPressed)
+            {
+                animator.SetBool("isRunningLeft", false);
+            }
 
-                if (runningPressed && sprintingPressed)
-                {
-                    animator.SetBool("isSprinting", true);
-                    speed = 10f;
-                    //Debug.Log("Trcim bre");
-                }
+            if (runningBackwardsPressed)
+            {
+                animator.SetBool("isRunningBackwards", true);
+            }
 
-                if (!runningPressed || !sprintingPressed)
-                {
-                    animator.SetBool("isSprinting", false);
-                }
+            if (!runningBackwardsPressed)
+            {
+                animator.SetBool("isRunningBackwards", false);
+            }
 
-                // mijenanje brzine kod prestanka sprinta
+            if (runningRightPressed)
+            {
+                animator.SetBool("isRunningRight", true);
+            }
 
-                if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    speed = 8.0f;
-                }
+            if (!runningRightPressed)
+            {
+                animator.SetBool("isRunningRight", false);
+            }
 
-                // trcanje ulijevo
+            // trcanje napred ulijevo
 
-                if (runningLeftPressed)
-                {
-                    animator.SetBool("isRunningLeft", true);
-                }
+            if (runningPressed && runningLeftPressed)
+            {
+                speed = 4.0f;
+                animator.SetBool("isRunningForwardLeft", true);
+            }
 
-                if (!runningLeftPressed)
-                {
-                    animator.SetBool("isRunningLeft", false);
-                }
+            if (!runningPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningForwardLeft", false);
+            }
 
-                if (runningBackwardsPressed)
-                {
-                    animator.SetBool("isRunningBackwards", true);
-                }
+            // trcanje napred udesno
 
-                if (!runningBackwardsPressed)
-                {
-                    animator.SetBool("isRunningBackwards", false);
-                }
+            if (runningPressed && runningRightPressed)
+            {
+                speed = 4.0f;
+                animator.SetBool("isRunningForwardRight", true);
+            }
 
-                if (runningRightPressed)
-                {
-                    animator.SetBool("isRunningRight", true);
-                }
+            if (!runningPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningForwardRight", false);
+            }
 
-                if (!runningRightPressed)
-                {
-                    animator.SetBool("isRunningRight", false);
-                }
+            // trcanje nazad ulijevo
 
-                // trcanje napred ulijevo
+            if (runningBackwardsPressed && runningLeftPressed)
+            {
+                speed = 4.0f;
+                animator.SetBool("isRunningBackwardsLeft", true);
+            }
 
-                if (runningPressed && runningLeftPressed)
-                {
-                    animator.SetBool("isRunningForwardLeft", true);
-                }
+            if (!runningBackwardsPressed || !runningLeftPressed)
+            {
+                animator.SetBool("isRunningBackwardsLeft", false);
+            }
 
-                if (!runningPressed || !runningLeftPressed)
-                {
-                    animator.SetBool("isRunningForwardLeft", false);
-                }
+            // trcanje nazad udesno
 
-                // trcanje napred udesno
+            if (runningBackwardsPressed && runningRightPressed)
+            {
+                speed = 4.0f;
+                animator.SetBool("isRunningBackwardsRight", true);
+            }
 
-                if (runningPressed && runningRightPressed)
-                {
-                    animator.SetBool("isRunningForwardRight", true);
-                }
+            if (!runningBackwardsPressed || !runningRightPressed)
+            {
+                animator.SetBool("isRunningBackwardsRight", false);
+            }
 
-                if (!runningPressed || !runningRightPressed)
-                {
-                    animator.SetBool("isRunningForwardRight", false);
-                }
-
-                // trcanje nazad ulijevo
-
-                if (runningBackwardsPressed && runningLeftPressed)
-                {
-                    animator.SetBool("isRunningBackwardsLeft", true);
-                }
-
-                if (!runningBackwardsPressed || !runningLeftPressed)
-                {
-                    animator.SetBool("isRunningBackwardsLeft", false);
-                }
-
-                // trcanje nazad udesno
-
-                if (runningBackwardsPressed && runningRightPressed)
-                {
-                    animator.SetBool("isRunningBackwardsRight", true);
-                }
-
-                if (!runningBackwardsPressed || !runningRightPressed)
-                {
-                    animator.SetBool("isRunningBackwardsRight", false);
-                }
+            // ne mice karaktera i napada primary weaponom
+            if (swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            {
+                animator.SetBool("isSwordAttacking", true);
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            else if (!swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            {
+                animator.SetBool("isSwordAttacking", false);
             }
         }
     }
+
 
     private void Move()
     {
