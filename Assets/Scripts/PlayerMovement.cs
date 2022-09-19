@@ -9,8 +9,11 @@ public class PlayerMovement : MonoBehaviour
 {
     private bool sprinting;
     private bool jump;
-    
-    private float speed;
+    float horizontalAxis, verticalAxis;
+
+    Rigidbody rb;
+
+    private float speed = 8.0f;
 
     public CharacterController controller;
     private Animator animator;
@@ -26,18 +29,17 @@ public class PlayerMovement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         view = GetComponent<PhotonView>();
-        
-
+        rb = GetComponent<Rigidbody>();
 
         //cam = Camera.main;
-        audioListener = cam.GetComponent<AudioListener>(); 
+        audioListener = cam.GetComponent<AudioListener>();
 
         if (!view.IsMine)
         {
             cam.enabled = false;
             audioListener.enabled = false;
         }
-        
+
 
     }
 
@@ -47,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         bool pause = Input.GetKeyDown(KeyCode.Escape);
-        speed = 8f;
 
         if (pause)
         {
@@ -62,8 +63,6 @@ public class PlayerMovement : MonoBehaviour
         // 7.6. If View
         if (view.IsMine) // check if this is my player character
         {
-            Move();
-
             bool runningPressed = Input.GetKey(KeyCode.W);
             bool runningLeftPressed = Input.GetKey(KeyCode.A);
             bool runningRightPressed = Input.GetKey(KeyCode.D);
@@ -71,10 +70,13 @@ public class PlayerMovement : MonoBehaviour
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
             bool swordAttackingPressed = Input.GetKey(KeyCode.R);
 
+            Move();
+
             // animating the movement
 
             if (Input.GetKey(KeyCode.W))
             {
+                speed = 8.0f;
                 animator.SetBool("isRunning", true);
 
             }
@@ -85,25 +87,12 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
-            // animacija maca
- 
-            if (swordAttackingPressed)
-            {
-                animator.SetBool("isSwordAttacking", true);
-
-            }
-
-            if (!swordAttackingPressed)
-            {
-                animator.SetBool("isSwordAttacking", false);
-            }
-
             // sprintanje
 
             if (runningPressed && sprintingPressed)
             {
                 animator.SetBool("isSprinting", true);
-                speed = 10f;
+                speed = 9.0f;
                 //Debug.Log("Trcim bre");
             }
 
@@ -116,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                speed = default;
+                speed = 8.0f;
             }
 
             // trcanje ulijevo
@@ -155,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (runningPressed && runningLeftPressed)
             {
+                speed = 4.0f;
                 animator.SetBool("isRunningForwardLeft", true);
             }
 
@@ -167,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (runningPressed && runningRightPressed)
             {
+                speed = 4.0f;
                 animator.SetBool("isRunningForwardRight", true);
             }
 
@@ -179,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (runningBackwardsPressed && runningLeftPressed)
             {
+                speed = 4.0f;
                 animator.SetBool("isRunningBackwardsLeft", true);
             }
 
@@ -191,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (runningBackwardsPressed && runningRightPressed)
             {
+                speed = 4.0f;
                 animator.SetBool("isRunningBackwardsRight", true);
             }
 
@@ -199,22 +192,31 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isRunningBackwardsRight", false);
             }
 
-
+            // ne mice karaktera i napada primary weaponom
+            if (swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            {
+                animator.SetBool("isSwordAttacking", true);
+            }
+            else if (!swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            {
+                animator.SetBool("isSwordAttacking", false);
+            }
         }
     }
 
+
     private void Move()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        horizontalAxis = Input.GetAxis("Horizontal");
+        verticalAxis = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * horizontalAxis + transform.forward * verticalAxis;
 
         // moves the character
         controller.Move(move * speed * Time.deltaTime);
 
     }
 
-   
+
 
 }
