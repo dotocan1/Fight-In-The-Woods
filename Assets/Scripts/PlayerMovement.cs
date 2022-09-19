@@ -196,8 +196,6 @@ public class PlayerMovement : MonoBehaviour
             if (swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
             {
                 animator.SetBool("isSwordAttacking", true);
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
             }
             else if (!swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
             {
