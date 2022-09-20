@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
             bool runningRightPressed = Input.GetKey(KeyCode.D);
             bool runningBackwardsPressed = Input.GetKey(KeyCode.S);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
-            bool swordAttackingPressed = Input.GetKey(KeyCode.R);
+            bool attacking = Input.GetKey(KeyCode.R);
 
             Move();
 
@@ -193,13 +193,13 @@ public class PlayerMovement : MonoBehaviour
             }
 
             // ne mice karaktera i napada primary weaponom
-            if (swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            if (attacking)
             {
-                animator.SetBool("isSwordAttacking", true);
+                animator.SetBool("isAttacking", true);
             }
-            else if (!swordAttackingPressed && gameObject.name.Equals("WarriorCharacter(Clone)"))
+            else if (!attacking)
             {
-                animator.SetBool("isSwordAttacking", false);
+                animator.SetBool("isAttacking", false);
             }
         }
     }
