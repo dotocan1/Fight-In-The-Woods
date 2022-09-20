@@ -15,11 +15,8 @@ public class Combat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
             animator = GetComponent<Animator>();
-
-            // upotrijebis getEnemy
-            //rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
+            //rbEnemy = damageScript.getEnemy().GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -37,6 +34,8 @@ public class Combat : MonoBehaviour
 
     public void takeWaterThrowDamage()
     {
+        if (gameObject.tag != "Team_1" || gameObject.tag != "Team_2") return;
+        
         Debug.Log("Taking damage! Enemy health is now:" + health);
         health -= 300f;
     }
