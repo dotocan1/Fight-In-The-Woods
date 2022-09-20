@@ -29,30 +29,30 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
         //Debug.Log(combatScript);
         string gameObjectName = gameObject.name;
         string playerTag = gameObject.transform.parent.tag;
 
-        Debug.Log("NAMEEEE: " + gameObjectName);
         string enemyTag = other.tag;
-
-        Debug.Log("ENEMY NAME: " + other.name);
-        Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
         if (gameObjectName.Equals("WaterThrow(Clone)"))
         {
-            
-            if(playerTag != enemyTag)
+
+            if (playerTag != enemyTag && enemyTag == "Team_2" || enemyTag == "Team_1")
             {
+                Debug.Log("Game object name: " + gameObjectName);
+                Debug.Log("ENEMY NAME: " + other.name);
+                Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+
                 Debug.Log("PLAYER'S TAG: " + playerTag);
                 Debug.Log("ENEMY'S TAG; " + enemyTag);
 
-                Debug.Log(combatScript);
                 combatScript.takeWaterThrowDamage();
-            } else
+            }
+            else
             {
-                Debug.Log("TAGOVI SE NE POKLAPAJU");
+                return;
             }
         }
         else if (gameObjectName.Equals("ArrowCircle(Clone)"))
@@ -71,7 +71,7 @@ public class Damage : MonoBehaviour
         }
         else if (gameObjectName.Equals("PullingCircle(Clone)"))
         {
-            
+
         }
         else if (gameObjectName.Equals("HealingRain(Clone)"))
         {
@@ -86,7 +86,7 @@ public class Damage : MonoBehaviour
             {
                 //combatScript.wavePush();
             }
-        } 
+        }
         else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
 
