@@ -18,7 +18,7 @@ public class PlayerEnter_2 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Team_2")
+        if (other.tag == "Team_2" || other.tag == "MinionTeam_2")
         {
             PlayerStatus_2 = true;
             PlayerAvatar_2 = other.gameObject;
@@ -28,7 +28,7 @@ public class PlayerEnter_2 : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Team_2")
+        if (other.tag == "Team_2" || other.tag == "MinionTeam_2")
         {
             PlayerStatus_2 = false;
             PlayerAvatar_2 = null;
