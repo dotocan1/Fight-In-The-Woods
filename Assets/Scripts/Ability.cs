@@ -82,7 +82,7 @@ public class Ability : MonoBehaviour
             if (castingQ && (gametimerCastQ - abilityUsedQ) > 9.0f)
             {
                 animator.SetBool("isCastingQ", true);
-                
+
                 abilityUsedQ = gametimerCastQ;
 
                 StartCoroutine(InstantiateAbilities("WavePush"));
@@ -95,7 +95,7 @@ public class Ability : MonoBehaviour
             if ((castingE && (gametimerCastE - abilityUsedE) > 18.0f))
             {
                 animator.SetBool("isCastingE", true);
-               
+
                 abilityUsedE = gametimerCastE;
 
                 StartCoroutine(InstantiateAbilities("HealingRain"));
@@ -114,7 +114,7 @@ public class Ability : MonoBehaviour
             if (castingQ && (gametimerCastQ - abilityUsedQ) > 13.0f)
             {
                 animator.SetBool("isCastingQ", true);
-                
+
                 abilityUsedQ = gametimerCastQ;
 
                 StartCoroutine(InstantiateAbilities("SingleArrow"));
@@ -187,25 +187,35 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
-            }else if (choice.Equals("PullingCircle"))
+            }
+            else if (choice.Equals("PullingCircle"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.01f, 0.01f, 0.134f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
-            }else if (choice.Equals("HealingRain"))
+            }
+            else if (choice.Equals("HealingRain"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position, fpsCam.transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
+                instantiatedObj.transform.localPosition = new Vector3(0.01f, 0.01f, 0.134f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
-            }else if (choice.Equals("WavePush"))
+            }
+            else if (choice.Equals("WavePush"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
-            }else if (choice.Equals("SingleArrow"))
+            }
+            else if (choice.Equals("SingleArrow"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position, fpsCam.transform.rotation, data: customInitData);
@@ -213,7 +223,8 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
-            } else if (choice.Equals("ArrowCircle"))
+            }
+            else if (choice.Equals("ArrowCircle"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
@@ -222,7 +233,7 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
-            
+
         }
     }
 
