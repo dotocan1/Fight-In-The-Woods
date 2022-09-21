@@ -36,8 +36,8 @@ public class Combat : MonoBehaviour
 
         if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
         {
-            gameObject.GetComponent<Animator>().SetBool("isDead", true);
             StartCoroutine(DestroyAbility(gameObject));
+            gameObject.GetComponent<Animator>().SetBool("isDead", true);
         }
     }
 
