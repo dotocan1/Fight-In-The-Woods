@@ -1,13 +1,10 @@
 using UnityEngine;
 using Photon.Pun;
-
+using System.Collections;
+using System.Collections.Generic;
 public class Combat : MonoBehaviour
 {
-    //public float health = 100f;
-    Rigidbody rbEnemy;
-    private float enemyHealth;
-    public float m_Thrust = 20f;
-    private float pushForce = 5.0f;
+    public float thrust = 50.0f;
 
     PhotonView view;
     private Animator animator;
@@ -25,8 +22,6 @@ public class Combat : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
-        
-        rbEnemy = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -70,20 +65,6 @@ public class Combat : MonoBehaviour
     {
         gameObject.GetComponent<PhotonPlayer>().health += 300.0f;
         Debug.Log("Healing! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
-
-    }
-
-    public void wavePush()
-    {
-
-        Vector3 moveBackwards = Vector3.forward * pushForce;
-        rbEnemy.AddForce(moveBackwards * m_Thrust);
-
-        // stops force
-
-        // rbEnemy.velocity = Vector3.zero;
-        //  rbEnemy.angularVelocity = Vector3.zero;
-
     }
 
     public void takeSwordDamage(GameObject character)
@@ -94,7 +75,14 @@ public class Combat : MonoBehaviour
         {
             gameObject.GetComponent<PhotonPlayer>().health -= 50f;
             Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
-        } 
+        }
+    }
+
+    private IEnumerator waitALittle(Rigidbody rb)
+    {
+        yield return new WaitForSeconds(5f);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
 }

@@ -85,7 +85,7 @@ public class Ability : MonoBehaviour
 
                 abilityUsedQ = gametimerCastQ;
 
-                StartCoroutine(InstantiateAbilities("WavePush"));
+                StartCoroutine(InstantiateAbilities("WaterThrow"));
 
             }
             else if (!castingQ)
@@ -206,10 +206,10 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
-            else if (choice.Equals("WavePush"))
+            else if (choice.Equals("WaterThrow"))
             {
                 yield return new WaitForSeconds(1f);
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WaterThrow", transform.position, fpsCam.transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
                 instantiatedObj.transform.parent = null;

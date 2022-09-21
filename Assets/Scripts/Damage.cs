@@ -29,15 +29,30 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
         transform.SetParent(gameObject.transform);
     }
+    private void Update()
+    {
+        GameObject enemyy = getEnemy();
+        string playerTag = parent.tag;
+        string enemyTag = enemyy.tag;
+       
+        if (gameObject.name.Equals("PullingCircle(Clone)") && playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
+        {
+            float speed = 0.1f;
+            var step = speed * Time.deltaTime;
+            Debug.Log("Ovo je enemy tag : " + enemyy.tag + " i ime: " + enemy.name);
 
-        public void OnPhotonInstantiate(PhotonMessageInfo info)
+            enemyy.transform.position = Vector3.MoveTowards(transform.position, transform.position, step);
+        }
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         object[] instantiationData = info.photonView.InstantiationData;
         parent = PhotonView.Find((int)instantiationData[0]).gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
-     {
+    {
 
         string gameObjectName = gameObject.name;
         string playerTag = parent.tag;
@@ -70,7 +85,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
             }
         }
         else if (gameObjectName.Equals("ArrowCircle(Clone)"))
-         {
+        {
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
@@ -80,8 +95,8 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
         }
-         else if (gameObjectName.Equals("Arrow(Clone)"))
-         {
+        else if (gameObjectName.Equals("Arrow(Clone)"))
+        {
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
@@ -91,41 +106,25 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
-         else if (gameObjectName.Equals("PullingCircle(Clone)"))
-         {
-            // dodaj
+        else if (gameObjectName.Equals("PullingCircle(Clone)"))
+        {
+            setEnemy(other.gameObject);
         }
-         else if (gameObjectName.Equals("HealingRain(Clone)"))
-         {
-             if (playerTag != enemyTag)
-             {
-                if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
-                {
-                    Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+        else if (gameObjectName.Equals("HealingRain(Clone)"))
+        {
+            if (playerTag == enemyTag)
+            {
 
-                    setEnemy(other.gameObject);
-                    enemy.GetComponent<Combat>().healPlayer();
-                    gameObject.GetComponent<SphereCollider>().enabled = false;
-                }
-            }
-         }
-         else if (gameObjectName.Equals("WavePush(Clone)"))
-         {
-             if (playerTag != enemyTag)
-             {
-                if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
-                {
-                    Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+                setEnemy(other.gameObject);
+                enemy.GetComponent<Combat>().healPlayer();
+                gameObject.GetComponent<SphereCollider>().enabled = false;
 
-                    setEnemy(other.gameObject);
-                    enemy.GetComponent<Combat>().wavePush();
-                    gameObject.GetComponent<SphereCollider>().enabled = false;
-                }
             }
-         }
-         else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
-         {
+        }
+
+        else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
+        {
             // dodaj
         }
     }
- }
+}
