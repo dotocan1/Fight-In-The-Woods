@@ -70,7 +70,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
@@ -84,7 +84,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
@@ -97,7 +97,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
@@ -110,7 +110,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
@@ -129,7 +129,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
