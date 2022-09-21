@@ -131,6 +131,8 @@ public class Ability : MonoBehaviour
             }
             if ((castingE && (gametimer - abilityUsed) > 1.0f))
             {
+                animator.SetBool("isCastingE", true);
+
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
