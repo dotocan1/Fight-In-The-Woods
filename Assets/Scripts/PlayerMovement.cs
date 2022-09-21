@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
             bool runningRightPressed = Input.GetKey(KeyCode.D);
             bool runningBackwardsPressed = Input.GetKey(KeyCode.S);
             bool sprintingPressed = Input.GetKey(KeyCode.LeftShift);
-            bool attacking = Input.GetKey(KeyCode.R);
 
             Move();
 
@@ -190,16 +189,6 @@ public class PlayerMovement : MonoBehaviour
             if (!runningBackwardsPressed || !runningRightPressed)
             {
                 animator.SetBool("isRunningBackwardsRight", false);
-            }
-
-            // ne mice karaktera i napada primary weaponom
-            if (attacking)
-            {
-                animator.SetBool("isAttacking", true);
-            }
-            else if (!attacking)
-            {
-                animator.SetBool("isAttacking", false);
             }
         }
     }
