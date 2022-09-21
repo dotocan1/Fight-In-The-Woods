@@ -68,6 +68,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 setEnemy(other.gameObject);
                 enemy.GetComponent<Combat>().takeWaterThrowDamage();
                 gameObject.GetComponent<SphereCollider>().enabled = false;
+                PhotonNetwork.Destroy(gameObject);
             }
         }
         else if (gameObjectName.Equals("GoodMageFire(Clone)"))
@@ -81,6 +82,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                     setEnemy(other.gameObject);
                     enemy.GetComponent<Combat>().takeGoodMageFire();
                     gameObject.GetComponent<BoxCollider>().enabled = false;
+                    PhotonNetwork.Destroy(gameObject);
                 }
             }
         }
@@ -104,6 +106,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 setEnemy(other.gameObject);
                 enemy.GetComponent<Combat>().takeSingleArrowDamage();
                 gameObject.GetComponent<BoxCollider>().enabled = false;
+
             }
         }
         else if (gameObjectName.Equals("PullingCircle(Clone)"))
