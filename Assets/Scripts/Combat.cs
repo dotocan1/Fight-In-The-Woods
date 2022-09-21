@@ -36,8 +36,16 @@ public class Combat : MonoBehaviour
 
         if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
         {
-            StartCoroutine(DestroyAbility(gameObject));
-            gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            
+            if (gameObject.tag == "Team_1" || gameObject.tag == "Team_2")
+            {
+                StartCoroutine(DestroyObject(gameObject));
+                gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            } else
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+           
         }
     }
 
@@ -98,10 +106,10 @@ public class Combat : MonoBehaviour
         } 
     }
 
-    private IEnumerator DestroyAbility(GameObject abilityObject)
+    private IEnumerator DestroyObject(GameObject gameObject)
     {
         yield return new WaitForSeconds(2);
-        PhotonNetwork.Destroy(abilityObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
 }
