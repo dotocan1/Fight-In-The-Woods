@@ -9,6 +9,7 @@ public class Ability : MonoBehaviour
     private GameObject instantiatedObj;
     public Camera fpsCam;
     PhotonView view;
+    private Animator animator;
 
     // timer
 
@@ -21,6 +22,7 @@ public class Ability : MonoBehaviour
     {
         view = GetComponent<PhotonView>();
         Ability abilityScript = GetComponent<Ability>();
+        animator = GetComponent<Animator>();
 
         if (!view.IsMine)
         {
@@ -31,6 +33,8 @@ public class Ability : MonoBehaviour
     void Update()
     {
 
+        bool castingQ = Input.GetKeyDown(KeyCode.Q);
+
         // kreiranje timera
         gametimer += Time.deltaTime;
         int seconds = (int)(gametimer % 60);
@@ -39,7 +43,7 @@ public class Ability : MonoBehaviour
         // bad mage ability
         if(gameObject.name.Equals("BadMageCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 5.0f)
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
@@ -62,7 +66,7 @@ public class Ability : MonoBehaviour
 
          if(gameObject.name.Equals("GoodMageCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 5.0f)
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
@@ -85,7 +89,7 @@ public class Ability : MonoBehaviour
 
          if(gameObject.name.Equals("ArcherCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 5.0f)
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
@@ -109,8 +113,10 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 1.0f)
+            if (castingQ && (gametimer - abilityUsed) > 1.0f)
             {
+                animator.SetBool("isCastingQ", true);
+
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
@@ -120,6 +126,9 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.localPosition = new Vector3(-0.05716324f, -3.12f, 1.4599f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
+            } else if (!castingQ)
+            {
+                animator.SetBool("isCastingQ", false);
             }
             else if ((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f))
             {
