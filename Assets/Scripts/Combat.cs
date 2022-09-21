@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 
@@ -36,7 +37,7 @@ public class Combat : MonoBehaviour
         if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
         {
             gameObject.GetComponent<Animator>().SetBool("isDead", true);
-            Destroy(gameObject, 5f);
+            StartCoroutine(DestroyAbility(gameObject));
         }
     }
 
@@ -95,6 +96,12 @@ public class Combat : MonoBehaviour
             gameObject.GetComponent<PhotonPlayer>().health -= 50f;
             Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
         } 
+    }
+
+    private IEnumerator DestroyAbility(GameObject abilityObject)
+    {
+        yield return new WaitForSeconds(2);
+        PhotonNetwork.Destroy(abilityObject);
     }
 
 }

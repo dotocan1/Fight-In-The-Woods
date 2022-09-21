@@ -41,7 +41,6 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
                 }
             }
         }
-
     }
 
     [PunRPC]

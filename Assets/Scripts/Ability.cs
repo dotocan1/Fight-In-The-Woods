@@ -109,7 +109,7 @@ public class Ability : MonoBehaviour
 
     private IEnumerator DestroyAbility(GameObject abilityObject)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         PhotonNetwork.Destroy(abilityObject);
     }
 }
