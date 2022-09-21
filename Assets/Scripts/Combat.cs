@@ -55,6 +55,12 @@ public class Combat : MonoBehaviour
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
+    public void takeGroundSlash()
+    {
+        gameObject.GetComponent<PhotonPlayer>().health -= 150f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+    }
+
     public void takeSingleArrowDamage()
     {
         gameObject.GetComponent<PhotonPlayer>().health -= 400f;
@@ -77,12 +83,4 @@ public class Combat : MonoBehaviour
             Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
         }
     }
-
-    private IEnumerator waitALittle(Rigidbody rb)
-    {
-        yield return new WaitForSeconds(5f);
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-    }
-
 }

@@ -146,15 +146,10 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", true);
 
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsedQ = gametimerCastQ;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/GroundSlash", transform.position, transform.rotation, data: customInitData);
-                instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(-0.05716324f, -3.12f, 1.4599f);
-                instantiatedObj.transform.parent = null;
-                StartCoroutine(DestroyAbility(instantiatedObj));
+                StartCoroutine(InstantiateAbilities("GroundSlash"));
+
             }
             else if (!castingQ)
             {
@@ -230,6 +225,14 @@ public class Ability : MonoBehaviour
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(-1.92f, 0.997f, -0.033f);
+                instantiatedObj.transform.parent = null;
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (choice.Equals("GroundSlash"))
+            {
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/GroundSlash", transform.position, transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(-0.05716324f, -3.12f, 1.4599f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
