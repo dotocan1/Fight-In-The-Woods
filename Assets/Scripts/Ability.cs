@@ -9,6 +9,7 @@ public class Ability : MonoBehaviour
     private GameObject instantiatedObj;
     public Camera fpsCam;
     PhotonView view;
+    private Animator animator;
 
     // timer
 
@@ -21,6 +22,7 @@ public class Ability : MonoBehaviour
     {
         view = GetComponent<PhotonView>();
         Ability abilityScript = GetComponent<Ability>();
+        animator = GetComponent<Animator>();
 
         if (!view.IsMine)
         {
@@ -31,80 +33,156 @@ public class Ability : MonoBehaviour
     void Update()
     {
 
+        bool castingQ = Input.GetKeyDown(KeyCode.Q);
+        bool castingE = Input.GetKeyDown(KeyCode.E);
+
         // kreiranje timera
         gametimer += Time.deltaTime;
         int seconds = (int)(gametimer % 60);
         int minutes = (int)(gametimer / 60);
 
         // bad mage ability
-        if(gameObject.name.Equals("BadMageCharacter(Clone)")){
+        if (gameObject.name.Equals("BadMageCharacter(Clone)"))
+        {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 1.0f)
             {
+                animator.SetBool("isCastingQ", true);
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
-            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
+            else if (!castingQ)
+            {
+                animator.SetBool("isCastingQ", false);
+            }
+            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            {
+                animator.SetBool("isCastingE", true);
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (!castingE)
+            {
+                animator.SetBool("isCastingE", false);
             }
         }
-        
+
         // good mage ability
 
-         if(gameObject.name.Equals("GoodMageCharacter(Clone)")){
+        if (gameObject.name.Equals("GoodMageCharacter(Clone)"))
+        {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 1.0f)
             {
+                animator.SetBool("isCastingQ", true);
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
-            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
+            else if (!castingQ)
+            {
+                animator.SetBool("isCastingQ", false);
+            }
+            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            {
+                animator.SetBool("isCastingE", true);
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (!castingE)
+            {
+                animator.SetBool("isCastingE", false);
             }
         }
 
         // archer ability
 
-         if(gameObject.name.Equals("ArcherCharacter(Clone)")){
+        if (gameObject.name.Equals("ArcherCharacter(Clone)"))
+        {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            {
+                animator.SetBool("isCastingQ", true);
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position, fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (!castingQ)
+            {
+                animator.SetBool("isCastingQ", false);
+            }
+            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            {
+                animator.SetBool("isCastingE", true);
+
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (!castingE)
+            {
+                animator.SetBool("isCastingE", false);
+            }
+        }
+
+        // warrior ability
+
+        if (gameObject.name.Equals("WarriorCharacter(Clone)"))
+        {
+            // zadnji broj u uvjetu oznacava vrijeme cooldowna
+            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            {
+                animator.SetBool("isCastingQ", true);
+
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/GroundSlash", transform.position, transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(-0.05716324f, -3.12f, 1.4599f);
+                instantiatedObj.transform.parent = null;
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (!castingQ)
+            {
+                animator.SetBool("isCastingQ", false);
+            }
+            if ((castingE && (gametimer - abilityUsed) > 5.0f))
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
-            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
-                abilityUsed = gametimer;
-
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility(instantiatedObj));
+            else if (!castingE)
+            {
+                animator.SetBool("isCastingE", false);
             }
         }
-
-        // warrior ability
     }
 
     private IEnumerator DestroyAbility(GameObject abilityObject)
