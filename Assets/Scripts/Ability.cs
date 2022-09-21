@@ -40,15 +40,22 @@ public class Ability : MonoBehaviour
         if(gameObject.name.Equals("BadMageCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
             if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
-        {   
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }
+            {
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
+            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
         }
         
         // good mage ability
@@ -56,15 +63,22 @@ public class Ability : MonoBehaviour
          if(gameObject.name.Equals("GoodMageCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
             if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
-        {   
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }
+            {
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
+            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
         }
 
         // archer ability
@@ -72,17 +86,30 @@ public class Ability : MonoBehaviour
          if(gameObject.name.Equals("ArcherCharacter(Clone)")){
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
             if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
-        {   
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
-            abilityUsed = gametimer;
-            instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            Destroy(instantiatedObj, 0.5f);
-        }
+            {
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
+            else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
+                object[] customInitData = new object[1];
+                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                abilityUsed = gametimer;
+
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
+                StartCoroutine(DestroyAbility());
+            }
         }
 
         // warrior ability
+    }
+
+    private IEnumerator DestroyAbility()
+    {
+        yield return new WaitForSeconds(5);
+        PhotonNetwork.Destroy(instantiatedObj);
     }
 }
