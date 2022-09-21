@@ -183,6 +183,9 @@ public class Ability : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }else if (choice.Equals("PullingCircle"))
             {
@@ -193,6 +196,9 @@ public class Ability : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }else if (choice.Equals("WavePush"))
             {
@@ -203,11 +209,17 @@ public class Ability : MonoBehaviour
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             } else if (choice.Equals("ArrowCircle"))
             {
                 yield return new WaitForSeconds(1f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(-1.92f, 0.997f, -0.033f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
             
