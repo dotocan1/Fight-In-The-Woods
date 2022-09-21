@@ -1,35 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Combat : MonoBehaviour
 {
-    public float health = 100f;
+    //public float health = 100f;
     Rigidbody rbEnemy;
+    private float enemyHealth;
     public float m_Thrust = 20f;
     private float pushForce = 5.0f;
 
+    PhotonView view;
     private Animator animator;
     private Damage damageScript;
 
     // Start is called before the first frame update
     void Start()
     {
-      
-            animator = GetComponent<Animator>();
+        view = GetComponent<PhotonView>();
+        Combat combatScript = GetComponent<Combat>();
 
-            // upotrijebis getEnemy
-            //rbEnemy = GameObject.Find("Enemy").GetComponent<Rigidbody>();
+        if (!view.IsMine)
+        {
+            combatScript.enabled = false;
+        }
+
+        animator = GetComponent<Animator>();
+        
+        rbEnemy = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (health <= 0)
+        if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
         {
-            Destroy(gameObject,5f);
-            animator.SetBool("isDead", true);
+            gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            Destroy(gameObject, 5f);
         }
     }
 
@@ -37,25 +44,26 @@ public class Combat : MonoBehaviour
 
     public void takeWaterThrowDamage()
     {
-        Debug.Log("Taking damage! Enemy health is now:" + health);
-        health -= 300f;
+        gameObject.GetComponent<PhotonPlayer>().health -= 300f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void takeArrowCircleDamage()
     {
-        Debug.Log("Taking damage! Enemy health is now:" + health);
-        health -= 150f;
+        gameObject.GetComponent<PhotonPlayer>().health -= 150f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void takeSingleArrowDamage()
     {
-        health -= 400f;
+        gameObject.GetComponent<PhotonPlayer>().health -= 400f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void healPlayer()
     {
-        health += 300.0f;
-        Debug.Log("Healing! Enemy health is now:" + health);
+        gameObject.GetComponent<PhotonPlayer>().health += 300.0f;
+        Debug.Log("Healing! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
 
     }
 
@@ -78,8 +86,9 @@ public class Combat : MonoBehaviour
         Animator a_animator = character.GetComponent<Animator>();
         if (a_animator.GetBool("isSwordAttacking"))
         {
-            health -= 50f;
-            Debug.Log("Taking damage! Enemy health is now:" + health);
+            gameObject.GetComponent<PhotonPlayer>().health -= 50f;
+            Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
         } 
     }
+
 }

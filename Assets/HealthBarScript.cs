@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBarScript : MonoBehaviour
 {
-    private Image HealthBar;
+    /*private Image HealthBar;
     public float CurrentHealth;
     private float MaxHealth = 100f;
     Combat combatScript;
@@ -20,5 +20,5 @@ public class HealthBarScript : MonoBehaviour
     {
         CurrentHealth = combatScript.health;
         HealthBar.fillAmount = CurrentHealth/MaxHealth;
-    }
+    }*/
 }
