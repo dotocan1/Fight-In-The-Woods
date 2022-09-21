@@ -17,6 +17,7 @@ public class MinionMove : MonoBehaviour
 
     private void Update()
     {
+        tower = GameObject.FindWithTag("Tower_2A");
         rb = GetComponent<Rigidbody>();
         Movement();
     }

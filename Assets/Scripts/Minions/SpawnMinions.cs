@@ -23,7 +23,7 @@ public class SpawnMinions: MonoBehaviour
     
     private IEnumerator spawnMinion(float interval, GameObject Minion)
     {
-        if (brojac < 6)
+        if (brojac < 4)
         {
 
             yield return new WaitForSeconds(Delay);
