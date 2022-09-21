@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class MinionAI : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class MinionAI : MonoBehaviour
     public GameObject player;
     private GameObject minion;
     private GameObject phoenix;
+    private GameObject fontana;
+    bool parent;
 
     [SerializeField] private GameObject projectile;
     
-    private float minionspeed = 5f;
+    private float minionspeed = 10f;
     private Rigidbody rb;
 
     //TeamSetup
@@ -22,6 +25,7 @@ public class MinionAI : MonoBehaviour
     [SerializeField] string WhichTowerToAttack;
     [SerializeField] string PlayerTeamTagToAttack;
     [SerializeField] string WhichPhoenixToAttack;
+    //[SerializeField] string WhichFontanaToAttack;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -29,18 +33,23 @@ public class MinionAI : MonoBehaviour
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public bool playerInSightRange, playerInAttackRange, minionInSightRange, minionInAttackRange;
+    public bool TurretInSight;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerInSightRange = false;
         playerInAttackRange = false;
+
+
     }
     private void Start()
     {
+        //fontana = GameObject.FindWithTag(WhichFontanaToAttack);
         minion = GameObject.FindWithTag(minionTeamNameToAttack);
         tower = GameObject.FindWithTag(WhichTowerToAttack);
+
         phoenix = GameObject.FindWithTag(WhichPhoenixToAttack);
         player = GameObject.FindWithTag(PlayerTeamTagToAttack);
 
@@ -48,77 +57,35 @@ public class MinionAI : MonoBehaviour
 
     void Update()
     {
-
-        //napad izmedju playera i miniona
-        if (player != null)
+        if (player != null && PlayerDistance())
         {
-            playerInSightRange = Distance(player);
-            playerInAttackRange = AttackDistance(player);
-
-            if (!playerInSightRange && !playerInAttackRange)
-            {
-                Movement(tower);
-            }
-            if (playerInSightRange && !playerInAttackRange)
-            {
-                FindPlayer(player);
-            }
-            if (playerInSightRange && playerInAttackRange)
-            {
-                AttackPlayer(player);
-            }
+            playerInSightRange = true;
+            Action(player);
         }
-        //napad izmedju miniona i miniona
-        else if (minion != null)
+        if (minion != null && MinionDistance())
         {
-            
-            playerInSightRange = Distance(minion);
-            playerInAttackRange = AttackDistance(minion);
-
-            if (!playerInSightRange && !playerInAttackRange)
-            {
-                Movement(tower);
-            }
-            if (playerInSightRange && !playerInAttackRange)
-            {
-                FindPlayer(minion);
-            }
-            if (playerInSightRange && playerInAttackRange)
-            {
-                AttackPlayer(minion);
-            }
-
+            minionInSightRange = true;
+            Debug.Log("Found a minion");
+            Action(minion);
         }
-        else if (tower != null)
+        if (tower != null || TurretRange())
         {
-            playerInSightRange = Distance(tower);
-            playerInAttackRange = Distance(tower);
-            Movement(tower);
-            if (playerInSightRange && playerInAttackRange)
-            {
-                AttackPlayer(tower);
-            }
+            TurretInSight = true;
+            Action(tower);
+        }
 
-        } 
-        /*else if (phoenix != null)
-        {
-            Movement(phoenix);
-            AttackPlayer(phoenix);
-        }*/
-        /*else
-        {
-            Movement(fontana);
-            AttackPlayer(fontana);
-            
-        }*/
-      
+
+
     }
     private void Movement(GameObject target)
     {
-        Vector3 MinionDirection = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
-        Vector3 vector3 = target.transform.position - MinionDirection;
-        transform.LookAt(target.transform.position);
-        transform.Translate(new Vector3(0f, 0f, minionspeed * Time.deltaTime));
+        if (target != null)
+        {
+            Vector3 MinionDirection = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+            Vector3 vector3 = target.transform.position - MinionDirection;
+            transform.LookAt(target.transform.position);
+            transform.Translate(new Vector3(0f, 0f, minionspeed * Time.deltaTime));
+        }
     }
 
     private void FindPlayer(GameObject target1)
@@ -128,13 +95,9 @@ public class MinionAI : MonoBehaviour
 
     private void AttackPlayer(GameObject target2)
     {
-
+        Movement(null);
         if (!AlreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 30f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 10f, ForceMode.Impulse);
-
             AlreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -167,6 +130,17 @@ public class MinionAI : MonoBehaviour
         
     }
 
+    private bool TurretRange()
+    {
+        float distance = Vector3.Distance(tower.transform.position, transform.position);
+        if (distance <= 6)
+        {
+            return true;
+        }
+        else return false;
+
+    }
+
     private bool AttackDistance(GameObject attackobjekt)
     {
         float distance = Vector3.Distance(attackobjekt.transform.position, transform.position);
@@ -175,6 +149,45 @@ public class MinionAI : MonoBehaviour
             return true;
         }
         else return false;
+    }
+
+    private bool PlayerDistance()
+    {
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        if (distance <= 6)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    private bool MinionDistance()
+    {
+        float distance = Vector3.Distance(minion.transform.position, transform.position);
+        if (distance <= 6)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    void Distanca()
+    {
+        float distance = Vector3.Distance(minion.transform.position, transform.position);
+        Debug.Log(distance);
+    }
+
+
+    private void Action(GameObject entry)
+    {
+       if (AttackDistance(entry))
+        {
+            AttackPlayer(entry);
+        }
+        else
+        {
+            Movement(entry);
+        }
     }
 
 }
