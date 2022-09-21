@@ -20,15 +20,18 @@ public class AudioSettings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.D)) || (Input.GetKey(KeyCode.S)))
+        if (!Input.GetKey(KeyCode.R) || !Input.GetKeyDown(KeyCode.R))
         {
-            PlayerFootstep();
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-            SoundPlayer.Stop();
+            if ((Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.D)) || (Input.GetKey(KeyCode.S)))
+            {
+                PlayerFootstep();
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+                SoundPlayer.Stop();
+            }
         }
 
     }
