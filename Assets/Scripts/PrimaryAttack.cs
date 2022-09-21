@@ -9,10 +9,18 @@ public class PrimaryAttack : MonoBehaviour
     private GameObject instantiatedObj;
     public Camera fpsCam;
 
+    PhotonView view;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        PrimaryAttack primaryAttackScript = GetComponent<PrimaryAttack>();
+
+        if (!view.IsMine)
+        {
+            primaryAttackScript.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -22,7 +30,14 @@ public class PrimaryAttack : MonoBehaviour
 
         if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
-            return;
+            if (attacking)
+            {
+                animator.SetBool("isAttacking", true);
+            }
+            else if (!attacking)
+            {
+                animator.SetBool("isAttacking", false);
+            }
         }
         else if (gameObject.name.Equals("ArcherCharacter(Clone)"))
         {
@@ -41,26 +56,18 @@ public class PrimaryAttack : MonoBehaviour
                 animator.SetBool("isAttacking", false);
             }
         }
-        else if (gameObject.name.Equals("GoodMage(Clone)") || gameObject.name.Equals("BadMage(Clone)"))
+        else if (gameObject.name.Equals("GoodMageCharacter(Clone)") || gameObject.name.Equals("BadMageCharacter(Clone)"))
         {
-            if (attacking || gameObject.name.Equals("GoodMage(Clone)"))
+            if (attacking)
             {
 
                 animator.SetBool("isAttacking", true);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation);
                 instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
                 instantiatedObj.transform.parent = null;
 
                 // TODO: izbrisi ako pogodi playera ili tower
-            }
-            else if (attacking || gameObject.name.Equals("BadMage(Clone)"))
-            {
-                animator.SetBool("isAttacking", true);
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation);
-                instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
-                instantiatedObj.transform.parent = null;
             }
             else if (!attacking)
             {
