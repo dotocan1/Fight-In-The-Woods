@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Damage : MonoBehaviour
 {
-
-    private Combat combatScript;
     private GameObject enemy;
 
     public GameObject getEnemy()
@@ -18,44 +17,32 @@ public class Damage : MonoBehaviour
         this.enemy = enemy;
     }
 
-    public void Update()
-    {
-        if (combatScript == null)
-        {
-            combatScript = gameObject.transform.parent.gameObject.GetComponent<Combat>();
-            Debug.Log("COMBAT SCRIPT " + combatScript);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-
-        //Debug.Log(combatScript);
+        
+        Debug.Log("OTHER NAME " + other.name);
         string gameObjectName = gameObject.name;
-        string playerTag = gameObject.transform.parent.tag;
+        Debug.Log("GAME OBJ " + gameObject.transform.parent.name);
 
-        string enemyTag = other.tag;
-
-        if (gameObjectName.Equals("WaterThrow(Clone)"))
+        /*if (gameObjectName.Equals("WaterThrow(Clone)"))
         {
+            string playerTag = gameObject.transform.parent.tag;
+            string enemyTag = other.tag;
 
-            if (playerTag != enemyTag && enemyTag == "Team_2" || enemyTag == "Team_1")
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
             {
-                Debug.Log("Game object name: " + gameObjectName);
-                Debug.Log("ENEMY NAME: " + other.name);
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
-                Debug.Log("PLAYER'S TAG: " + playerTag);
-                Debug.Log("ENEMY'S TAG; " + enemyTag);
-
-                combatScript.takeWaterThrowDamage();
+                setEnemy(other.gameObject);
+                enemy.GetComponent<Combat>().takeWaterThrowDamage();
+                //combatScript.takeWaterThrowDamage();
             }
             else
             {
                 return;
             }
         }
-        else if (gameObjectName.Equals("ArrowCircle(Clone)"))
+        /*else if (gameObjectName.Equals("ArrowCircle(Clone)"))
         {
             if (playerTag != enemyTag)
             {
@@ -90,6 +77,6 @@ public class Damage : MonoBehaviour
         else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
 
-        }
+        }*/
     }
 }

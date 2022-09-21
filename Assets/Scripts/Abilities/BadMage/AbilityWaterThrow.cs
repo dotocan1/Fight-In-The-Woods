@@ -35,8 +35,9 @@ public class AbilityWaterThrow : MonoBehaviour
         {
 
             instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation);
-            instantiatedObj.transform.parent = gameObject.transform; // u parent transform sam spremila transform od playera (fuš)
-            Debug.Log("WATER PARENT " + gameObject.name);
+            instantiatedObj.transform.SetParent(gameObject.transform); 
+                //= gameObject.transform; // u parent transform sam spremila transform od playera (fuš)
+            Debug.Log("WATER PARENT " + instantiatedObj.transform.parent);
             Destroy(instantiatedObj, 0.5f);
         }
     }

@@ -3,6 +3,7 @@ using Photon.Pun;
 public class PhotonPlayer : MonoBehaviour
 {
     PhotonView view;
+    public float health = 1000f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,4 +23,5 @@ public class PhotonPlayer : MonoBehaviour
     {
         this.tag = text;
     }
+    
 }
