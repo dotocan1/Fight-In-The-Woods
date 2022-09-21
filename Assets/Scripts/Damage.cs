@@ -66,8 +66,6 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         string gameObjectName = gameObject.name;
         string enemyTag = other.tag;
 
-        Debug.Log(gameObjectName);
-
         if (gameObjectName.Equals("WaterThrow(Clone)"))
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
@@ -145,7 +143,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
