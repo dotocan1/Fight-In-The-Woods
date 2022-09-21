@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
@@ -30,8 +31,16 @@ public class Combat : MonoBehaviour
 
         if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
         {
-            gameObject.GetComponent<Animator>().SetBool("isDead", true);
-            Destroy(gameObject, 5f);
+            
+            if (gameObject.tag == "Team_1" || gameObject.tag == "Team_2")
+            {
+                StartCoroutine(DestroyObject(gameObject));
+                gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            } else
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+           
         }
     }
 

@@ -55,10 +55,10 @@ public class MinionAI : MonoBehaviour
             playerInSightRange = Distance(player);
             playerInAttackRange = AttackDistance(player);
 
-            if (!playerInSightRange && !playerInAttackRange)
+            /*if (!playerInSightRange && !playerInAttackRange)
             {
                 Movement(tower);
-            }
+            }*/
             if (playerInSightRange && !playerInAttackRange)
             {
                 FindPlayer(player);
@@ -75,10 +75,10 @@ public class MinionAI : MonoBehaviour
             playerInSightRange = Distance(minion);
             playerInAttackRange = AttackDistance(minion);
 
-            if (!playerInSightRange && !playerInAttackRange)
+            /*if (!playerInSightRange && !playerInAttackRange)
             {
-                Movement(tower);
-            }
+                Movement(tower);   
+            }*/
             if (playerInSightRange && !playerInAttackRange)
             {
                 FindPlayer(minion);
@@ -100,11 +100,16 @@ public class MinionAI : MonoBehaviour
             }
 
         } 
-        /*else if (phoenix != null)
+        else if (phoenix != null)
         {
+            playerInSightRange = Distance(phoenix);
+            playerInAttackRange = Distance(phoenix);
             Movement(phoenix);
-            AttackPlayer(phoenix);
-        }*/
+            if (playerInSightRange && playerInAttackRange)
+            {
+                AttackPlayer(phoenix);
+            }
+        }
         /*else
         {
             Movement(fontana);
