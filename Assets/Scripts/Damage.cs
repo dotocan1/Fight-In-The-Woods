@@ -55,6 +55,20 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
         }
+        else if (gameObjectName.Equals("GoodMageFire(Clone)"))
+        {
+            if (playerTag != enemyTag)
+            {
+                if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
+                {
+                    Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+
+                    setEnemy(other.gameObject);
+                    enemy.GetComponent<Combat>().takeGoodMageFire();
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                }
+            }
+        }
         else if (gameObjectName.Equals("ArrowCircle(Clone)"))
          {
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
@@ -66,7 +80,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
         }
-         else if (gameObjectName.Equals("SingleArrow(Clone)"))
+         else if (gameObjectName.Equals("Arrow(Clone)"))
          {
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
             {
@@ -74,7 +88,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
                 setEnemy(other.gameObject);
                 enemy.GetComponent<Combat>().takeSingleArrowDamage();
-                gameObject.GetComponent<SphereCollider>().enabled = false;
+                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
          else if (gameObjectName.Equals("PullingCircle(Clone)"))

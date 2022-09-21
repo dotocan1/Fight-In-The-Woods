@@ -48,6 +48,12 @@ public class Combat : MonoBehaviour
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
+    public void takeGoodMageFire()
+    {
+        gameObject.GetComponent<PhotonPlayer>().health -= 50f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+    }
+
     public void takeArrowCircleDamage()
     {
         gameObject.GetComponent<PhotonPlayer>().health -= 150f;

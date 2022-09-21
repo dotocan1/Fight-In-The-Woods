@@ -52,7 +52,7 @@ public class PrimaryAttack : MonoBehaviour
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
                 instantiatedObj.transform.parent = null;
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
 
                 // TODO: izbrisi ako pogodi playera ili tower
             }
@@ -74,7 +74,7 @@ public class PrimaryAttack : MonoBehaviour
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
                 instantiatedObj.transform.parent = null;
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
 
                 // TODO: izbrisi ako pogodi playera ili tower
             }
@@ -95,9 +95,9 @@ public class PrimaryAttack : MonoBehaviour
     //}
 
 
-    private IEnumerator DestroyAbility()
+    private IEnumerator DestroyAbility(GameObject abilityObject)
     {
-        yield return new WaitForSeconds(5);
-        PhotonNetwork.Destroy(instantiatedObj);
+        yield return new WaitForSeconds(2);
+        PhotonNetwork.Destroy(abilityObject);
     }
 }

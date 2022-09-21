@@ -46,7 +46,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
             else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
                 object[] customInitData = new object[1];
@@ -54,7 +54,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
         }
         
@@ -69,7 +69,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
             else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
                 object[] customInitData = new object[1];
@@ -77,7 +77,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/WavePush", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
         }
 
@@ -92,7 +92,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/SingleArrow", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
             else if((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f)){
                 object[] customInitData = new object[1];
@@ -100,16 +100,16 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility());
+                StartCoroutine(DestroyAbility(instantiatedObj);
             }
         }
 
         // warrior ability
     }
 
-    private IEnumerator DestroyAbility()
+    private IEnumerator DestroyAbility(GameObject abilityObject)
     {
         yield return new WaitForSeconds(5);
-        PhotonNetwork.Destroy(instantiatedObj);
+        PhotonNetwork.Destroy(abilityObject);
     }
 }
