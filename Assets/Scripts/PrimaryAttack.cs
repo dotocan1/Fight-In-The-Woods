@@ -74,7 +74,7 @@ public class PrimaryAttack : MonoBehaviour
             // uvjet
             if (choice.Equals("Mage"))
             {
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.58f);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
