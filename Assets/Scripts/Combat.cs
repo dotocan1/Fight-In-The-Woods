@@ -104,12 +104,19 @@ public class Combat : MonoBehaviour
 
     public void takeSwordDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
         // ovo ce se koristit za provjeru ako je u animaciji
         gameObject.GetComponent<PhotonPlayer>().health -= 50f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+    }
+
+    private IEnumerator DestroyObject(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(2);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

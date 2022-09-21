@@ -58,13 +58,15 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
     private void OnTriggerEnter(Collider other)
     {
-        if(parent == null)
-        {
-            return;
-        }
+        string playerTag;
+
+        if (parent == null) playerTag = gameObject.GetComponentInParent<Combat>().transform.tag;
+        else playerTag = parent.tag;
+
         string gameObjectName = gameObject.name;
-        string playerTag = parent.tag;
         string enemyTag = other.tag;
+
+        Debug.Log(gameObjectName);
 
         if (gameObjectName.Equals("WaterThrow(Clone)"))
         {
@@ -94,7 +96,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
             }
         }
         else if (gameObjectName.Equals("ArrowCircle(Clone)"))
-         {
+        {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
@@ -106,8 +108,8 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
         }
-         else if (gameObjectName.Equals("Arrow(Clone)"))
-         {
+        else if (gameObjectName.Equals("Arrow(Clone)"))
+        {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
@@ -125,8 +127,8 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         {
             setEnemy(other.gameObject);
         }
-         else if (gameObjectName.Equals("HealingRain(Clone)"))
-         {
+        else if (gameObjectName.Equals("HealingRain(Clone)"))
+        {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
@@ -137,9 +139,10 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 enemy.GetComponent<Combat>().healPlayer();
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
-         }
-         else if (gameObjectName.Equals("WavePush(Clone)"))
-         {
+        }
+
+        else if (gameObjectName.Equals("Sword"))
+        {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
 
             if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber))))
@@ -147,13 +150,9 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
                 setEnemy(other.gameObject);
-                enemy.GetComponent<Combat>().wavePush();
-                gameObject.GetComponent<SphereCollider>().enabled = false;
+                enemy.GetComponent<Combat>().takeSwordDamage();
+                //gameObject.GetComponent<MeshCollider>().enabled = false;
             }
-         }
-         else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
-         {
-            // dodaj
         }
     }
 }
