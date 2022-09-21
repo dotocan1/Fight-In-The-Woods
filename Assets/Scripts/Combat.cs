@@ -39,30 +39,50 @@ public class Combat : MonoBehaviour
 
     public void takeWaterThrowDamage()
     {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 300f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void takeGoodMageFire()
     {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 50f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void takeArrowCircleDamage()
     {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 150f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
-    public void takeGroundSlash()
+    public void takeGroundSlashDamage()
     {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 150f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     public void takeSingleArrowDamage()
     {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 400f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
@@ -73,14 +93,14 @@ public class Combat : MonoBehaviour
         Debug.Log("Healing! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
-    public void takeSwordDamage(GameObject character)
+    public void takeSwordDamage()
     {
-        // ovo ce se koristit za provjeru ako je u animaciji
-        Animator a_animator = character.GetComponent<Animator>();
-        if (a_animator.GetBool("isSwordAttacking"))
+        if (gameObject.GetComponent<Ability>().isShield)
         {
-            gameObject.GetComponent<PhotonPlayer>().health -= 50f;
-            Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+            return;
         }
+        // ovo ce se koristit za provjeru ako je u animaciji
+        gameObject.GetComponent<PhotonPlayer>().health -= 50f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 }

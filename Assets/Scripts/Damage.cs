@@ -22,7 +22,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
         view = GetComponent<PhotonView>();
         Damage damageScript = GetComponent<Damage>();
 
-        if (!view.IsMine)
+        if (!view.IsMine && gameObject.name.Equals("Sword"))
         {
             damageScript.enabled = false;
         }
@@ -31,17 +31,22 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
     }
     private void Update()
     {
-        GameObject enemyy = getEnemy();
-        string playerTag = parent.tag;
-        string enemyTag = enemyy.tag;
-       
-        if (gameObject.name.Equals("PullingCircle(Clone)") && playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
+        if (gameObject.name.Equals("PullingCircle(Clone)"))
         {
-            float speed = 0.1f;
-            var step = speed * Time.deltaTime;
-            Debug.Log("Ovo je enemy tag : " + enemyy.tag + " i ime: " + enemy.name);
+            GameObject enemyy = getEnemy();
+            string playerTag = parent.tag;
+            string enemyTag = enemyy.tag;
 
-            enemyy.transform.position = Vector3.MoveTowards(transform.position, transform.position, step);
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
+            {
+                {
+                    float speed = 0.1f;
+                    var step = speed * Time.deltaTime;
+                    Debug.Log("Ovo je enemy tag : " + enemyy.tag + " i ime: " + enemy.name);
+
+                    enemyy.transform.position = Vector3.MoveTowards(transform.position, transform.position, step);
+                }
+            }
         }
     }
 
@@ -53,7 +58,10 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if(parent == null)
+        {
+            return;
+        }
         string gameObjectName = gameObject.name;
         string playerTag = parent.tag;
         string enemyTag = other.tag;
@@ -125,9 +133,31 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
             }
         }
 
-        else if (gameObject.name.Equals("WarriorCharacter(Clone)"))
+        else if (gameObjectName.Equals("GroundSlash(Clone)"))
         {
-            // dodaj
+            if (playerTag == enemyTag)
+            {
+
+                setEnemy(other.gameObject);
+                enemy.GetComponent<Combat>().takeGroundSlashDamage();
+                gameObject.GetComponent<SphereCollider>().enabled = false;
+
+            }
+        }
+        else if (gameObjectName.Equals("Sword"))
+        {
+            if (playerTag != enemyTag)
+            {
+                if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2"))
+                {
+                    Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+
+                    setEnemy(other.gameObject);
+                    enemy.GetComponent<Combat>().takeSwordDamage();
+                    gameObject.GetComponent<MeshCollider>().enabled = false;
+                    PhotonNetwork.Destroy(gameObject);
+                }
+            }
         }
     }
 }

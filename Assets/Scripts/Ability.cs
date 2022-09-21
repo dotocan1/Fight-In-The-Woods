@@ -18,6 +18,7 @@ public class Ability : MonoBehaviour
     // private float coolDownTime;
     private float abilityUsedQ;
     private float abilityUsedE;
+    public bool isShield = false;
 
 
     private void Start()
@@ -142,7 +143,7 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (castingQ && (gametimerCastQ - abilityUsedQ) > 1.0f)
+            if (castingQ && (gametimerCastQ - abilityUsedQ) > 9.0f)
             {
                 animator.SetBool("isCastingQ", true);
 
@@ -155,14 +156,13 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimerCastE - abilityUsedE) > 5.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 1.0f))
             {
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
+               animator.SetBool("isCastingE", true);
+
                 abilityUsedE = gametimerCastE;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/", transform.position, fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility(instantiatedObj));
+                StartCoroutine(InstantiateAbilities("Shield"));
             }
             else if (!castingE)
             {
@@ -173,6 +173,7 @@ public class Ability : MonoBehaviour
         {
             object[] customInitData = new object[1];
             customInitData[0] = gameObject.GetPhotonView().ViewID;
+
             // uvjet
             if (choice.Equals("WaterThrow"))
             {
@@ -236,6 +237,15 @@ public class Ability : MonoBehaviour
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
+            else if (choice.Equals("Shield"))
+            {
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/Shield", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.028f, 0.745f, 0.021f);
+                isShield = true;
+                StartCoroutine(DestroyAbility(instantiatedObj));
+               
+            }
 
         }
     }
@@ -243,6 +253,7 @@ public class Ability : MonoBehaviour
     private IEnumerator DestroyAbility(GameObject abilityObject)
     {
         yield return new WaitForSeconds(5);
+        isShield = false;
         PhotonNetwork.Destroy(abilityObject);
     }
 }
