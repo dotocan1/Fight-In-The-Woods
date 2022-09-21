@@ -191,16 +191,16 @@ public class Ability : MonoBehaviour
             else if (choice.Equals("PullingCircle"))
             {
                 yield return new WaitForSeconds(1f);
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/PullingCircle", transform.position, transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0.01f, 0.01f, 0.134f);
+                instantiatedObj.transform.localPosition = new Vector3(0.01f, 0.063f, 0.134f);
                 instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
             else if (choice.Equals("HealingRain"))
             {
                 yield return new WaitForSeconds(1f);
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/HealingRain", transform.position, transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0.01f, 0.01f, 0.134f);
                 instantiatedObj.transform.parent = null;
@@ -227,7 +227,7 @@ public class Ability : MonoBehaviour
             else if (choice.Equals("ArrowCircle"))
             {
                 yield return new WaitForSeconds(1f);
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position, transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(-1.92f, 0.997f, -0.033f);
                 instantiatedObj.transform.parent = null;
