@@ -100,7 +100,7 @@ public class Ability : MonoBehaviour
                 abilityUsed = gametimer;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/ArrowCircle", transform.position + (transform.forward * 1) + (transform.up * 1.5f), fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility(instantiatedObj);
+                StartCoroutine(DestroyAbility(instantiatedObj));
             }
         }
 
