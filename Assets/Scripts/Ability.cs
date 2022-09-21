@@ -13,9 +13,11 @@ public class Ability : MonoBehaviour
 
     // timer
 
-    private float gametimer = 0f;
+    private float gametimerCastQ = 0f;
+    private float gametimerCastE = 0f;
     // private float coolDownTime;
-    private float abilityUsed;
+    private float abilityUsedQ;
+    private float abilityUsedE;
 
 
     private void Start()
@@ -37,18 +39,21 @@ public class Ability : MonoBehaviour
         bool castingE = Input.GetKeyDown(KeyCode.E);
 
         // kreiranje timera
-        gametimer += Time.deltaTime;
-        int seconds = (int)(gametimer % 60);
-        int minutes = (int)(gametimer / 60);
+        gametimerCastQ += Time.deltaTime;
+        gametimerCastE += Time.deltaTime;
+        int secondsQ = (int)(gametimerCastQ % 60);
+        int minutesQ = (int)(gametimerCastQ / 60);
+        int secondsE = (int)(gametimerCastE % 60);
+        int minutesE = (int)(gametimerCastE / 60);
 
         // bad mage ability
         if (gameObject.name.Equals("BadMageCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            if (castingQ && (gametimerCastQ - abilityUsedQ) > 8.0f)
             {
                 animator.SetBool("isCastingQ", true);
-                abilityUsed = gametimer;
+                abilityUsedQ = gametimerCastQ;
 
                 StartCoroutine(InstantiateAbilities("WaterThrow"));
             }
@@ -56,10 +61,10 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 20.0f))
             {
                 animator.SetBool("isCastingE", true);
-                abilityUsed = gametimer;
+                abilityUsedE = gametimerCastE;
 
                 StartCoroutine(InstantiateAbilities("PullingCircle"));
             }
@@ -74,11 +79,11 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("GoodMageCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            if (castingQ && (gametimerCastQ - abilityUsedQ) > 9.0f)
             {
                 animator.SetBool("isCastingQ", true);
                 
-                abilityUsed = gametimer;
+                abilityUsedQ = gametimerCastQ;
 
                 StartCoroutine(InstantiateAbilities("WavePush"));
 
@@ -87,11 +92,11 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 18.0f))
             {
                 animator.SetBool("isCastingE", true);
                
-                abilityUsed = gametimer;
+                abilityUsedE = gametimerCastE;
 
                 StartCoroutine(InstantiateAbilities("HealingRain"));
             }
@@ -106,11 +111,11 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("ArcherCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            if (castingQ && (gametimerCastQ - abilityUsedQ) > 13.0f)
             {
                 animator.SetBool("isCastingQ", true);
                 
-                abilityUsed = gametimer;
+                abilityUsedQ = gametimerCastQ;
 
                 StartCoroutine(InstantiateAbilities("SingleArrow"));
             }
@@ -118,11 +123,11 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimer - abilityUsed) > 1.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 10.0f))
             {
                 animator.SetBool("isCastingE", true);
 
-                abilityUsed = gametimer;
+                abilityUsedE = gametimerCastE;
 
                 StartCoroutine(InstantiateAbilities("ArrowCircle"));
             }
@@ -137,13 +142,13 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (castingQ && (gametimer - abilityUsed) > 1.0f)
+            if (castingQ && (gametimerCastQ - abilityUsedQ) > 1.0f)
             {
                 animator.SetBool("isCastingQ", true);
 
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
-                abilityUsed = gametimer;
+                abilityUsedQ = gametimerCastQ;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/GroundSlash", transform.position, transform.rotation, data: customInitData);
                 instantiatedObj.transform.parent = transform;
@@ -155,11 +160,11 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimer - abilityUsed) > 5.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 5.0f))
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
-                abilityUsed = gametimer;
+                abilityUsedE = gametimerCastE;
 
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/", transform.position, fpsCam.transform.rotation, data: customInitData);
                 StartCoroutine(DestroyAbility(instantiatedObj));
