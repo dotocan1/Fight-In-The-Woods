@@ -26,7 +26,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
                 int spawnPicker = PhotonNetwork.LocalPlayer.ActorNumber / 2;
                 if (view.IsMine)
                 {
-                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/BadMageCharacter", GameManager.GM.spawnPointsTeamOne[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/ArcherCharacter", GameManager.GM.spawnPointsTeamOne[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
                     PlayerPrefab.tag = "Team_1";
                 }
             }
@@ -36,7 +36,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
                 int spawnPicker = PhotonNetwork.LocalPlayer.ActorNumber / 2;
                 if (view.IsMine)
                 {
-                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/ArcherCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/BadMageCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
                     PlayerPrefab.tag = "Team_2";
                 }
             }
