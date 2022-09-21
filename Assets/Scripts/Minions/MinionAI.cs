@@ -57,7 +57,6 @@ public class MinionAI : MonoBehaviour
 
             if (!playerInSightRange && !playerInAttackRange)
             {
-                Debug.Log("not in range!");
                 Movement(tower);
             }
             if (playerInSightRange && !playerInAttackRange)
