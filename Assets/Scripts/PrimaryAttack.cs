@@ -26,19 +26,41 @@ public class PrimaryAttack : MonoBehaviour
         }
         else if (gameObject.name.Equals("ArcherCharacter(Clone)"))
         {
-            // ne mice karaktera i napada primary weaponom
             if (attacking)
             {
-                // new Vector3(0f, 1.475f, 2.653f)
-                Debug.Log("Lokalna pozicija = " + transform.localPosition);
-                Debug.Log("Pozicija = " + transform.position);
-                Debug.Log("ovo se desava");
                 animator.SetBool("isAttacking", true);
                 instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/Arrow", transform.position, fpsCam.transform.rotation);
                 instantiatedObj.transform.parent = transform;
                 instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
                 instantiatedObj.transform.parent = null;
-                Destroy(instantiatedObj, 5.5f);
+
+                // TODO: izbrisi ako pogodi playera ili tower
+            }
+            else if (!attacking)
+            {
+                animator.SetBool("isAttacking", false);
+            }
+        }
+        else if (gameObject.name.Equals("GoodMage(Clone)") || gameObject.name.Equals("BadMage(Clone)"))
+        {
+            if (attacking || gameObject.name.Equals("GoodMage(Clone)"))
+            {
+
+                animator.SetBool("isAttacking", true);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.parent = null;
+
+                // TODO: izbrisi ako pogodi playera ili tower
+            }
+            else if (attacking || gameObject.name.Equals("BadMage(Clone)"))
+            {
+                animator.SetBool("isAttacking", true);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.parent = null;
             }
             else if (!attacking)
             {

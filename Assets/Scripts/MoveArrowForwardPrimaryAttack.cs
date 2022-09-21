@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveArrowForwardPrimaryAttack : MonoBehaviour
 {
-    private float speed = 2f;
+    private float speed = 20f;
 
     // Start is called before the first frame update
     void Start()
