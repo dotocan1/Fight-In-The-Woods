@@ -46,13 +46,7 @@ public class PrimaryAttack : MonoBehaviour
             {
                 animator.SetBool("isAttacking", true);
 
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/Arrow", transform.position, fpsCam.transform.rotation, data: customInitData);
-                instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
-                instantiatedObj.transform.parent = null;
-                StartCoroutine(DestroyAbility(instantiatedObj));
+                StartCoroutine(InstantiateAbilities("Archer"));
 
                 // TODO: izbrisi ako pogodi playera ili tower
             }
@@ -65,23 +59,38 @@ public class PrimaryAttack : MonoBehaviour
         {
             if (attacking)
             {
-
                 animator.SetBool("isAttacking", true);
-
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation, data: customInitData);
-                instantiatedObj.transform.parent = transform;
-                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
-                instantiatedObj.transform.parent = null;
-                StartCoroutine(DestroyAbility(instantiatedObj));
-
-                // TODO: izbrisi ako pogodi playera ili tower
+                StartCoroutine(InstantiateAbilities("Mage"));
             }
             else if (!attacking)
             {
                 animator.SetBool("isAttacking", false);
             }
+        }
+        IEnumerator InstantiateAbilities(string choice)
+        {
+            object[] customInitData = new object[1];
+            customInitData[0] = gameObject.GetPhotonView().ViewID;
+            // uvjet
+            if (choice.Equals("Mage"))
+            {
+                yield return new WaitForSeconds(1f);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/GoodMage/GoodMageFire", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0.243f, 1.318f, 0.773f);
+                instantiatedObj.transform.parent = null;
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+            else if (choice.Equals("Archer"))
+            {
+                yield return new WaitForSeconds(1.075f);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Archer/Arrow", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.parent = null;
+                StartCoroutine(DestroyAbility(instantiatedObj));
+            }
+
         }
     }
 
