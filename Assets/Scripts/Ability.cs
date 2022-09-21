@@ -48,12 +48,10 @@ public class Ability : MonoBehaviour
             if (castingQ && (gametimer - abilityUsed) > 1.0f)
             {
                 animator.SetBool("isCastingQ", true);
-                object[] customInitData = new object[1];
-                customInitData[0] = gameObject.GetPhotonView().ViewID;
+                
                 abilityUsed = gametimer;
-
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position, fpsCam.transform.rotation, data: customInitData);
-                StartCoroutine(DestroyAbility(instantiatedObj));
+               
+                StartCoroutine(InstWaterThrow());
             }
             else if (!castingQ)
             {
@@ -182,6 +180,14 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingE", false);
             }
+        }
+        IEnumerator InstWaterThrow()
+        {
+            object[] customInitData = new object[1];
+            customInitData[0] = gameObject.GetPhotonView().ViewID;
+            yield return new WaitForSeconds(1f);
+            instantiatedObj = PhotonNetwork.Instantiate("Abilities/BadMage/WaterThrow", transform.position, fpsCam.transform.rotation, data: customInitData);
+            StartCoroutine(DestroyAbility(instantiatedObj));
         }
     }
 
