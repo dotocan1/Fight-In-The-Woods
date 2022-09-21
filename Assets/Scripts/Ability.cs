@@ -109,13 +109,16 @@ public class Ability : MonoBehaviour
         if (gameObject.name.Equals("WarriorCharacter(Clone)"))
         {
             // zadnji broj u uvjetu oznacava vrijeme cooldowna
-            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 5.0f)
+            if (Input.GetKeyDown(KeyCode.Q) && (gametimer - abilityUsed) > 1.0f)
             {
                 object[] customInitData = new object[1];
                 customInitData[0] = gameObject.GetPhotonView().ViewID;
                 abilityUsed = gametimer;
 
-                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/", transform.position, fpsCam.transform.rotation, data: customInitData);
+                instantiatedObj = PhotonNetwork.Instantiate("Abilities/Warrior/GroundSlash", transform.position, transform.rotation, data: customInitData);
+                instantiatedObj.transform.parent = transform;
+                instantiatedObj.transform.localPosition = new Vector3(0f, 1.475f, 2.653f);
+                instantiatedObj.transform.parent = null;
                 StartCoroutine(DestroyAbility(instantiatedObj));
             }
             else if ((Input.GetKeyDown(KeyCode.E) && (gametimer - abilityUsed) > 5.0f))
