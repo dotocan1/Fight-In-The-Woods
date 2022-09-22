@@ -112,7 +112,7 @@ public class Combat : MonoBehaviour
             return;
         }
 
-        gameObject.GetComponent<PhotonPlayer>().health -= 50f;
+        gameObject.GetComponent<PhotonPlayer>().health -= 1f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
