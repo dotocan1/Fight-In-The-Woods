@@ -38,7 +38,7 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
                 if (view.IsMine)
                 {
-                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/WarriorCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
+                    PlayerPrefab = PhotonNetwork.Instantiate("Characters/GoodMageCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));
                     PlayerPrefab.tag = "Team_2";
                 }
             }
