@@ -29,7 +29,7 @@ public class Combat : MonoBehaviour
     void Update()
     {
 
-        if (gameObject.GetComponent<PhotonPlayer>().health <= 0)
+        if (gameObject.GetComponent<PhotonPlayer>().health <= 0f)
         {
             
             if (gameObject.tag == "Team_1" || gameObject.tag == "Team_2")
@@ -110,6 +110,16 @@ public class Combat : MonoBehaviour
             return;
         }
         // ovo ce se koristit za provjeru ako je u animaciji
+        gameObject.GetComponent<PhotonPlayer>().health -= 50f;
+        Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+    }
+
+    public void takeProjectileDamage()
+    {
+        if (gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
         gameObject.GetComponent<PhotonPlayer>().health -= 50f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }

@@ -31,12 +31,18 @@ public class TurretScript : MonoBehaviour
     private void Update()
     {
         if (playerEnter_1 != null) {
-            playerTransform = playerEnter_1.PlayerAvatar_1.transform;
-            Fire(playerTransform);
+            if (playerEnter_1.PlayerAvatar_1 != null) 
+            {
+                playerTransform = playerEnter_1.PlayerAvatar_1.transform;
+                Fire(playerTransform);
+            }
         } 
         else if (playerEnter_2 != null) {
-            playerTransform = playerEnter_2.PlayerAvatar_2.transform;
-            Fire(playerTransform);
+            if (playerEnter_2.PlayerAvatar_2 != null)
+            {
+                playerTransform = playerEnter_2.PlayerAvatar_2.transform;
+                Fire(playerTransform);
+            }
         }
         
     }

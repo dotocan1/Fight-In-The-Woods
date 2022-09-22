@@ -58,6 +58,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("AAAAAAAAAAAA");
         string playerTag;
 
         if (parent == null) playerTag = gameObject.GetComponentInParent<Combat>().transform.tag;
@@ -118,7 +119,6 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 Debug.Log("ENEMY NAME " + other.name);
                 enemy.GetComponent<Combat>().takeSingleArrowDamage();
                 gameObject.GetComponent<BoxCollider>().enabled = false;
-
             }
         }
         else if (gameObjectName.Equals("PullingCircle(Clone)"))
@@ -138,7 +138,6 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
         }
-
         else if (gameObjectName.Equals("Sword"))
         {
             string teamNumber = playerTag == "Team_1" ? "A" : "B";
@@ -150,6 +149,19 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 setEnemy(other.gameObject);
                 enemy.GetComponent<Combat>().takeSwordDamage();
                 //gameObject.GetComponent<MeshCollider>().enabled = false;
+            }
+        }
+        else if (gameObjectName.Equals("HM_cannon_bullet1(Clone)"))
+        {
+            string teamNumber = playerTag.Substring(0, playerTag.Length - 1);
+
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("MinionTeam") && !enemyTag.Contains(teamNumber)) ))
+            {
+                Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+
+                setEnemy(other.gameObject);
+                enemy.GetComponent<Combat>().takeProjectileDamage();
+                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
