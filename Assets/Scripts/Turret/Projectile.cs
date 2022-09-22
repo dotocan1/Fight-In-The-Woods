@@ -18,10 +18,6 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform != null)
-        {
-            return;
-        }
         Vector3 playerGroundPos = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
         Vector3 vector3 = playerTransform.position - playerGroundPos;
         transform.LookAt(playerTransform.position);
