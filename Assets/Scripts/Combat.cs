@@ -38,8 +38,8 @@ public class Combat : MonoBehaviour
                 gameObject.GetComponent<Animator>().SetBool("isDead", true);
             } else
             {
+                if(gameObject.name.Contains("fountain")) GameObject.Find("GameManager").GetComponent<GameManager>().MatchEnd(gameObject.tag);
                 PhotonNetwork.Destroy(gameObject);
-                if(gameObject.name.Contains("fountain")) GameObject.Find("GameManager").GetComponent<GameManager>().MatchEnd();
             }
            
         }
@@ -49,7 +49,7 @@ public class Combat : MonoBehaviour
 
     public void takeWaterThrowDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
@@ -69,7 +69,7 @@ public class Combat : MonoBehaviour
 
     public void takeArrowCircleDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
@@ -79,7 +79,7 @@ public class Combat : MonoBehaviour
 
     public void takeGroundSlashDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield != null && gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
@@ -89,7 +89,7 @@ public class Combat : MonoBehaviour
 
     public void takeSingleArrowDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
@@ -105,7 +105,7 @@ public class Combat : MonoBehaviour
 
     public void takeSwordDamage()
     {
-        
+
         if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
@@ -117,12 +117,22 @@ public class Combat : MonoBehaviour
 
     public void takeProjectileDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
         gameObject.GetComponent<PhotonPlayer>().health -= 50f;
         Debug.Log("Taking damage! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
+    }
+
+    public void takeFireDamage()
+    {
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
+        {
+            return;
+        }
+        gameObject.GetComponent<PhotonPlayer>().health -= 100f;
+        Debug.Log("Taking damage from Phoenix! Enemy health is now:" + gameObject.GetComponent<PhotonPlayer>().health);
     }
 
     private IEnumerator DestroyObject(GameObject gameObject)

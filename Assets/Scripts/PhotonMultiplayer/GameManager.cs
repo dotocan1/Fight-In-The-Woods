@@ -57,12 +57,10 @@ public class GameManager : MonoBehaviour
         Cursor.visible = paused;
     }
 
-    public void MatchEnd()
+    public void MatchEnd(string tag)
     {
-        Debug.Log("ENDINGGGGGG");
         paused = true;
-        view.RPC("RPC_End_Match_For_Everyone", RpcTarget.All);
-        
+        view.RPC("RPC_End_Match_For_Everyone", RpcTarget.All, tag);
     }
 
     public void Quit()
@@ -76,21 +74,20 @@ public class GameManager : MonoBehaviour
     {
         if (nextPlayersTeam == 1) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;
-        /*Debug.Log("PLAYER COUNT: " + PhotonNetwork.CurrentRoom.PlayerCount);
-        if (PhotonNetwork.CurrentRoom.PlayerCount % 2 == 0) nextPlayersTeam = 2;
-        else nextPlayersTeam = 1;*/
     }
 
     [PunRPC]
-    void RPC_End_Match_For_Everyone()
+    void RPC_End_Match_For_Everyone(string tag)
     {
+        string winnerTeam = tag == "Fountain_A" ? "2" : "1";
+
+        winnerPanel.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "TEAM " + winnerTeam + " VICTORY";
         timer.SetActive(false);
         text.SetActive(false);
         winnerPanel.SetActive(true);
         Cursor.lockState = (paused) ? CursorLockMode.None : CursorLockMode.Confined;
         Cursor.visible = paused;
 
-        
         StartCoroutine(GoToMainMenu());
     }
 

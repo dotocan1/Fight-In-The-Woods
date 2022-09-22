@@ -58,7 +58,6 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("AAAAAAAAAAAA");
         string playerTag;
 
         if (parent == null) playerTag = gameObject.GetComponentInParent<Combat>().transform.tag;
@@ -164,6 +163,22 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
-        
+        else if (gameObjectName.Equals("vfxGraph_PhoenixBreath") && (playerTag == "Team_1" || playerTag == "Team_2"))
+        {
+            string teamNumber = playerTag == "Team_1" ? "A" : "B";
+
+            Debug.Log("VATRAAAAA");
+            Debug.Log("DRUGI OBJEKT " + other.name);
+            Debug.Log("PRVI OBJEKT " + gameObject.name);
+
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("Tower") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Phoenix") && !enemyTag.Contains(teamNumber)) || (enemyTag.Contains("Fountain") && !enemyTag.Contains(teamNumber))))
+            {
+                Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
+
+                setEnemy(other.gameObject);
+                enemy.GetComponent<Combat>().takeFireDamage();
+                //gameObject.GetComponent<MeshCollider>().enabled = false;
+            }
+        }  
     }
 }
