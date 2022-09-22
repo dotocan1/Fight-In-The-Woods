@@ -156,7 +156,7 @@ public class Ability : MonoBehaviour
             {
                 animator.SetBool("isCastingQ", false);
             }
-            if ((castingE && (gametimerCastE - abilityUsedE) > 1.0f))
+            if ((castingE && (gametimerCastE - abilityUsedE) > 15.0f))
             {
                animator.SetBool("isCastingE", true);
 

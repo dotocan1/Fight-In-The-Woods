@@ -1,11 +1,15 @@
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 {
     PhotonView view;
     private GameObject enemy;
     private GameObject parent;
+
+    private Animator animator;
 
     public GameObject getEnemy()
     {
@@ -19,6 +23,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
     private void Start()
     {
+   
         view = GetComponent<PhotonView>();
         Damage damageScript = GetComponent<Damage>();
 
@@ -147,14 +152,14 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
 
                 setEnemy(other.gameObject);
                 enemy.GetComponent<Combat>().takeSwordDamage();
-                //gameObject.GetComponent<MeshCollider>().enabled = false;
+
             }
         }
         else if (gameObjectName.Equals("HM_cannon_bullet1(Clone)"))
         {
             string teamNumber = playerTag.Substring(0, playerTag.Length - 1);
 
-            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("MinionTeam") && !enemyTag.Contains(teamNumber)) ))
+            if (playerTag != enemyTag && (enemyTag == "Team_1" || enemyTag == "Team_2" || (enemyTag.Contains("MinionTeam") && !enemyTag.Contains(teamNumber))))
             {
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
@@ -179,6 +184,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 enemy.GetComponent<Combat>().takeFireDamage();
                 //gameObject.GetComponent<MeshCollider>().enabled = false;
             }
-        }  
+        }
+
     }
 }
