@@ -34,6 +34,8 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
             {
                 degrees = -90;
                 int spawnPicker = PhotonNetwork.LocalPlayer.ActorNumber / 2;
+                if (spawnPicker == 2) spawnPicker = 0;
+
                 if (view.IsMine)
                 {
                     PlayerPrefab = PhotonNetwork.Instantiate("Characters/BadMageCharacter", GameManager.GM.spawnPointsTeamTwo[spawnPicker].position, Quaternion.Euler(0, degrees, 0));

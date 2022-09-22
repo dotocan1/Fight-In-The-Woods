@@ -164,5 +164,6 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
+        
     }
 }
