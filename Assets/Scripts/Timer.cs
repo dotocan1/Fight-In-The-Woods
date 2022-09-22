@@ -19,15 +19,18 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PhotonNetwork.CurrentRoom.PlayerCount == 4)
+        if (!GameManager.paused)
         {
-            gametimer += Time.deltaTime;
-            int seconds = (int)(gametimer % 60);
-            int minutes = (int)(gametimer / 60);
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 4)
+            {
+                gametimer += Time.deltaTime;
+                int seconds = (int)(gametimer % 60);
+                int minutes = (int)(gametimer / 60);
 
-            string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+                string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-            gameTimerText.text = timerString;
+                gameTimerText.text = timerString;
+            }
         }
     }
 }

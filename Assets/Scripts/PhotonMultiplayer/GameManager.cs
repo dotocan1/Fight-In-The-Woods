@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager GM;
+    PhotonView view;
 
+    public GameObject winnerPanel;
     public GameObject pauseMenu;
+    public GameObject timer;
+    public GameObject text;
     public static bool paused = false;
     private bool disconnecting = false;
 
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
 
      private void Start()
      {
+        view = GetComponent<PhotonView>();
         StartCoroutine(CreatePlayer());
          //CreatePlayer();
      }
@@ -52,6 +57,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = paused;
     }
 
+    public void MatchEnd()
+    {
+        Debug.Log("ENDINGGGGGG");
+        paused = true;
+        view.RPC("RPC_End_Match_For_Everyone", RpcTarget.All);
+        
+    }
+
     public void Quit()
     {
         disconnecting = true;
@@ -66,5 +79,27 @@ public class GameManager : MonoBehaviour
         /*Debug.Log("PLAYER COUNT: " + PhotonNetwork.CurrentRoom.PlayerCount);
         if (PhotonNetwork.CurrentRoom.PlayerCount % 2 == 0) nextPlayersTeam = 2;
         else nextPlayersTeam = 1;*/
+    }
+
+    [PunRPC]
+    void RPC_End_Match_For_Everyone()
+    {
+        timer.SetActive(false);
+        text.SetActive(false);
+        winnerPanel.SetActive(true);
+        Cursor.lockState = (paused) ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.visible = paused;
+
+        
+        StartCoroutine(GoToMainMenu());
+    }
+
+    private IEnumerator GoToMainMenu()
+    {
+        yield return new WaitForSeconds(10);
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("Main_Menu");
+        
+
     }
 }

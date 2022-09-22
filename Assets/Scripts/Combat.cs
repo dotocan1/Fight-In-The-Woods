@@ -39,6 +39,7 @@ public class Combat : MonoBehaviour
             } else
             {
                 PhotonNetwork.Destroy(gameObject);
+                if(gameObject.name.Contains("fountain")) GameObject.Find("GameManager").GetComponent<GameManager>().MatchEnd();
             }
            
         }
@@ -58,7 +59,7 @@ public class Combat : MonoBehaviour
 
     public void takeGoodMageFire()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>() != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
@@ -78,7 +79,7 @@ public class Combat : MonoBehaviour
 
     public void takeGroundSlashDamage()
     {
-        if (gameObject.GetComponent<Ability>().isShield)
+        if (gameObject.GetComponent<Ability>().isShield != null && gameObject.GetComponent<Ability>().isShield)
         {
             return;
         }
