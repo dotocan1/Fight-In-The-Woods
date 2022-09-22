@@ -11,8 +11,7 @@ public class MinionAI : MonoBehaviour
     public GameObject player;
     private GameObject minion;
     private GameObject phoenix;
-
-    [SerializeField] private GameObject projectile;
+    private GameObject fontana;
     
     private float minionspeed = 5f;
     private Rigidbody rb;
@@ -22,6 +21,7 @@ public class MinionAI : MonoBehaviour
     [SerializeField] string WhichTowerToAttack;
     [SerializeField] string PlayerTeamTagToAttack;
     [SerializeField] string WhichPhoenixToAttack;
+    [SerializeField] string WhichFontanaToAttack;
 
     //Attacking
     public float timeBetweenAttacks;
@@ -43,80 +43,181 @@ public class MinionAI : MonoBehaviour
         tower = GameObject.FindWithTag(WhichTowerToAttack);
         phoenix = GameObject.FindWithTag(WhichPhoenixToAttack);
         player = GameObject.FindWithTag(PlayerTeamTagToAttack);
+        fontana = GameObject.FindWithTag(WhichFontanaToAttack);
 
     }
 
     void Update()
     {
-
-        //napad izmedju playera i miniona
-        if (player != null)
+        if(player != null)
         {
-            playerInSightRange = Distance(player);
-            playerInAttackRange = AttackDistance(player);
-
-            /*if (!playerInSightRange && !playerInAttackRange)
+            if (Distance(player))
             {
-                Movement(tower);
-            }*/
-            if (playerInSightRange && !playerInAttackRange)
-            {
-                FindPlayer(player);
+                playerInSightRange = true;
             }
-            if (playerInSightRange && playerInAttackRange)
-            {
-                AttackPlayer(player);
-            }
+            else playerInSightRange = false;
         }
-        //napad izmedju miniona i miniona
         else if (minion != null)
         {
-            
-            playerInSightRange = Distance(minion);
-            playerInAttackRange = AttackDistance(minion);
-
-            /*if (!playerInSightRange && !playerInAttackRange)
+            if (Distance(minion))
             {
-                Movement(tower);   
-            }*/
-            if (playerInSightRange && !playerInAttackRange)
-            {
-                FindPlayer(minion);
+                playerInSightRange = true;
             }
-            if (playerInSightRange && playerInAttackRange)
+            else playerInSightRange = false;
+        }
+
+        if (tower != null)
+        {
+            if (player != null && playerInSightRange)
             {
-                AttackPlayer(minion);
+                if (Distance(player))
+                {
+                    playerInSightRange = true;
+
+                    if (playerInSightRange && !StopDistance(player) == true)
+                    {
+                        Movement(player);
+                    }
+
+                    if (AttackDistance(player))
+                    {              
+                        playerInAttackRange = true;
+                        AttackPlayer(player);
+                    }
+                    else playerInAttackRange = false;   
+                }
+                else playerInSightRange = false;
+            }
+
+            else if (minion != null && playerInSightRange)
+            {
+                if (Distance(minion))
+                {
+                    playerInSightRange = true;
+
+                    if(playerInSightRange && !StopDistance(minion) == true)
+                    {
+                        Movement(minion);
+                    }
+                    
+                    if (AttackDistance(minion))
+                    {
+                        playerInAttackRange = true;
+                        AttackPlayer(minion);
+                    }
+
+                    else playerInAttackRange = false;
+                }
+                else playerInSightRange = false;
+            }
+            else
+            {
+                Movement(tower);
             }
 
         }
-        else if (tower != null)
-        {
-            playerInSightRange = Distance(tower);
-            playerInAttackRange = Distance(tower);
-            Movement(tower);
-            if (playerInSightRange && playerInAttackRange)
-            {
-                AttackPlayer(tower);
-            }
-
-        } 
+        /*
         else if (phoenix != null)
         {
-            playerInSightRange = Distance(phoenix);
-            playerInAttackRange = Distance(phoenix);
-            Movement(phoenix);
-            if (playerInSightRange && playerInAttackRange)
+            if (player != null && playerInSightRange)
             {
-                AttackPlayer(phoenix);
+                if (Distance(player))
+                {
+                    playerInSightRange = true;
+
+                    if (playerInSightRange && !StopDistance(player) == true)
+                    {
+                        Movement(player);
+                    }
+
+                    if (AttackDistance(player))
+                    {
+                        playerInAttackRange = true;
+                        AttackPlayer(player);
+                    }
+                    else playerInAttackRange = false;
+                }
+                else playerInSightRange = false;
+            }
+
+            else if (minion != null && playerInSightRange)
+            {
+                if (Distance(minion))
+                {
+                    playerInSightRange = true;
+
+                    if (playerInSightRange && !StopDistance(minion) == true)
+                    {
+                        Movement(minion);
+                    }
+
+                    if (AttackDistance(minion))
+                    {
+                        playerInAttackRange = true;
+                        AttackPlayer(minion);
+                    }
+
+                    else playerInAttackRange = false;
+                }
+                else playerInSightRange = false;
+            }
+            else
+            {
+                Movement(phoenix);
             }
         }
-        /*else
+
+        else if (fontana != null)
         {
-            Movement(fontana);
-            AttackPlayer(fontana);
-            
+            if (player != null && playerInSightRange)
+            {
+                if (Distance(player))
+                {
+                    playerInSightRange = true;
+
+                    if (playerInSightRange && !StopDistance(player) == true)
+                    {
+                        Movement(player);
+                    }
+
+                    if (AttackDistance(player))
+                    {
+                        playerInAttackRange = true;
+                        AttackPlayer(player);
+                    }
+                    else playerInAttackRange = false;
+                }
+                else playerInSightRange = false;
+            }
+
+            else if (minion != null && playerInSightRange)
+            {
+                if (Distance(minion))
+                {
+                    playerInSightRange = true;
+
+                    if (playerInSightRange && !StopDistance(minion) == true)
+                    {
+                        Movement(minion);
+                    }
+
+                    if (AttackDistance(minion))
+                    {
+                        playerInAttackRange = true;
+                        AttackPlayer(minion);
+                    }
+
+                    else playerInAttackRange = false;
+                }
+                else playerInSightRange = false;
+            }
+            else
+            {
+                Movement(fontana);
+            }
         }*/
-      
+        
+
     }
     private void Movement(GameObject target)
     {
@@ -136,10 +237,7 @@ public class MinionAI : MonoBehaviour
 
         if (!AlreadyAttacked)
         {
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 30f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 10f, ForceMode.Impulse);
-
+            //Debug.Log("Attacking " + target2 + " !");
             AlreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -164,7 +262,7 @@ public class MinionAI : MonoBehaviour
     private bool Distance(GameObject objekt)
     {
         float distanc = Vector3.Distance(objekt.transform.position, transform.position);
-        if (distanc <= 6)
+        if (distanc <= 15)
         {
             return true;
         }
@@ -175,7 +273,17 @@ public class MinionAI : MonoBehaviour
     private bool AttackDistance(GameObject attackobjekt)
     {
         float distance = Vector3.Distance(attackobjekt.transform.position, transform.position);
-        if (distance <= 4)
+        if (distance <= 10)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    private bool StopDistance(GameObject objekt)
+    {
+        float distance = Vector3.Distance(objekt.transform.position, transform.position);
+        if (distance <= 3)
         {
             return true;
         }

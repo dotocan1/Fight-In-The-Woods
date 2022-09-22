@@ -147,7 +147,7 @@ public class Damage : MonoBehaviour, IPunInstantiateMagicCallback
                 Debug.Log("PLAYER: " + playerTag + " ENEMY: " + enemyTag);
 
                 setEnemy(other.gameObject);
-                enemy.GetComponent<Combat>().wavePush();
+                //enemy.GetComponent<Combat>().wavePush();
                 gameObject.GetComponent<SphereCollider>().enabled = false;
             }
          }
