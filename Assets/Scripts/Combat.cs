@@ -34,7 +34,7 @@ public class Combat : MonoBehaviour
             
             if (gameObject.tag == "Team_1" || gameObject.tag == "Team_2")
             {
-                StartCoroutine(DestroyObject(gameObject));
+                //StartCoroutine(DestroyObject(gameObject));
                 gameObject.GetComponent<Animator>().SetBool("isDead", true);
             } else
             {
